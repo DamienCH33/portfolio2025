@@ -1,0 +1,83 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entity;
+
+use App\Repository\EducationRepository;
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Types;
+
+#[ORM\Entity(repositoryClass: EducationRepository::class)]
+class Education
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
+
+    #[ORM\Column(name:'year_start', type: Types::INTEGER)]
+    private ?int $yearStart = null;
+
+    #[ORM\Column(name:'year_end', type: Types::INTEGER)]
+    private ?int $yearEnd = null;
+
+    #[ORM\Column(name:'institution', length: 255,type: Types::STRING)]
+    private ?string $institution = null;
+
+    #[ORM\Column(name:'title', length: 255, type: Types::STRING)]
+    private ?string $title = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getYearStart(): ?int
+    {
+        return $this->yearStart;
+    }
+
+    public function setYearStart(int $yearStart): static
+    {
+        $this->yearStart = $yearStart;
+
+        return $this;
+    }
+
+    public function getYearEnd(): ?int
+    {
+        return $this->yearEnd;
+    }
+
+    public function setYearEnd(int $yearEnd): static
+    {
+        $this->yearEnd = $yearEnd;
+
+        return $this;
+    }
+
+    public function getInstitution(): ?string
+    {
+        return $this->institution;
+    }
+
+    public function setInstitution(string $institution): static
+    {
+        $this->institution = $institution;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): static
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+}
