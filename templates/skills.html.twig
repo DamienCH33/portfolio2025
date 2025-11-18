@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+{% block title %}Compétences
+{% endblock %}
+
+{% block body %}
+	<section class="container py-5 mt-5">
+		<h1 class="section-title text-center mb-5">Compétences</h1>
+
+		<div
+			class="d-flex flex-wrap justify-content-center gap-4">
+			<!-- Langages -->
+			<div class="skill-category">
+				<h3>Langages</h3>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" class="skill-logo" alt="PHP">
+					<span>PHP 8</span>
+				</div>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="skill-logo" alt="HTML5">
+					<span>HTML5</span>
+				</div>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="skill-logo" alt="CSS3">
+					<span>CSS3</span>
+				</div>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="skill-logo" alt="MySQL">
+					<span>MySQL</span>
+				</div>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" class="skill-logo" alt="PostgreSQL Logo">
+					<span>PostgreSQL</span>
+				</div>
+			</div>
+
+			<!-- Frameworks -->
+			<div class="skill-category">
+				<h3>Frameworks</h3>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/symfony/symfony-original.svg" class="skill-logo" alt="Symfony">
+					<span>Symfony 7</span>
+				</div>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" class="skill-logo" alt="Bootstrap">
+					<span>Bootstrap 5</span>
+				</div>
+			</div>
+
+			<!-- Outils -->
+			<div class="skill-category">
+				<h3>Outils</h3>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" class="skill-logo" alt="VSCode">
+					<span>VS Code</span>
+				</div>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/phpstorm/phpstorm-original.svg" class="skill-logo" alt="PhpStorm">
+					<span>PhpStorm</span>
+				</div>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/composer/composer-original.svg" class="skill-logo" alt="Composer">
+					<span>Composer</span>
+				</div>
+				<div class="skill-item">
+					<img src="https://www.svgrepo.com/show/447473/rest-api.svg" class="skill-logo" alt="REST API">
+					<span>API REST</span>
+				</div>
+				<div class="skill-item">
+					<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="skill-logo" alt="Git">
+					<span>Git / GitHub</span>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

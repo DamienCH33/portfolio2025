@@ -13,4 +13,22 @@ final class PageController extends AbstractController
     {
         return $this->render('index.html.twig');
     }
+
+    #[Route('/skills', name: 'app_skills', methods: ['GET'])]
+    public function skills(): Response
+    {
+        return $this->render('skills.html.twig');
+    }
+
+    #[Route('/portfolio', name: 'app_portfolio', methods: ['GET'])]
+    public function porftolio(): Response
+    {
+        return $this->render('portfolio.html.twig');
+    }
+
+    #[Route('/contact', name: 'app_contact', methods: ['GET'])]
+    public function contact(): Response
+    {
+        return $this->render('contact.html.twig');
+    }
 }
