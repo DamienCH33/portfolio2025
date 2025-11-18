@@ -1,0 +1,167 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<section id="accueil" class="hero-section text-center container">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-lg-6">
+            <h1 class="fw-bold display-4">Damien</h1>
+            <h2 class="text-success fw-semibold mb-3">Développeur Back-End PHP / Symfony</h2>
+            <p class="mb-4">Je construis des applications web performantes, stables et élégantes. Passionné par la conception de systèmes solides et le code propre.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#portfolio" class="btn btn-primary-custom px-4">Voir mes projets</a>
+                <a href="#" class="btn btn-outline-light px-4">Télécharger mon CV</a>
+            </div>
+        </div>
+        <div class="col-lg-4 mt-5 mt-lg-0 text-center">
+            <div class="profile-photo">
+                <img src="assets/img/photo_damien.jpg" alt="Photo de Damien">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Compétences -->
+<section id="competences" class="py-5 section-bg">
+    <div class="container">
+        <h2 class="section-title">Compétences</h2>
+
+        <div class="skills-row">
+            <!-- Langages -->
+            <div class="skill-category">
+                <h3>Langages</h3>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" class="skill-logo" alt="PHP">
+                    <span>PHP 8</span>
+                </div>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="skill-logo" alt="JS">
+                    <span>JavaScript</span>
+                </div>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="skill-logo" alt="HTML5">
+                    <span>HTML5</span>
+                </div>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="skill-logo" alt="CSS3">
+                    <span>CSS3</span>
+                </div>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="skill-logo" alt="MySQL">
+                    <span>MySQL</span>
+                </div>
+            </div>
+
+            <!-- Frameworks -->
+            <div class="skill-category">
+                <h3>Frameworks</h3>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/symfony/symfony-original.svg" class="skill-logo" alt="Symfony">
+                    <span>Symfony 6</span>
+                </div>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" class="skill-logo" alt="Bootstrap">
+                    <span>Bootstrap 5</span>
+                </div>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" class="skill-logo" alt="Laravel">
+                    <span>Laravel (Notions)</span>
+                </div>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="skill-logo" alt="Git">
+                    <span>Git / GitHub</span>
+                </div>
+            </div>
+
+            <!-- Outils -->
+            <div class="skill-category">
+                <h3>Outils</h3>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" class="skill-logo" alt="VSCode">
+                    <span>VS Code</span>
+                </div>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="skill-logo" alt="Docker">
+                    <span>Docker</span>
+                </div>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" class="skill-logo" alt="Linux">
+                    <span>Linux</span>
+                </div>
+                <div class="skill-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/composer/composer-original.svg" class="skill-logo" alt="Composer">
+                    <span>Composer</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio -->
+<section id="portfolio" class="py-5">
+    <div class="container">
+        <h2 class="section-title">Portfolio</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="project-card">
+                    <img src="assets/img/project1.jpg" class="img-fluid rounded-top" alt="Projet 1">
+                    <div class="p-3">
+                        <h5>Blog PHP MVC</h5>
+                        <p class="text-muted mb-2">Blog développé en architecture MVC orientée objet avec gestion des articles, commentaires et panneau admin.</p>
+                        <span class="text-success fw-semibold">PHP · Symfony · MySQL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="project-card">
+                    <img src="assets/img/project2.jpg" class="img-fluid rounded-top" alt="Projet 2">
+                    <div class="p-3">
+                        <h5>Application météo</h5>
+                        <p class="text-muted mb-2">Application consommant une API météo externe avec affichage dynamique et responsive.</p>
+                        <span class="text-success fw-semibold">Symfony · API REST · JSON</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="project-card">
+                    <img src="assets/img/project3.jpg" class="img-fluid rounded-top" alt="Projet 3">
+                    <div class="p-3">
+                        <h5>TomTroc</h5>
+                        <p class="text-muted mb-2">Plateforme de troc en ligne avec messagerie interne et gestion d’annonces.</p>
+                        <span class="text-success fw-semibold">PHP · MVC · Bootstrap</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-5 section-bg">
+    <div class="container">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-card">
+            <h3 class="mb-4">Envie de collaborer ?</h3>
+            <p class="text-muted">Je suis toujours ouvert aux opportunités, collaborations et projets stimulants.</p>
+            <form>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" placeholder="Votre nom" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="email" class="form-control" placeholder="Votre email" required>
+                    </div>
+                    <div class="col-12">
+                        <textarea class="form-control" rows="5" placeholder="Votre message" required></textarea>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary-custom px-4 mt-3">Envoyer</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

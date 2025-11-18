@@ -1,0 +1,117 @@
+:root {
+    --primary-green: #10b981;
+    --dark-bg: #0f172a;
+    --card-bg: #1e293b;
+    --border-color: #334155;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #fff;
+}
+
+.navbar-custom {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-green), #059669);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.hero-section {
+    padding-top: 120px;
+    padding-bottom: 80px;
+}
+
+.profile-photo img {
+    width: 180px;
+    height: 180px;
+    border-radius: 16px;
+    border: 3px solid var(--primary-green);
+    box-shadow: 0 20px 60px rgba(16, 185, 129, 0.2);
+    object-fit: cover;
+}
+
+.btn-primary-custom {
+    background: var(--primary-green);
+    border: none;
+    font-weight: 600;
+}
+
+.btn-primary-custom:hover {
+    background: #059669;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Compétences */
+.skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.skill-category {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid var(--border-color);
+    width: 350px;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.skill-logo {
+    width: 36px;
+    height: 36px;
+}
+
+.project-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-green);
+}
+
+.contact-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 3rem;
+    border: 1px solid var(--border-color);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border-color);
+    color: #94a3b8;
+}
