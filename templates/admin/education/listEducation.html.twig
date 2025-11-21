@@ -1,0 +1,60 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Gestion des diplômes
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h2 class="m-0">🎓 Gestion des diplômes</h2>
+			<a href="{{ path('admin_education_create') }}" class="btn btn-primary-custom">
+				<i class="bi bi-plus-circle"></i>
+				Ajouter un diplôme
+			</a>
+		</div>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">{{ message }}</div>
+		{% endfor %}
+
+		{% if educations is not empty %}
+			<div class="table-responsive">
+				<table class="table table-dark table-striped align-middle text-center">
+					<thead>
+						<tr>
+							<th>Établissement</th>
+							<th>Titre du diplôme</th>
+							<th>Année début</th>
+							<th>Année fin</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for education in educations %}
+							<tr>
+								<td>{{ education.institution }}</td>
+								<td>{{ education.title }}</td>
+								<td>{{ education.yearStart }}</td>
+								<td>{{ education.yearEnd is not null ? education.yearEnd : 'En cours' }}</td>
+								<td>
+									<a href="{{ path('admin_education_edit', {id: education.id}) }}" class="btn btn-outline-warning btn-sm">
+										<i class="bi bi-pencil"></i>
+										Modifier
+									</a>
+									<form method="post" action="{{ path('admin_education_delete', {id: education.id}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression ?');">
+										<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ education.id) }}">
+										<button class="btn btn-outline-danger btn-sm">
+											<i class="bi bi-trash"></i>
+											Supprimer</button>
+									</form>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% else %}
+			<div class="alert alert-warning text-center">Aucun diplôme enregistré pour le moment.</div>
+		{% endif %}
+	</div>
+{% endblock %}

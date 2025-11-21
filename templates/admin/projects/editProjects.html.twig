@@ -1,0 +1,69 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Modifier un projet
+{% endblock %}
+
+{% block body %}
+	<div class="container py-4">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h2>🧩 Modifier un projet</h2>
+			<a href="{{ path('admin_projects') }}" class="btn btn-primary-custom">↩ Retour</a>
+		</div>
+
+		{{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+		<div class="card p-4 shadow-sm">
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					{{ form_label(form.title) }}
+					{{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+					{{ form_errors(form.title) }}
+				</div>
+
+				<div class="col-md-6 mb-3">
+					{{ form_label(form.description) }}
+					{{ form_widget(form.description) }}
+					{{ form_errors(form.description) }}
+				</div>
+
+				<div class="col-md-12 mb-3">
+					{{ form_label(form.techStack) }}
+					{{ form_widget(form.techStack, {'attr': {'class': 'form-control'}}) }}
+					{{ form_errors(form.techStack) }}
+				</div>
+
+				<div class="col-md-6 mb-3">
+					{{ form_label(form.imageFile) }}
+					<div class="input-group">
+						{{ form_widget(form.imageFile, {'attr': {'class': 'form-control', 'onchange': 'updateFileName(this)'}}) }}
+						<span class="input-group-text" id="fileNameDisplay">Aucun fichier choisi</span>
+					</div>
+					{{ form_errors(form.imageFile) }}
+				</div>
+
+				<div class="col-md-6 mb-3">
+					{{ form_label(form.link) }}
+					{{ form_widget(form.link) }}
+					{{ form_errors(form.link) }}
+				</div>
+
+				<div class="col-md-6 mb-3">
+					{{ form_label(form.createdAt) }}
+					{{ form_widget(form.createdAt) }}
+					{{ form_errors(form.createdAt) }}
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary-custom mt-3">
+				💾 Enregistrer
+			</button>
+		</div>
+		{{ form_end(form) }}
+	</div>
+
+	<script>
+		function updateFileName(input) {
+const fileName = input.files.length > 0 ? input.files[0].name : 'Aucun fichier choisi';
+document.getElementById('fileNameDisplay').innerText = fileName;
+}
+	</script>
+{% endblock %}

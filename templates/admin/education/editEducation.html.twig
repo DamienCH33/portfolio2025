@@ -1,0 +1,43 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Modifier le diplôme{% endblock %}
+
+{% block body %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="m-0">✏️ Modifier le diplôme</h2>
+        <a href="{{ path('admin_education') }}" class="btn btn-primary-custom">↩ Retour</a>
+    </div>
+
+    {{ form_start(form) }}
+    <div class="card p-4 shadow-sm">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form_label(form.institution) }}
+                {{ form_widget(form.institution, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.institution) }}
+            </div>
+
+            <div class="col-md-6 mb-3">
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.title) }}
+            </div>
+
+            <div class="col-md-6 mb-3">
+                {{ form_label(form.yearStart) }}
+                {{ form_widget(form.yearStart) }}
+                {{ form_errors(form.yearStart) }}
+            </div>
+
+            <div class="col-md-12 mb-3">
+                {{ form_label(form.yearEnd) }}
+                {{ form_widget(form.yearEnd) }}
+                {{ form_errors(form.yearEnd) }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary-custom mt-3">💾 Mettre à jour</button>
+    </div>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

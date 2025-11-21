@@ -1,0 +1,89 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="m-0">Tableau de bord</h2>
+    <div class="small-muted">Dernière mise à jour : {{ "now"|date("d/m/Y H:i") }}</div>
+</div>
+
+<div class="row gy-3">
+    <!-- Activité mensuelle + Visites du mois -->
+    <div class="col-12 col-lg-8">
+        <div class="card p-3 mb-3">
+            <h5 class="mb-3">📊 Activité mensuelle</h5>
+            <canvas id="activityChart" height="120"></canvas>
+        </div>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="card p-3 mb-3 text-center">
+            <h6>👁️ Visites ce mois-ci</h6>
+            <div class="h2 mb-0">{{ visits_month|default(0) }}</div>
+        </div>
+    </div>
+</div>
+
+<!-- Messages formulaire de contact -->
+<div class="dashboard-section mt-4 p-3">
+    <h5 class="mb-3">📩 Messages du formulaire de contact</h5>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm mb-0">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                    <tr>
+                        <td>{{ contact.lastname }}</td>
+                        <td>{{ contact.firstname }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td>{{ contact.message|slice(0,60) ~ (contact.message|length > 60 ? '…' : '') }}</td>
+                        <td>{{ contact.createdAt ? contact.createdAt|date('d/m/Y H:i') : '—' }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="4" class="small-muted text-center">Aucun message</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{#<script>
+const labels = {{ months_labels|json_encode|raw }};
+const dataCounts = {{ monthly_activity|json_encode|raw }};
+
+const ctx = document.getElementById('activityChart');
+if (ctx) {
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Visites + Contacts',
+                data: dataCounts,
+                borderColor: '#0d6efd',
+                backgroundColor: 'rgba(13,110,253,0.1)',
+                tension: 0.3,
+                fill: true,
+                pointRadius: 4
+            }]
+        },
+        options: {
+            plugins: { legend: { display: false } },
+            scales: { x: { grid: { display: false } }, y: { beginAtZero: true } },
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+}
+</script>#}
+{% endblock %}

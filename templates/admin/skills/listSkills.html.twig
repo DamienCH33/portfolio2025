@@ -1,0 +1,59 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Gestion des compétences{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="m-0">🧩 Gestion des compétences</h2>
+        <a href="{{ path('admin_skills_create') }}" class="btn btn-primary-custom">
+            <i class="bi bi-plus-circle"></i> Ajouter une compétence
+        </a>
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% if skills is not empty %}
+        <div class="table-responsive">
+            <table class="table table-dark table-striped align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Logo</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for skill in skills %}
+                        <tr>
+                            <td>{{ skill.name }}</td>
+                            <td><span class="badge bg-secondary">{{ skill.category|capitalize }}</span></td>
+                            <td>
+                                {% if skill.logo matches '/\.(jpg|jpeg|png|svg|webp)$/i' %}
+                                    <img src="{{ asset(skill.logo) }}" alt="{{ skill.name }}" height="35">
+                                {% else %}
+                                    <i class="{{ skill.logo }} text-success fs-4"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('admin_skills_edit', {id: skill.id}) }}" class="btn btn-outline-warning btn-sm">
+                                    <i class="bi bi-pencil"></i> Modifier
+                                </a>
+                                <form method="post" action="{{ path('admin_skills_delete', {id: skill.id}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ skill.id) }}">
+                                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center">Aucune compétence enregistrée pour le moment.</div>
+    {% endif %}
+</div>
+{% endblock %}

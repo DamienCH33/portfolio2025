@@ -1,0 +1,86 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Gestion des projets
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h2 class="m-0">🚀 Gestion des projets</h2>
+			<a href="{{ path('admin_projects_create') }}" class="btn btn-primary-custom">
+				<i class="bi bi-plus-circle"></i>
+				Ajouter un projet
+			</a>
+		</div>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">{{ message }}</div>
+		{% endfor %}
+
+		{% if projects is not empty %}
+			<div class="table-responsive">
+				<table class="table table-dark table-striped align-middle text-center">
+					<thead>
+						<tr>
+							<th>Miniature</th>
+							<th>Titre</th>
+							<th>Description</th>
+							<th>Technologies</th>
+							<th>Lien</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for project in projects %}
+							<tr>
+								<td>
+									{% if project.image %}
+										<img src="{{ asset('image/portfolio_media/' ~ project.image) }}" alt="{{ project.title }}" height="50">
+									{% else %}
+										<span class="text-muted">Aucune</span>
+									{% endif %}
+								</td>
+								<td>{{ project.title }}</td>
+								<td>{{ project.description }}</td>
+								<td>
+									{% if project.techStack is not empty %}
+										{% for tech in project.techStack %}
+											<span class="badge bg-secondary">{{ tech.name }}</span>
+										{% endfor %}
+									{% else %}
+										<span class="text-muted">Aucune</span>
+									{% endif %}
+								</td>
+								<td>
+									{% if project.link %}
+										<a href="{{ project.link }}" target="_blank" class="text-decoration-none">
+											<i class="bi bi-link-45deg"></i>
+											Voir
+										</a>
+									{% else %}
+										<span class="text-muted">—</span>
+									{% endif %}
+								</td>
+								<td>
+									<a href="{{ path('admin_projects_edit', {id: project.id}) }}" class="btn btn-outline-warning btn-sm">
+										<i class="bi bi-pencil"></i>
+										Modifier
+									</a>
+									<form method="post" action="{{ path('admin_projects_delete', {id: project.id}) }}" style="display:inline;" onsubmit="return confirm('Confirmer la suppression ?');">
+										<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ project.id) }}">
+										<button class="btn btn-outline-danger btn-sm">
+											<i class="bi bi-trash"></i>
+											Supprimer
+										</button>
+									</form>
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		{% else %}
+			<div class="alert alert-warning text-center">Aucun projet enregistré pour le moment.</div>
+		{% endif %}
+	</div>
+{% endblock %}
