@@ -3,39 +3,24 @@
 {% endblock %}
 
 {% block body %}
-	<section class="container py-5 mt-5">
-		<h1 class="section-title text-center mb-5">Portfolio</h1>
-
-		<div class="row g-4">
-			<div class="col-md-4">
-				<div class="project-card">
-					<img src="" class="img-fluid rounded-top" alt="Blog PHP MVC">
-					<div class="p-3">
-						<h5>Blog PHP MVC</h5>
-						<p class="text-muted mb-2">Blog en architecture MVC avec gestion des articles, commentaires et back-office.</p>
-						<span class="text-success fw-semibold">PHP · Symfony · MySQL</span>
+<section id="portfolio" class="py-5">
+		<div class="container">
+			<h2 class="section-title">Portfolio</h2>
+			<div class="row g-4">
+				{% for project in projects %}
+					<div class="col">
+						<div class="project-card">
+							<img src="{{ asset('image/portfolio_media/' ~ project.image) }}" alt="{{ project.title }}" class="img-fluid rounded-top">
+							<div class="p-3">
+								<h5>{{ project.title}}</h5>
+								<p class="text-muted mb-2">{{ project.description}}</p>
+								{% for skill in project.techStack %}
+									<span class="text-success fw-semibold">{{ skill.name }}</span>
+								{% endfor %}
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="project-card">
-					<img src="" class="img-fluid rounded-top" alt="Application Météo">
-					<div class="p-3">
-						<h5>Application Météo</h5>
-						<p class="text-muted mb-2">Application dynamique utilisant une API météo avec affichage en temps réel.</p>
-						<span class="text-success fw-semibold">Symfony · API REST</span>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="project-card">
-					<img src="" class="img-fluid rounded-top" alt="TomTroc">
-					<div class="p-3">
-						<h5>TomTroc</h5>
-						<p class="text-muted mb-2">Plateforme de troc en ligne avec système de messagerie et profils utilisateurs.</p>
-						<span class="text-success fw-semibold">PHP · MVC · Bootstrap</span>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</section>

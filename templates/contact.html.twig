@@ -1,6 +1,20 @@
 {% extends 'base.html.twig' %}
-{% block title %}Contact - Damien{% endblock %}
+
+{% block title %}Contact{% endblock %}
 
 {% block body %}
-<p>contact</p>
+<section id="contact" class="py-5 section-bg">
+    <div class="container">
+        <h2 class="section-title mb-4 text-center">Contactez-moi</h2>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+
+        {% include "form_contact.html.twig" %}
+    </div>
+</section>
 {% endblock %}
