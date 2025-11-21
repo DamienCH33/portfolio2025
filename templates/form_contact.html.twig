@@ -1,0 +1,32 @@
+{{ form_start(form) }}
+<div class="row g-3">
+	<div class="col-md-6">
+		{{ form_label(form.firstname) }}
+		{{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.firstname) }}
+	</div>
+
+	<div class="col-md-6">
+		{{ form_label(form.lastname) }}
+		{{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.lastname) }}
+	</div>
+
+	<div class="col-12">
+		{{ form_label(form.email) }}
+		{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.email) }}
+	</div>
+	<div class="col-12">
+		{{ form_label(form.message) }}
+		{{ form_widget(form.message, {'attr': {'class': 'form-control', 'labels': '5'}}) }}
+		{{ form_errors(form.message) }}
+	</div>
+</div>
+
+<div class="text-center mt-4">
+	<button type="submit" class="btn btn-primary px-4 py-2">Envoyer</button>
+</div>
+
+{{ form_widget(form.bottrap, {'attr': {'style': 'display:none'}}) }}
+{{ form_end(form) }}
