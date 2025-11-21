@@ -31,6 +31,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column(type: "json")]
+    private array $roles = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -41,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -53,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
@@ -65,7 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -80,11 +83,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return ['ROLE_ADMIN'];
+        $roles = $this->roles;
+        // garantit qu'un utilisateur a au moins ROLE_USER
+        $roles[] = 'ROLE_USER';
+        return array_unique($roles);
     }
 
-    public function eraseCredentials(): void
+    public function setRoles(array $roles): self
     {
-    
+        $this->roles = $roles;
+        return $this;
     }
+    public function eraseCredentials(): void {}
 }

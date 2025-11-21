@@ -19,7 +19,7 @@ class Education
     #[ORM\Column(name:'year_start', type: Types::INTEGER)]
     private ?int $yearStart = null;
 
-    #[ORM\Column(name:'year_end', type: Types::INTEGER)]
+  #[ORM\Column(name: 'year_end', type: Types::INTEGER, nullable: true)]
     private ?int $yearEnd = null;
 
     #[ORM\Column(name:'institution', length: 255,type: Types::STRING)]
@@ -38,7 +38,7 @@ class Education
         return $this->yearStart;
     }
 
-    public function setYearStart(int $yearStart): static
+    public function setYearStart(int $yearStart): self
     {
         $this->yearStart = $yearStart;
 
@@ -50,7 +50,7 @@ class Education
         return $this->yearEnd;
     }
 
-    public function setYearEnd(int $yearEnd): static
+    public function setYearEnd(int $yearEnd): self
     {
         $this->yearEnd = $yearEnd;
 
@@ -62,7 +62,7 @@ class Education
         return $this->institution;
     }
 
-    public function setInstitution(string $institution): static
+    public function setInstitution(string $institution): self
     {
         $this->institution = $institution;
 
@@ -74,7 +74,7 @@ class Education
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 

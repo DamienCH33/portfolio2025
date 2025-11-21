@@ -25,6 +25,9 @@ class Skill
     #[ORM\Column(name: 'logo', length: 255, type: Types::STRING)]
     private ?string $logo = null;
 
+    #[ORM\Column(name: 'priority', type: Types::INTEGER )]
+    private ?int $priority = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,7 +38,7 @@ class Skill
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -47,7 +50,7 @@ class Skill
         return $this->category;
     }
 
-    public function setCategory(string $category): static
+    public function setCategory(string $category): self
     {
         $this->category = $category;
 
@@ -59,9 +62,20 @@ class Skill
         return $this->logo;
     }
 
-    public function setLogo(string $logo): static
+    public function setLogo(string $logo): self
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(int $priority): self
+    {
+        $this->priority = $priority;
 
         return $this;
     }

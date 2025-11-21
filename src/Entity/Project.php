@@ -7,6 +7,8 @@ namespace App\Entity;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
@@ -22,8 +24,9 @@ class Project
     #[ORM\Column(name: 'description', type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(name: 'tech_stack', length: 255, type: Types::STRING)]
-    private ?string $techStack = null;
+    #[ORM\ManyToMany(targetEntity: Skill::class)]
+    #[ORM\OrderBy(['priority' => 'DESC'])]
+    private Collection $techStack;
 
     #[ORM\Column(name: 'image', length: 255, type: Types::STRING)]
     private ?string $image = null;
@@ -33,11 +36,6 @@ class Project
 
     #[ORM\Column(name: 'created_At', type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $createdAt = null;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTimeImmutable();
-    }
     public function getId(): ?int
     {
         return $this->id;
@@ -48,7 +46,7 @@ class Project
         return $this->title;
     }
 
-    public function setTitle(string $title): static
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
@@ -60,21 +58,35 @@ class Project
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function getTechStack(): ?string
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->techStack = new ArrayCollection();
+    }
+
+    public function getTechStack(): Collection
     {
         return $this->techStack;
     }
 
-    public function setTechStack(string $techStack): static
+    public function addTechStack(Skill $skill): self
     {
-        $this->techStack = $techStack;
+        if (!$this->techStack->contains($skill)) {
+            $this->techStack->add($skill);
+        }
+        return $this;
+    }
+
+    public function removeTechStack(Skill $skill): self
+    {
+        $this->techStack->removeElement($skill);
         return $this;
     }
 
@@ -83,7 +95,7 @@ class Project
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    public function setImage(string $image): self
     {
         $this->image = $image;
 
@@ -95,7 +107,7 @@ class Project
         return $this->link;
     }
 
-    public function setLink(string $link): static
+    public function setLink(string $link): self
     {
         $this->link = $link;
 
@@ -107,7 +119,7 @@ class Project
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
