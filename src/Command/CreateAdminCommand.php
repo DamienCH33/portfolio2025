@@ -47,6 +47,7 @@ class CreateAdminCommand extends Command
         $this->em->flush();
 
         $output->writeln("Admin $email créé avec succès !");
+
         return Command::SUCCESS;
     }
 }

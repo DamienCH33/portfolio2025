@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\SkillRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SkillRepository::class)]
 class Skill
@@ -25,7 +25,7 @@ class Skill
     #[ORM\Column(name: 'logo', length: 255, type: Types::STRING)]
     private ?string $logo = null;
 
-    #[ORM\Column(name: 'priority', type: Types::INTEGER )]
+    #[ORM\Column(name: 'priority', type: Types::INTEGER)]
     private ?int $priority = null;
 
     public function getId(): ?int
@@ -68,6 +68,7 @@ class Skill
 
         return $this;
     }
+
     public function getPriority(): ?int
     {
         return $this->priority;

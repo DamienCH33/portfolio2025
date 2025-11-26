@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\EducationRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EducationRepository::class)]
 class Education
@@ -16,16 +16,16 @@ class Education
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ORM\Column(name:'year_start', type: Types::INTEGER)]
+    #[ORM\Column(name: 'year_start', type: Types::INTEGER)]
     private ?int $yearStart = null;
 
-  #[ORM\Column(name: 'year_end', type: Types::INTEGER, nullable: true)]
+    #[ORM\Column(name: 'year_end', type: Types::INTEGER, nullable: true)]
     private ?int $yearEnd = null;
 
-    #[ORM\Column(name:'institution', length: 255,type: Types::STRING)]
+    #[ORM\Column(name: 'institution', length: 255, type: Types::STRING)]
     private ?string $institution = null;
 
-    #[ORM\Column(name:'title', length: 255, type: Types::STRING)]
+    #[ORM\Column(name: 'title', length: 255, type: Types::STRING)]
     private ?string $title = null;
 
     public function getId(): ?int

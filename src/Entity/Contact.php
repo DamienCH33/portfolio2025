@@ -8,8 +8,6 @@ use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-use function Symfony\Component\String\u;
-
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
 {
@@ -18,25 +16,26 @@ class Contact
     #[ORM\Column(type: Types::INTEGER)]
     private ?int $id = null;
 
-    #[ORM\Column(name:'lastname',length: 255, type: Types::STRING)]
+    #[ORM\Column(name: 'lastname', length: 255, type: Types::STRING)]
     private ?string $lastname = null;
 
-    #[ORM\Column(name:'firstname', length: 255, type: Types::STRING)]
+    #[ORM\Column(name: 'firstname', length: 255, type: Types::STRING)]
     private ?string $firstname = null;
 
-    #[ORM\Column(name:'email', length: 255, type: Types::STRING)]
+    #[ORM\Column(name: 'email', length: 255, type: Types::STRING)]
     private ?string $email = null;
 
-    #[ORM\Column(name:'message', type: Types::TEXT)]
+    #[ORM\Column(name: 'message', type: Types::TEXT)]
     private ?string $message = null;
 
-    #[ORM\Column(name:'created_at', type: Types::DATETIME_IMMUTABLE)]
+    #[ORM\Column(name: 'created_at', type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $createdAt = null;
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
     }
+
     public function getId(): ?int
     {
         return $this->id;

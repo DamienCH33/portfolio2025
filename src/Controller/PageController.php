@@ -7,7 +7,6 @@ use App\Entity\Skill;
 use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Config\Builder\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -19,9 +18,9 @@ final class PageController extends AbstractController
     {
         $skills = $em->getRepository(Skill::class)->findAll();
         $educations = $em->getRepository(\App\Entity\Education::class)->findAll();
-        $projects = $em->getRepository(\App\Entity\Project::class)->findBy([],['createdAt'=>'DESC'],3);
+        $projects = $em->getRepository(\App\Entity\Project::class)->findBy([], ['createdAt' => 'DESC'], 3);
 
-        $form = $this->createForm(ContactType::class, new Contact(),[
+        $form = $this->createForm(ContactType::class, new Contact(), [
             'action' => '#contact',
         ]);
         $form->handleRequest($request);
@@ -54,7 +53,8 @@ final class PageController extends AbstractController
     #[Route('/portfolio', name: 'app_portfolio', methods: ['GET'])]
     public function porftolio(EntityManagerInterface $em): Response
     {
-        $projects = $em->getRepository(\App\Entity\Project::class)->findBy([],['createdAt'=>'DESC']);
+        $projects = $em->getRepository(\App\Entity\Project::class)->findBy([], ['createdAt' => 'DESC']);
+
         return $this->render('portfolio.html.twig', [
             'projects' => $projects,
         ]);
@@ -63,6 +63,6 @@ final class PageController extends AbstractController
     #[Route('/contact', name: 'app_contact', methods: ['GET'])]
     public function contact(): Response
     {
-        return $this->render('contact.html.twig',);
+        return $this->render('contact.html.twig');
     }
 }

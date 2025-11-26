@@ -24,7 +24,7 @@ class ProjectsController extends AbstractController
 
         return $this->render('admin/projects/listProjects.html.twig', [
             'projects' => $projects,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -43,11 +43,11 @@ class ProjectsController extends AbstractController
                 // Génère un nom de fichier unique et sûr
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
 
                 try {
                     $imageFile->move(
-                        $this->getParameter('kernel.project_dir') . '/public/image/portfolio_media',
+                        $this->getParameter('kernel.project_dir').'/public/image/portfolio_media',
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -61,6 +61,7 @@ class ProjectsController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Projet ajouté avec succès !');
+
             return $this->redirectToRoute('admin_projects');
         }
 
@@ -84,18 +85,18 @@ class ProjectsController extends AbstractController
             $imageFile = $form->get('imageFile')->getData();
 
             if ($imageFile) {
-                $oldImagePath = $this->getParameter('kernel.project_dir') . '/public/image/portfolio_media/' . $project->getImage();
+                $oldImagePath = $this->getParameter('kernel.project_dir').'/public/image/portfolio_media/'.$project->getImage();
                 if ($project->getImage() && file_exists($oldImagePath)) {
                     unlink($oldImagePath);
                 }
 
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
 
                 try {
                     $imageFile->move(
-                        $this->getParameter('kernel.project_dir') . '/public/image/portfolio_media',
+                        $this->getParameter('kernel.project_dir').'/public/image/portfolio_media',
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -117,7 +118,7 @@ class ProjectsController extends AbstractController
 
         return $this->render('admin/projects/editProjects.html.twig', [
             'form' => $form->createView(),
-            'project' => $project
+            'project' => $project,
         ]);
     }
 
@@ -125,7 +126,7 @@ class ProjectsController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function deleteProjects(Request $request, EntityManagerInterface $em, Project $project): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $project->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$project->getId(), $request->request->get('_token'))) {
             $em->remove($project);
             $em->flush();
 
@@ -138,7 +139,7 @@ class ProjectsController extends AbstractController
     #[Route('/media/{filename}', name: 'project_image')]
     public function projectImage(string $filename)
     {
-        $path = 'C:\wamp64\www\portfolio_media\\' . $filename;
+        $path = 'C:\wamp64\www\portfolio_media\\'.$filename;
         if (!file_exists($path)) {
             throw $this->createNotFoundException();
         }

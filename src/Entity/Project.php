@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
 class Project
@@ -36,6 +36,7 @@ class Project
 
     #[ORM\Column(name: 'created_At', type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $createdAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -81,12 +82,14 @@ class Project
         if (!$this->techStack->contains($skill)) {
             $this->techStack->add($skill);
         }
+
         return $this;
     }
 
     public function removeTechStack(Skill $skill): self
     {
         $this->techStack->removeElement($skill);
+
         return $this;
     }
 

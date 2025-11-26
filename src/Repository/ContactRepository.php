@@ -1,5 +1,7 @@
 <?php
+
 // src/Repository/ContactRepository.php
+
 namespace App\Repository;
 
 use App\Entity\Contact;

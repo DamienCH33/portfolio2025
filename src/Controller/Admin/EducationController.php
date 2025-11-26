@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controller\Admin; 
+namespace App\Controller\Admin;
 
 use App\Entity\Education;
-use App\Form\EducationType;   
+use App\Form\EducationType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;   
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -30,7 +30,7 @@ class EducationController extends AbstractController
 
         return $this->render('admin/education/listEducation.html.twig', [
             'educations' => $educations,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -52,11 +52,12 @@ class EducationController extends AbstractController
         }
 
         return $this->render('admin/education/addEducation.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
+
     #[Route('/{id}/edit', name: 'admin_education_edit', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_ADMIN')]  
+    #[IsGranted('ROLE_ADMIN')]
     public function editEducation(Request $request, EntityManagerInterface $em, Education $education): Response
     {
         $education = $em->getRepository(Education::class)->find($education->getId());
@@ -73,19 +74,21 @@ class EducationController extends AbstractController
                 'La compétence "%s" a été mise à jour avec succès.',
                 $education->getTitle()
             ));
+
             return $this->redirectToRoute('admin_education');
         }
+
         return $this->render('admin/education/editEducation.html.twig', [
             'form' => $form->createView(),
-            'education' => $education
-        ]);       
+            'education' => $education,
+        ]);
     }
 
     #[Route('/{id}/delete', name: 'admin_education_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function deleteEducation(Request $request, EntityManagerInterface $em, Education $education
+    public function deleteEducation(Request $request, EntityManagerInterface $em, Education $education,
     ): Response {
-        if ($this->isCsrfTokenValid('delete' . $education->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$education->getId(), $request->request->get('_token'))) {
             $em->remove($education);
             $em->flush();
 
@@ -94,4 +97,4 @@ class EducationController extends AbstractController
 
         return $this->redirectToRoute('admin_education');
     }
-}       
+}

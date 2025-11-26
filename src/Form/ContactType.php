@@ -26,7 +26,7 @@ class ContactType extends AbstractType
                         'pattern' => '/^[a-zA-ZÀ-ÿ\-\' ]{2,50}$/u',
                         'message' => 'Le nom ne peut contenir que des lettres, espaces ou tirets.',
                     ]),
-                ]
+                ],
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
@@ -37,14 +37,14 @@ class ContactType extends AbstractType
                         'pattern' => '/^[a-zA-ZÀ-ÿ\-\' ]{2,50}$/u',
                         'message' => 'Le nom ne peut contenir que des lettres, espaces ou tirets.',
                     ]),
-                ]
+                ],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'Adresse e-mail',
                 'constraints' => [
                     new Assert\NotBlank(['message' => 'Veuillez saisir une adresse e-mail.']),
                     new Assert\Email(['message' => 'Adresse e-mail invalide.']),
-                ]
+                ],
             ])
             ->add('message', TextareaType::class, [
                 'label' => 'Message',
@@ -52,7 +52,7 @@ class ContactType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank(['message' => 'Le message ne peut pas être vide.']),
                     new Assert\Length(['min' => 10, 'max' => 2000]),
-                ]
+                ],
             ])
             // Champ honeypot anti-bot
             ->add('bottrap', TextType::class, [

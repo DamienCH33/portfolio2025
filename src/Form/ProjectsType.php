@@ -4,13 +4,13 @@ namespace App\Form;
 
 use App\Entity\Project;
 use App\Entity\Skill;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -32,7 +32,7 @@ class ProjectsType extends AbstractType
                     new Assert\NotBlank(['message' => 'Le titre est obligatoire.']),
                     new Assert\Length([
                         'max' => 150,
-                        'maxMessage' => 'Le titre ne peut pas dépasser {{ limit }} caractères.'
+                        'maxMessage' => 'Le titre ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                 ],
             ])
@@ -71,7 +71,7 @@ class ProjectsType extends AbstractType
                             'image/jpg',
                         ],
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (jpeg, jpg, png).',
-                    ])
+                    ]),
                 ],
             ])
             ->add('link', UrlType::class, [

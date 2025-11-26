@@ -23,7 +23,7 @@ class SkillsController extends AbstractController
 
         return $this->render('admin/skills/listSkills.html.twig', [
             'skills' => $skills,
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -45,7 +45,7 @@ class SkillsController extends AbstractController
         }
 
         return $this->render('admin/skills/addSkills.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -82,7 +82,7 @@ class SkillsController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function deleteSkills(Request $request, EntityManagerInterface $em, Skill $skill): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $skill->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$skill->getId(), $request->request->get('_token'))) {
             $em->remove($skill);
             $em->flush();
 
