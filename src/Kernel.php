@@ -9,7 +9,7 @@ class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    public const string DEFAULT_TIMEZONE = 'Europe/Paris';
+    public const DEFAULT_TIMEZONE = 'Europe/Paris';
 
     public function __construct(string $environment, bool $debug)
     {
