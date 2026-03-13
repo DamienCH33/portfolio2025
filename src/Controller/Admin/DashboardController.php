@@ -20,9 +20,16 @@ class DashboardController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
         $contacts = $em->getRepository(Contact::class)->findAll();
-        return $this->render('admin/dashboard.html.twig',[
+
+        return $this->render('admin/dashboard.html.twig', [
             'contacts' => $contacts,
+            'visits_month' => 0,
+            'contacts_month' => count($contacts),
+            'conversion' => 0,
+            'visits_today' => 0,
+            'months_labels' => [],
+            'monthly_visits' => [],
+            'monthly_contacts' => []
         ]);
-    }   
-    
+    }
 }

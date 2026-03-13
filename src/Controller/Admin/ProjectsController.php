@@ -40,7 +40,6 @@ class ProjectsController extends AbstractController
             $imageFile = $form->get('imageFile')->getData();
 
             if ($imageFile) {
-                // Génère un nom de fichier unique et sûr
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
@@ -73,10 +72,6 @@ class ProjectsController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function editProjects(Request $request, EntityManagerInterface $em, Project $project, SluggerInterface $slugger): Response
     {
-        if (!$project) {
-            throw $this->createNotFoundException('Projet non trouvé.');
-        }
-
         $form = $this->createForm(ProjectsType::class, $project);
         $form->handleRequest($request);
 
@@ -136,9 +131,9 @@ class ProjectsController extends AbstractController
     }
 
     #[Route('/media/{filename}', name: 'project_image')]
-    public function projectImage(string $filename)
+    public function projectImage(string $filename): Response
     {
-        $path = 'C:\wamp64\www\portfolio_media\\' . $filename;
+        $path = $this->getParameter('kernel.project_dir') . '/public/image/portfolio_media/' . $filename;
         if (!file_exists($path)) {
             throw $this->createNotFoundException();
         }

@@ -12,7 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class CreateAdminCommand extends Command
 {
-    protected static $defaultName = 'app:create-admin';
+    protected static string $defaultName = 'app:create-admin';
 
     private EntityManagerInterface $em;
     private UserPasswordHasherInterface $passwordHasher;
