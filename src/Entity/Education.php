@@ -50,7 +50,7 @@ class Education
         return $this->yearEnd;
     }
 
-    public function setYearEnd(int $yearEnd): self
+    public function setYearEnd(?int $yearEnd): self
     {
         $this->yearEnd = $yearEnd;
 

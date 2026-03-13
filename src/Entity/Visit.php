@@ -8,11 +8,13 @@ use App\Repository\VisitRepository;
 #[ORM\Entity(repositoryClass: VisitRepository::class)]
 class Visit
 {
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column(type:"integer")]
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    #[ORM\Column(type:"datetime")]
-    private $createdAt;
+    #[ORM\Column(type: 'datetime')]
+    private \DateTimeInterface $createdAt;
 
     public function __construct()
     {

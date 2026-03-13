@@ -24,6 +24,9 @@ class Project
     #[ORM\Column(name: 'description', type: Types::TEXT)]
     private ?string $description = null;
 
+    /**
+     * @var Collection<int, Skill>
+     */
     #[ORM\ManyToMany(targetEntity: Skill::class)]
     #[ORM\OrderBy(['priority' => 'DESC'])]
     private Collection $techStack;
@@ -71,6 +74,9 @@ class Project
         $this->techStack = new ArrayCollection();
     }
 
+    /**
+     * @return Collection<int, Skill>
+     */
     public function getTechStack(): Collection
     {
         return $this->techStack;
