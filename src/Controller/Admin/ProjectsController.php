@@ -15,16 +15,19 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProjectsController extends AbstractController
 {
+    private function getUploadDir(): string
+    {
+        return $this->getParameter('kernel.project_dir') . '/public/image/portfolio_media';
+    }
+
     #[Route('/admin/projects', name: 'admin_projects')]
     public function index(EntityManagerInterface $em): Response
     {
-        $user = $this->getUser();
-
         $projects = $em->getRepository(Project::class)->findBy([], ['createdAt' => 'DESC']);
 
         return $this->render('admin/projects/listProjects.html.twig', [
             'projects' => $projects,
-            'user' => $user
+            'user' => $this->getUser()
         ]);
     }
 
@@ -37,29 +40,36 @@ class ProjectsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $imageFile = $form->get('imageFile')->getData();
 
             if ($imageFile) {
+
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $safeFilename = (string) $slugger->slug($originalFilename);
+
+                $extension = $imageFile->guessExtension() ?? 'bin';
+
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $extension;
 
                 try {
                     $imageFile->move(
-                        $this->getParameter('kernel.project_dir') . '/public/image/portfolio_media',
+                        $this->getUploadDir(),
                         $newFilename
                     );
-                } catch (FileException $e) {
+
+                    $project->setImage($newFilename);
+                } catch (FileException) {
+
                     $this->addFlash('danger', "Erreur lors de l'upload de l'image !");
                 }
-
-                $project->setImage($newFilename);
             }
 
             $em->persist($project);
             $em->flush();
 
             $this->addFlash('success', 'Projet ajouté avec succès !');
+
             return $this->redirectToRoute('admin_projects');
         }
 
@@ -76,36 +86,44 @@ class ProjectsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $imageFile = $form->get('imageFile')->getData();
 
             if ($imageFile) {
-                $oldImagePath = $this->getParameter('kernel.project_dir') . '/public/image/portfolio_media/' . $project->getImage();
-                if ($project->getImage() && file_exists($oldImagePath)) {
+
+                $oldImagePath = $this->getUploadDir() . '/' . $project->getImage();
+
+                if ($project->getImage() && is_file($oldImagePath)) {
                     unlink($oldImagePath);
                 }
 
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+                $safeFilename = (string) $slugger->slug($originalFilename);
+
+                $extension = $imageFile->guessExtension() ?? 'bin';
+
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $extension;
 
                 try {
+
                     $imageFile->move(
-                        $this->getParameter('kernel.project_dir') . '/public/image/portfolio_media',
+                        $this->getUploadDir(),
                         $newFilename
                     );
-                } catch (FileException $e) {
+
+                    $project->setImage($newFilename);
+                } catch (FileException) {
+
                     $this->addFlash('danger', "Erreur lors de l'upload de l'image !");
                 }
-
-                $project->setImage($newFilename);
             }
 
             $em->flush();
 
-            $this->addFlash('success', sprintf(
-                'Le projet "%s" a été mis à jour avec succès.',
-                $project->getTitle()
-            ));
+            $this->addFlash(
+                'success',
+                sprintf('Le projet "%s" a été mis à jour avec succès.', $project->getTitle())
+            );
 
             return $this->redirectToRoute('admin_projects');
         }
@@ -121,6 +139,13 @@ class ProjectsController extends AbstractController
     public function deleteProjects(Request $request, EntityManagerInterface $em, Project $project): Response
     {
         if ($this->isCsrfTokenValid('delete' . $project->getId(), $request->request->get('_token'))) {
+
+            $imagePath = $this->getUploadDir() . '/' . $project->getImage();
+
+            if ($project->getImage() && is_file($imagePath)) {
+                unlink($imagePath);
+            }
+
             $em->remove($project);
             $em->flush();
 
@@ -133,8 +158,9 @@ class ProjectsController extends AbstractController
     #[Route('/media/{filename}', name: 'project_image')]
     public function projectImage(string $filename): Response
     {
-        $path = $this->getParameter('kernel.project_dir') . '/public/image/portfolio_media/' . $filename;
-        if (!file_exists($path)) {
+        $path = $this->getUploadDir() . '/' . $filename;
+
+        if (!is_file($path)) {
             throw $this->createNotFoundException();
         }
 
