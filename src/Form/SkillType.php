@@ -6,6 +6,7 @@ use App\Entity\Skill;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -71,6 +72,21 @@ class SkillType extends AbstractType
                         'message' => 'Le logo doit être un chemin valide ou une URL commençant par http:// ou https://.',
                     ]),
                 ],
+            ])
+            ->add('priority', IntegerType::class, [
+                'label' => 'Priorité',
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 0
+                ],
+                'constraints' => [
+                    new Assert\NotBlank([
+                        'message' => 'La priorité est obligatoire.'
+                    ]),
+                    new Assert\PositiveOrZero([
+                        'message' => 'La priorité doit être positive.'
+                    ])
+                ]
             ]);
     }
 
