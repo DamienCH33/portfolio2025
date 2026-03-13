@@ -4,24 +4,36 @@
 
 {% block body %}
 <section id="portfolio" class="py-5">
-		<div class="container">
-			<h2 class="section-title">Portfolio</h2>
-			<div class="row g-4">
-				{% for project in projects %}
-					<div class="col">
-						<div class="project-card">
-							<img src="{{ asset('image/portfolio_media/' ~ project.image) }}" alt="{{ project.title }}" class="img-fluid rounded-top">
-							<div class="p-3">
-								<h5>{{ project.title}}</h5>
-								<p class="text-muted mb-2">{{ project.description}}</p>
-								{% for skill in project.techStack %}
-									<span class="text-success fw-semibold">{{ skill.name }}</span>
-								{% endfor %}
-							</div>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-		</div>
-	</section>
+    <div class="container">
+        <h2 class="section-title">Portfolio</h2>
+        <div class="row g-4">
+            {% for project in projects %}
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <div class="project-card h-100">
+                    <img src="{{ asset('image/portfolio_media/' ~ project.image) }}" alt="{{ project.title }}"
+                        class="img-fluid rounded-top">
+                    <div class="p-3 d-flex flex-column h-100">
+                        <h4 class="project-title"> {{ project.title }} </h4>
+                        <p class="text-muted small mb-3">
+                            {{ project.description }}
+                        </p>
+                        <div class="project-tech mb-3">
+                            {% for skill in project.techStack %}
+                            <span class="badge bg-success me-1">
+                                {{ skill.name }}
+                            </span>
+                            {% endfor %}
+                        </div>
+                        <div class="project-actions mt-auto">
+                            <a href="{{ project.link }}" target="_blank" class="btn btn-sm btn-outline-light  bi bi-github">
+                                Voir le code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 {% endblock %}

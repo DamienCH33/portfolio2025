@@ -5,16 +5,46 @@
 {% block body %}
 <section id="contact" class="py-5 section-bg">
     <div class="container">
-        <h2 class="section-title mb-4 text-center">Contactez-moi</h2>
+
+        <h2 class="section-title text-center mb-3">Contact</h2>
+
+        <p class="text-center text-muted mb-5 contact-intro">
+            Une question, une proposition de collaboration ou une opportunité
+            professionnelle ? N’hésitez pas à me laisser un message.
+        </p>
 
         {% for message in app.flashes('success') %}
-            <div class="alert alert-success">{{ message }}</div>
-        {% endfor %}
-        {% for message in app.flashes('danger') %}
-            <div class="alert alert-danger">{{ message }}</div>
+            <div class="alert alert-success text-center">{{ message }}</div>
         {% endfor %}
 
-        {% include "form_contact.html.twig" %}
+        {% for message in app.flashes('danger') %}
+            <div class="alert alert-danger text-center">{{ message }}</div>
+        {% endfor %}
+
+        <div class="contact-card mx-auto">
+
+            {% include "form_contact.html.twig" %}
+
+        </div>
+
+        <div class="contact-alt text-center mt-5">
+            <p class="text-muted mb-2">
+                Vous pouvez également me contacter directement via :
+            </p>
+
+            <span class="mx-2">•</span>
+
+            <a href="https://github.com/DamienCH33" target="_blank" class="contact-link">
+                GitHub
+            </a>
+
+            <span class="mx-2">•</span>
+
+            <a href="https://linkedin.com/in/tonprofil" target="_blank" class="contact-link">
+                LinkedIn
+            </a>
+        </div>
+
     </div>
 </section>
 {% endblock %}

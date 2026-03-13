@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos{% endblock %}
+
+{% block body %}
+
+<section class="about-section py-5">
+	<div class="container">
+		<h1 class="text-center mb-5 py-5">À propos</h1>
+		<div class="about-intro">
+			<div class="about-profile">
+				<img src="{{ asset('image/portfolio_media/damien_chauveau_photo.png') }}" alt="Photo Damien Chauveau"
+					class="about-photo">
+				<div class="about-info">
+					<h2>Damien Chauveau</h2>
+					<p class="about-role">
+						Développeur Backend PHP / Symfony
+					</p>
+					<ul class="about-meta">
+						<li>📍 Bordeaux</li>
+						<li>🎓 Développeur Concepteur Logiciel (RNCP niveau 6)</li>
+						<li>💻 Stack principale : PHP • Symfony • API REST</li>
+						<li>🔎 Disponible pour un poste de développeur backend</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<h2>Parcours</h2>
+
+		<p>
+			Après plus de dix années d’expérience en entreprise dans le secteur de l’assurance,
+			j’ai progressivement orienté ma carrière vers le développement web.
+		</p>
+
+		<p>
+			Chez Willis Towers Watson, j’ai participé à l’évolution d’un extranet de gestion
+			utilisé par des collectivités. Mon rôle impliquait la participation aux phases
+			de recettage des fonctionnalités, la remontée d’anomalies et l’accompagnement
+			des utilisateurs dans l’utilisation de l’outil.
+		</p>
+
+		<p>
+			Cette expérience m’a permis de développer une bonne compréhension des applications
+			métiers, des besoins fonctionnels et du fonctionnement des projets logiciels
+			en environnement professionnel, en collaboration avec des équipes techniques.
+		</p>
+
+		<p>
+			Afin de me spécialiser dans le développement web, j’ai ensuite suivi la formation
+			<strong>Développeur d’Application PHP/Symfony</strong> chez OpenClassrooms,
+			une formation professionnalisante basée sur la réalisation de nombreux projets
+			applicatifs couvrant l’ensemble du cycle de développement backend.
+		</p>
+
+		<h2>Expérience en développement</h2>
+
+		<p>
+			Dans le cadre de cette formation et d’un stage chez Bilendi Technology,
+			j’ai travaillé sur le développement d’applications web avec PHP et Symfony
+			en utilisant l’architecture MVC.
+		</p>
+
+		<p>
+			J’y ai développé des fonctionnalités CRUD, manipulé des bases de données
+			relationnelles avec Doctrine ORM et participé au travail collaboratif
+			via Git et GitHub.
+		</p>
+
+		<p>
+			Ces projets m’ont permis de mettre en pratique plusieurs aspects essentiels
+			du développement backend : conception d’API REST, gestion des entités
+			et relations, optimisation de requêtes SQL et mise en place de tests
+			automatisés.
+		</p>
+
+		<h2>Technologies</h2>
+
+		<ul class="about-tech">
+			<li><strong>Backend :</strong> PHP, Symfony, Doctrine ORM, API REST</li>
+			<li><strong>Base de données :</strong> PostgreSQL, MySQL</li>
+			<li><strong>Qualité du code :</strong> PHPUnit, PHPStan, PHP-CS-Fixer</li>
+			<li><strong>Outils :</strong> Docker, Git, GitHub, GitHub Actions (CI), Composer</li>
+			<li><strong>Frontend :</strong> HTML, CSS, Twig, Bootstrap</li>
+		</ul>
+
+		<h2>Approche du développement</h2>
+		<p>
+			Je m’attache à produire un code structuré et maintenable en appliquant
+			les bonnes pratiques du développement backend : séparation des
+			responsabilités, architecture claire et organisation cohérente
+			des projets.
+		</p>
+		<p>
+			La qualité du code occupe également une place importante dans ma
+			façon de travailler, notamment grâce aux tests automatisés,
+			à l’analyse statique et à l’utilisation d’outils modernes
+			de développement.
+		</p>
+
+		<h2>Objectif professionnel</h2>
+		<p>
+			Aujourd’hui, je souhaite poursuivre mon évolution en tant que
+			développeur backend au sein d’une équipe technique, sur des
+			applications web concrètes et utiles. Mon objectif est de continuer
+			à progresser techniquement tout en contribuant à la conception
+			et à l’évolution de projets applicatifs solides.
+		</p>
+	</div>
+</section>
+{% endblock %}
