@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,42 +21,49 @@ class ContactType extends AbstractType
             ->add('lastname', TextType::class, [
                 'label' => 'Nom',
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'Veuillez saisir un nom..']),
-                    new Assert\Length(['max' => 100]),
-                    new Regex([
-                        'pattern' => '/^[a-zA-ZÀ-ÿ\-\' ]{2,50}$/u',
-                        'message' => 'Le nom ne peut contenir que des lettres, espaces ou tirets.',
-                    ]),
-                ]
+                    new Assert\NotBlank(message: 'Veuillez saisir un nom.'),
+                    new Assert\Length(max: 100),
+                    new Regex(
+                        pattern: '/^[a-zA-ZÀ-ÿ\-\' ]{2,50}$/u',
+                        message: 'Le nom ne peut contenir que des lettres, espaces ou tirets.'
+                    ),
+                ],
             ])
+
             ->add('firstname', TextType::class, [
                 'label' => 'Prénom',
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'Veuillez saisir un prénom.']),
-                    new Assert\Length(['max' => 100]),
-                    new Regex([
-                        'pattern' => '/^[a-zA-ZÀ-ÿ\-\' ]{2,50}$/u',
-                        'message' => 'Le nom ne peut contenir que des lettres, espaces ou tirets.',
-                    ]),
-                ]
+                    new Assert\NotBlank(message: 'Veuillez saisir un prénom.'),
+                    new Assert\Length(max: 100),
+                    new Regex(
+                        pattern: '/^[a-zA-ZÀ-ÿ\-\' ]{2,50}$/u',
+                        message: 'Le prénom ne peut contenir que des lettres, espaces ou tirets.'
+                    ),
+                ],
             ])
+
             ->add('email', EmailType::class, [
                 'label' => 'Adresse e-mail',
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'Veuillez saisir une adresse e-mail.']),
-                    new Assert\Email(['message' => 'Adresse e-mail invalide.']),
-                ]
+                    new Assert\NotBlank(message: 'Veuillez saisir une adresse e-mail.'),
+                    new Assert\Email(message: 'Adresse e-mail invalide.'),
+                ],
             ])
+
             ->add('message', TextareaType::class, [
                 'label' => 'Message',
                 'attr' => ['rows' => 6],
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'Le message ne peut pas être vide.']),
-                    new Assert\Length(['min' => 10, 'max' => 2000]),
-                ]
+                    new Assert\NotBlank(message: 'Le message ne peut pas être vide.'),
+                    new Assert\Length(min: 10, max: 2000),
+                ],
+            ])
+            ->add('form_time', HiddenType::class, [
+                'mapped' => false,
+                'data' => time(),
             ])
             // Champ honeypot anti-bot
-            ->add('bottrap', TextType::class, [
+            ->add('website', TextType::class, [
                 'mapped' => false,
                 'required' => false,
                 'attr' => [
@@ -70,7 +78,9 @@ class ContactType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Contact::class,
-            'attr' => ['novalidate' => 'novalidate'],
+            'attr' => [
+                'novalidate' => 'novalidate',
+            ],
         ]);
     }
 }

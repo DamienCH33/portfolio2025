@@ -40,9 +40,12 @@ class SkillType extends AbstractType
             ->add('category', ChoiceType::class, [
                 'label' => 'Catégorie',
                 'choices' => [
-                    'Langage' => 'langage',
-                    'Framework' => 'framework',
-                    'Outil' => 'outil',
+                    'Langage' => 'Langage',
+                    'Framework' => 'Framework',
+                    'Outils /DevOps' => 'Outils /DevOps',
+                    'Base de données' => 'Base de données',
+                    'Qualité / Tests' => 'Qualité / Tests',
+                    'Architecture' => 'Architecture',
                 ],
                 'attr' => ['class' => 'form-select'],
                 'constraints' => [
@@ -64,7 +67,6 @@ class SkillType extends AbstractType
                         'maxMessage' => 'Le lien du logo ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                     new Assert\Regex([
-                        // Autorise lettres, chiffres, / . - _ : et https:// ou http://
                         'pattern' => '/^(https?:\/\/[a-zA-Z0-9\-\.\/\_\?\=\&\#]+|\/[a-zA-Z0-9\-\.\/\_]+)$/',
                         'message' => 'Le logo doit être un chemin valide ou une URL commençant par http:// ou https://.',
                     ]),
