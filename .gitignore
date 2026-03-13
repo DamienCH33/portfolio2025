@@ -1,21 +1,32 @@
-###> symfony/framework-bundle ###
+### Symfony ###
 /.env.local
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
-/var/
+
+### Dependencies ###
 /vendor/
-###< symfony/framework-bundle ###
 
-###> phpunit/phpunit ###
-/phpunit.xml
-/.phpunit.cache/
-###< phpunit/phpunit ###
+### Cache ###
+/var/
 
-###> friendsofphp/php-cs-fixer ###
-/.php-cs-fixer.php
+### Uploads ###
+/public/image/portfolio_media/*
+!/public/image/portfolio_media/.gitkeep
+
+### PHPUnit ###
+/.phpunit.cache
+
+### PHP CS Fixer ###
 /.php-cs-fixer.cache
-###< friendsofphp/php-cs-fixer ###
-/.php-cs-fixer.cache
 
+### PHPStan ###
+/.phpstan/
+phpstan-result-cache.php
+
+### IDE ###
+/.idea/
+/.vscode/
+
+### OS ###
+.DS_Store
