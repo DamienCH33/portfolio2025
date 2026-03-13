@@ -6,6 +6,9 @@ use App\Entity\Visit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+/**
+ * @extends ServiceEntityRepository<Visit>
+ */
 class VisitRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -13,14 +16,32 @@ class VisitRepository extends ServiceEntityRepository
         parent::__construct($registry, Visit::class);
     }
 
+    /**
+     * @return array<int, array{month:int, count:int}>
+     */
     public function getMonthlyCounts(int $year): array
     {
-        return $this->createQueryBuilder('v')
-            ->select('MONTH(v.createdAt) AS month, COUNT(v.id) AS count')
-            ->where('YEAR(v.createdAt) = :year')
-            ->setParameter('year', $year)
-            ->groupBy('month')
+        return $this->getEntityManager()->getConnection()->executeQuery(
+            '
+        SELECT EXTRACT(MONTH FROM created_at) AS month, COUNT(id) AS count
+        FROM visit
+        WHERE EXTRACT(YEAR FROM created_at) = :year
+        GROUP BY month
+        ORDER BY month
+        ',
+            ['year' => $year]
+        )->fetchAllAssociative();
+    }
+
+    public function countToday(): int
+    {
+        $start = new \DateTimeImmutable('today');
+
+        return (int) $this->createQueryBuilder('v')
+            ->select('COUNT(v.id)')
+            ->where('v.createdAt >= :start')
+            ->setParameter('start', $start)
             ->getQuery()
-            ->getResult();
+            ->getSingleScalarResult();
     }
 }
