@@ -29,13 +29,16 @@ class ProjectsType extends AbstractType
                     'placeholder' => 'Ex: Portfolio Symfony',
                 ],
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'Le titre est obligatoire.']),
+                    new Assert\NotBlank([
+                        'message' => 'Le titre est obligatoire.',
+                    ]),
                     new Assert\Length([
                         'max' => 150,
-                        'maxMessage' => 'Le titre ne peut pas dépasser {{ limit }} caractères.'
+                        'maxMessage' => 'Le titre ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                 ],
             ])
+
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
                 'attr' => [
@@ -44,9 +47,12 @@ class ProjectsType extends AbstractType
                     'placeholder' => 'Décrivez votre projet...',
                 ],
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'La description est obligatoire.']),
+                    new Assert\NotBlank([
+                        'message' => 'La description est obligatoire.',
+                    ]),
                 ],
             ])
+
             ->add('techStack', EntityType::class, [
                 'class' => Skill::class,
                 'choice_label' => 'name',
@@ -55,36 +61,50 @@ class ProjectsType extends AbstractType
                 'label' => 'Technologies utilisées',
                 'attr' => ['class' => 'form-select'],
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'Veuillez sélectionner au moins une compétence.']),
+                    new Assert\Count([
+                        'min' => 1,
+                        'minMessage' => 'Veuillez sélectionner au moins une technologie.',
+                    ]),
                 ],
             ])
+
             ->add('imageFile', FileType::class, [
-                'label' => 'Image du projet (jpg, png, jpeg)',
+                'label' => 'Image du projet',
                 'mapped' => false,
                 'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'accept' => 'image/jpeg,image/png,image/webp'
+                ],
                 'constraints' => [
                     new File([
                         'maxSize' => '5M',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
-                            'image/jpg',
+                            'image/webp'
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier image valide (jpeg, jpg, png).',
+                        'mimeTypesMessage' => 'Veuillez uploader une image valide (jpeg, png, webp).',
                     ])
                 ],
             ])
+
             ->add('link', UrlType::class, [
                 'label' => 'Lien vers le projet',
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Ex: https://monprojet.com',
+                    'placeholder' => 'https://monprojet.com',
                 ],
                 'constraints' => [
-                    new Assert\NotBlank(['message' => 'Le lien du projet est obligatoire.']),
-                    new Assert\Url(['message' => 'Veuillez entrer une URL valide.']),
+                    new Assert\NotBlank([
+                        'message' => 'Le lien du projet est obligatoire.',
+                    ]),
+                    new Assert\Url([
+                        'message' => 'Veuillez entrer une URL valide.',
+                    ]),
                 ],
             ])
+
             ->add('createdAt', DateType::class, [
                 'label' => 'Date de création',
                 'widget' => 'single_text',
@@ -92,6 +112,11 @@ class ProjectsType extends AbstractType
                 'html5' => true,
                 'attr' => [
                     'class' => 'form-control',
+                ],
+                'constraints' => [
+                    new Assert\NotBlank([
+                        'message' => 'La date est obligatoire.',
+                    ]),
                 ],
             ])
         ;
@@ -101,7 +126,9 @@ class ProjectsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Project::class,
-            'attr' => ['novalidate' => 'novalidate'],
+            'attr' => [
+                'novalidate' => 'novalidate',
+            ],
         ]);
     }
 }
