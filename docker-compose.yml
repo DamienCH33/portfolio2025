@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+    portfolio:
+        build:
+            context: ./portfolio2025
+        container_name: portfolio-app
+        ports:
+            - "8080:80"
+        volumes:
+            - ./portfolio2025:/var/www/portfolio
+        restart: unless-stopped
