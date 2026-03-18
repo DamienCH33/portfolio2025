@@ -31,7 +31,7 @@ class ProjectsController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name: 'admin_projects_create', methods: ['GET', 'POST'])]
+    #[Route('/admin/projects/create', name: 'admin_projects_create', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function createProjects(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
@@ -78,7 +78,7 @@ class ProjectsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'admin_projects_edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/projects/{id}/edit', name: 'admin_projects_edit', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function editProjects(Request $request, EntityManagerInterface $em, Project $project, SluggerInterface $slugger): Response
     {
@@ -134,7 +134,7 @@ class ProjectsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'admin_projects_delete', methods: ['POST'])]
+    #[Route('/admin/projects/{id}/delete', name: 'admin_projects_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function deleteProjects(Request $request, EntityManagerInterface $em, Project $project): Response
     {

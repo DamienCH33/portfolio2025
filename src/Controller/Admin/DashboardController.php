@@ -2,11 +2,8 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
-use App\Entity\Project;
-use App\Entity\Skill;
-use App\Entity\Education;
 use App\Entity\Contact;
+use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,5 +28,17 @@ class DashboardController extends AbstractController
             'monthly_visits' => [],
             'monthly_contacts' => []
         ]);
+    }
+
+    #[Route('/contacts/delete/{id}', name: 'admin_contact_delete', methods: ['POST'])]
+    public function deleteContact(Request $request, EntityManagerInterface $em, Contact $contact): Response
+    {
+        if ($this->isCsrfTokenValid('delete_contact_' . $contact->getId(), $request->request->get('_token'))) {
+            $em->remove($contact);
+            $em->flush();
+            $this->addFlash('success', 'Contact supprimé');
+        }
+
+        return $this->redirectToRoute('admin_dashboard');
     }
 }
