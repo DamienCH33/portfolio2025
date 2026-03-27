@@ -17,7 +17,7 @@ class ProjectsController extends AbstractController
 {
     private function getUploadDir(): string
     {
-        return $this->getParameter('kernel.project_dir') . '/public/image/portfolio_media';
+        return $this->getParameter('kernel.project_dir') . '/public/image/projects';
     }
 
     #[Route('/admin/projects', name: 'admin_projects')]
@@ -43,26 +43,22 @@ class ProjectsController extends AbstractController
 
             $imageFile = $form->get('imageFile')->getData();
 
-            if ($imageFile) {
+            if (!$imageFile) {
+                $this->addFlash('danger', "Image obligatoire");
+                return $this->redirectToRoute('admin_projects_create');
+            }
 
-                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = (string) $slugger->slug($originalFilename);
+            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = (string) $slugger->slug($originalFilename);
+            $extension = $imageFile->guessExtension() ?? 'bin';
+            $newFilename = $safeFilename . '-' . uniqid() . '.' . $extension;
 
-                $extension = $imageFile->guessExtension() ?? 'bin';
-
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $extension;
-
-                try {
-                    $imageFile->move(
-                        $this->getUploadDir(),
-                        $newFilename
-                    );
-
-                    $project->setImage($newFilename);
-                } catch (FileException) {
-
-                    $this->addFlash('danger', "Erreur lors de l'upload de l'image !");
-                }
+            try {
+                $imageFile->move($this->getUploadDir(), $newFilename);
+                $project->setImage($newFilename);
+            } catch (FileException $e) {
+                $this->addFlash('danger', "Erreur upload");
+                return $this->redirectToRoute('admin_projects_create');
             }
 
             $em->persist($project);
@@ -82,7 +78,9 @@ class ProjectsController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function editProjects(Request $request, EntityManagerInterface $em, Project $project, SluggerInterface $slugger): Response
     {
-        $form = $this->createForm(ProjectsType::class, $project);
+        $form = $this->createForm(ProjectsType::class, $project, [
+            'is_edit' => true,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

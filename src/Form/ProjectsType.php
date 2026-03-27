@@ -71,7 +71,7 @@ class ProjectsType extends AbstractType
             ->add('imageFile', FileType::class, [
                 'label' => 'Image du projet',
                 'mapped' => false,
-                'required' => false,
+                'required' => !$options['is_edit'],
                 'attr' => [
                     'class' => 'form-control',
                     'accept' => 'image/jpeg,image/png,image/webp'
@@ -84,8 +84,7 @@ class ProjectsType extends AbstractType
                             'image/png',
                             'image/webp'
                         ],
-                        'mimeTypesMessage' => 'Veuillez uploader une image valide (jpeg, png, webp).',
-                    ])
+                    ]),
                 ],
             ])
 
@@ -126,6 +125,7 @@ class ProjectsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Project::class,
+            'is_edit' => false,
             'attr' => [
                 'novalidate' => 'novalidate',
             ],

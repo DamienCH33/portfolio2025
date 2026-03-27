@@ -17,9 +17,12 @@ class SkillFixtures extends Fixture
             ['Bootstrap', 'Framework', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg', 18],
 
             ['API REST', 'Architecture', 'https://www.iconpacks.net/icons/free-icons-6/free-rest-api-blue-logo-icon-22099-thumb.png', 17],
+            ['Google Places API', 'Architecture', 'https://www.vectorlogo.zone/logos/google/google-icon.svg', 22],
+            ['OpenAI API', 'Architecture', 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg', 21],
 
             ['PostgreSQL', 'Base de données', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', 16],
             ['MySQL', 'Base de données', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg', 15],
+            ['Doctrine ORM', 'Base de données', 'https://w7.pngwing.com/pngs/198/984/png-transparent-doctrine-plain-wordmark-logo-icon.png', 14],
 
             ['Docker', 'Outils /DevOps', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', 14],
             ['Git', 'Outils /DevOps', 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', 13],
