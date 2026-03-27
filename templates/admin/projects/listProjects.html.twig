@@ -35,7 +35,7 @@
 							<tr>
 								<td>
 									{% if project.image %}
-										<img src="{{ project.image }}" height="50" alt="{{ project.title }}">
+										<img src="{{ asset('image/projects/' ~ project.image) }}" height="50" alt="{{ project.title }}">
 									{% else %}
 										<span class="text-muted">Aucune</span>
 									{% endif %}
