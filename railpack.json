@@ -1,5 +1,5 @@
 {
-  "php": {
-    "extensions": ["pdo_pgsql", "intl", "ctype", "iconv"]
-  }
+    "php": {
+        "extensions": ["pdo_pgsql", "intl", "ctype", "iconv", "fileinfo"]
+    }
 }
