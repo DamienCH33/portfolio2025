@@ -25,10 +25,15 @@
 										</span>
 									{% endfor %}
 								</div>
-								<div class="project-actions mt-auto">
-									<a href="{{ project.link }}" target="_blank" class="btn btn-sm btn-outline-light  bi bi-github">
+								<div class="project-actions mt-auto d-flex gap-2">
+									<a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-light bi bi-github">
 										Voir le code
 									</a>
+									{% if project.demoUrl %}
+										<a href="{{ project.demoUrl }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary-custom">
+											Voir la démo
+										</a>
+									{% endif %}
 								</div>
 							</div>
 						</div>

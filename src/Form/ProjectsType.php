@@ -104,6 +104,20 @@ class ProjectsType extends AbstractType
                 ],
             ])
 
+            ->add('demoUrl', UrlType::class, [
+                'label' => 'Lien de la démo (optionnel)',
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'placeholder' => 'https://ma-demo.com',
+                ],
+                'constraints' => [
+                    new Assert\Url([
+                        'message' => 'Veuillez entrer une URL valide.',
+                    ]),
+                ],
+            ])
+
             ->add('createdAt', DateType::class, [
                 'label' => 'Date de création',
                 'widget' => 'single_text',

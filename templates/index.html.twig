@@ -46,8 +46,8 @@
 			<div class="container seo-text">
 				<p>
 					Mes compétences couvrent le développement web avec PHP, Symfony et Angular,
-										la conception d’applications et d’API REST, la gestion de bases de données
-										relationnelles ainsi que l’utilisation d’outils modernes de développement.
+															la conception d’applications et d’API REST, la gestion de bases de données
+															relationnelles ainsi que l’utilisation d’outils modernes de développement.
 				</p>
 			</div>
 			{% set categories = ['Langage', 'Framework', 'Architecture', 'Base de données', 'Outils /DevOps', 'Qualité / Tests'] %}
@@ -84,9 +84,9 @@
 			<div class="container mt-4 seo-text">
 				<p>
 					Ce portfolio présente plusieurs projets réalisés avec PHP, le framework Symfony
-										et Angular. Ces applications web illustrent mon travail autour de l’architecture
-										applicative, de la gestion de base de données, des API et des bonnes pratiques
-										de développement.
+															et Angular. Ces applications web illustrent mon travail autour de l’architecture
+															applicative, de la gestion de base de données, des API et des bonnes pratiques
+															de développement.
 				</p>
 			</div>
 			<div class="row g-4">
@@ -108,10 +108,15 @@
 										</span>
 									{% endfor %}
 								</div>
-								<div class="project-actions mt-auto">
-									<a href="{{ project.link }}" target="_blank" class="btn btn-sm btn-outline-light  bi bi-github">
+								<div class="project-actions mt-auto d-flex gap-2">
+									<a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline-light bi bi-github">
 										Voir le code
 									</a>
+									{% if project.demoUrl %}
+										<a href="{{ project.demoUrl }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary-custom">
+											Voir la démo
+										</a>
+									{% endif %}
 								</div>
 							</div>
 						</div>

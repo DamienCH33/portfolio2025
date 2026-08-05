@@ -37,8 +37,13 @@ class Project
     #[ORM\Column(name: 'link', length: 255, type: Types::STRING)]
     private ?string $link = null;
 
+    #[ORM\Column(name: 'demo_url', length: 255, type: Types::STRING, nullable: true)]
+    private ?string $demoUrl = null;
+
     #[ORM\Column(name: 'created_At', type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $createdAt = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -116,6 +121,18 @@ class Project
     public function setLink(string $link): self
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function getDemoUrl(): ?string
+    {
+        return $this->demoUrl;
+    }
+
+    public function setDemoUrl(?string $demoUrl): self
+    {
+        $this->demoUrl = $demoUrl;
 
         return $this;
     }
