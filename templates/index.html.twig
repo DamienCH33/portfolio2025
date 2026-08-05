@@ -8,9 +8,9 @@
 		<div class="row align-items-center justify-content-center">
 			<div class="col-lg-6">
 				<h1 class="fw-bold display-4">{{ profile.title|default('Damien Chauveau') }}</h1>
-				<h2 class="text-success fw-semibold mb-3">{{ profile.subtitle|default('Développeur Back-End PHP / Symfony') }}</h2>
+				<h2 class="text-success fw-semibold mb-3">{{ profile.subtitle|default('Développeur Fullstack PHP Symfony / Angular') }}</h2>
 				<p class="mb-4">
-					{{ profile.intro|default('Je conçois et développe des applications web en PHP avec Symfony, en transformant des idées en solutions concrètes et fonctionnelles. J’accorde une attention particulière à la structure des projets, à la qualité du code et à la maintenabilité des applications.')|nl2br }}
+					{{ profile.intro|default('Je développe des applications web qui répondent à des besoins métiers concrets : automatiser des tâches, centraliser des données et intégrer des services externes. Spécialisé en PHP/Symfony et Angular, je conçois des applications robustes, des API REST et des interfaces déployées en production.')|nl2br }}
 				</p>
 				<div class="d-flex justify-content-center gap-3">
 					<a href="{{ path('app_portfolio') }}" class="btn btn-primary-custom px-4">Voir mes projets</a>
@@ -45,9 +45,9 @@
 			<h2 class="section-title text-center mb-4">Compétences</h2>
 			<div class="container seo-text">
 				<p>
-					Mes compétences couvrent principalement le développement backend avec PHP et Symfony,
-																													la conception d’applications web, la gestion de bases de données relationnelles ainsi
-																													que l’utilisation d’outils modernes de développement.
+					Mes compétences couvrent le développement web avec PHP, Symfony et Angular,
+										la conception d’applications et d’API REST, la gestion de bases de données
+										relationnelles ainsi que l’utilisation d’outils modernes de développement.
 				</p>
 			</div>
 			{% set categories = ['Langage', 'Framework', 'Architecture', 'Base de données', 'Outils /DevOps', 'Qualité / Tests'] %}
@@ -83,9 +83,10 @@
 			<h2 class="section-title">Portfolio</h2>
 			<div class="container mt-4 seo-text">
 				<p>
-					Ce portfolio présente plusieurs projets réalisés avec PHP et le framework Symfony.
-																													Ces applications web illustrent mon travail autour de l’architecture backend,
-																													de la gestion de base de données, des API et des bonnes pratiques de développement.
+					Ce portfolio présente plusieurs projets réalisés avec PHP, le framework Symfony
+										et Angular. Ces applications web illustrent mon travail autour de l’architecture
+										applicative, de la gestion de base de données, des API et des bonnes pratiques
+										de développement.
 				</p>
 			</div>
 			<div class="row g-4">
@@ -98,7 +99,7 @@
 									{{ project.title }}
 								</h4>
 								<p class="text-muted small mb-3">
-									{{ project.description }}
+									{{ project.description|nl2br }}
 								</p>
 								<div class="project-tech mb-3">
 									{% for skill in project.techStack %}
@@ -127,14 +128,7 @@
 	<section class="education">
 		<div class="container">
 			<h2>Diplômes & Formation</h2>
-			<div class="container seo-text">
-				<p>
-					J’ai obtenu la certification professionnelle Développeur Concepteur Logiciel
-																													(niveau 6 – bac+3/4) délivrée par OpenClassrooms. Cette formation m’a permis
-																													de développer des applications web complètes en PHP avec Symfony, en appliquant
-																													les bonnes pratiques de développement et d’architecture logicielle.
-				</p>
-			</div>
+			<div class="container seo-text"></div>
 			<div class="education-list">
 				{% for education in educations %}
 					<div class="education-item">
@@ -147,56 +141,56 @@
 								En cours
 							{% endif %}
 						</div>
-						{{ education.title}}</h3>
-					<p>{{ education.institution}}</p>
-				</div>
-			{% endfor %}
+						<h3>{{ education.title }}</h3>
+						<p>{{ education.institution }}</p>
+					</div>
+				{% endfor %}
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
 
-<!-- Contact Section -->
-<section id="contact" class="py-5 section-bg">
-	<div class="container">
+	<!-- Contact Section -->
+	<section id="contact" class="py-5 section-bg">
+		<div class="container">
 
-		<h2 class="section-title text-center mb-3">Contact</h2>
+			<h2 class="section-title text-center mb-3">Contact</h2>
 
-		<p class="text-center text-muted mb-5 contact-intro">
-			Une question, une proposition de collaboration ou une opportunité
-															            professionnelle ? N’hésitez pas à me laisser un message.
-		</p>
-
-		{% for message in app.flashes('success') %}
-			<div class="alert alert-success text-center">{{ message }}</div>
-		{% endfor %}
-
-		{% for message in app.flashes('danger') %}
-			<div class="alert alert-danger text-center">{{ message }}</div>
-		{% endfor %}
-
-		<div class="contact-card mx-auto">
-
-			{% include "form_contact.html.twig" %}
-
-		</div>
-
-		<div class="contact-alt text-center mt-5">
-			<p class="text-muted mb-2">
-				Vous pouvez également me contacter directement via :
+			<p class="text-center text-muted mb-5 contact-intro">
+				Vous recherchez un développeur PHP Symfony / Angular capable de concevoir des applications web, des API REST ou des outils métiers ? N'hésitez pas à me contacter pour échanger sur votre projet ou une opportunité.
 			</p>
 
-			<span class="mx-2">•</span>
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success text-center">{{ message }}</div>
+			{% endfor %}
 
-			<a href="https://github.com/DamienCH33" target="_blank" class="contact-link">
-				GitHub
-			</a>
+			{% for message in app.flashes('danger') %}
+				<div class="alert alert-danger text-center">{{ message }}</div>
+			{% endfor %}
 
-			<span class="mx-2">•</span>
+			<div class="contact-card mx-auto">
 
-			<a href="https://www.linkedin.com/in/damien-chauveau-747892100/" target="_blank" class="contact-link">
-				LinkedIn
-			</a>
+				{% include "form_contact.html.twig" %}
+
+			</div>
+
+			<div class="contact-alt text-center mt-5">
+				<p class="text-muted mb-2">
+					Vous pouvez également me contacter directement via :
+				</p>
+
+				<span class="mx-2">•</span>
+
+				<a href="https://github.com/DamienCH33" target="_blank" class="contact-link">
+					GitHub
+				</a>
+
+				<span class="mx-2">•</span>
+
+				<a href="https://www.linkedin.com/in/damien-chauveau-747892100/" target="_blank" class="contact-link">
+					LinkedIn
+				</a>
+			</div>
+
 		</div>
-
-	</div>
-</section>{% endblock %}
+	</section>
+{% endblock %}
