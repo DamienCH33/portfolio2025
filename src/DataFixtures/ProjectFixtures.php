@@ -17,6 +17,24 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
         $projects = [
 
             [
+                'title' => 'La compagnie des archers des Albères',
+                'description' => 'Site vitrine et back-office sur mesure livrés à un client associatif, de la conception au déploiement. Back-office EasyAdmin donnant au client une autonomie complète sur les actualités, événements, saisons, partenaires et galeries. Authentification sécurisée, gestion des rôles, galerie responsive et carte Google Maps.',
+                'skills' => ['Symfony', 'PHP', 'PostgreSQL', 'Docker', 'GitHub', 'PHPUnit', 'PHPStan', 'FrankenPHP', 'Railway'],
+                'image' => 'archersdesalberes.png',
+                'link' => 'https://github.com/DamienCH33/archersdesalberes-website',
+                'date' => '2026-05-01',
+            ],
+
+            [
+                'title' => 'NutriPetit',
+                'description' => 'NutriPetit permet de scanner les produits alimentaires de votre bébé et d\'obtenir une analyse nutritionnelle adaptée aux 0-3 ans, basée sur les recommandations officielles ANSES, OMS, EFSA et la réglementation européenne. PWA installable avec interface Angular de scan et de consultation des scores, consommant une API REST Symfony.',
+                'skills' => ['Symfony', 'PHP', 'Twig', 'PostgreSQL', 'PHPUnit', 'Open Food Facts API', 'PWA', 'ZXing', 'FrankenPHP', 'Redis', 'Angular'],
+                'image' => 'nutripetit.png',
+                'link' => 'https://github.com/DamienCH33/nutripetit',
+                'date' => '2026-05-15',
+            ],
+
+            [
                 'title' => 'Mon Avis Pro',
                 'description' => 'MonAvisPro est une application web permettant aux commerçants et indépendants de surveiller 
                 et gérer efficacement leur e-réputation sur Google. L’outil détecte automatiquement les nouveaux avis, alerte 

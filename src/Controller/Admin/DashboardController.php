@@ -70,6 +70,10 @@ class DashboardController extends AbstractController
         return $this->redirectToRoute('admin_dashboard');
     }
 
+    /**
+     * @template T of object
+     * @param EntityRepository<T> $repo
+     */
     private function countSince(EntityRepository $repo, \DateTimeInterface $since): int
     {
         return (int) $repo->createQueryBuilder('e')
@@ -80,6 +84,10 @@ class DashboardController extends AbstractController
             ->getSingleScalarResult();
     }
 
+    /**
+     * @template T of object
+     * @param EntityRepository<T> $repo
+     */
     private function countBetween(EntityRepository $repo, \DateTimeInterface $start, \DateTimeInterface $end): int
     {
         return (int) $repo->createQueryBuilder('e')

@@ -19,6 +19,7 @@ final class PageController extends AbstractController
         $skills = $em->getRepository(Skill::class)->findAll();
         $educations = $em->getRepository(\App\Entity\Education::class)->findAll();
         $projects = $em->getRepository(\App\Entity\Project::class)->findBy([], ['createdAt' => 'DESC'], 3);
+        $profile = $em->getRepository(\App\Entity\Profile::class)->getSingleton();
 
         $form = $this->createForm(ContactType::class, new Contact(), [
             'action' => '#contact',
@@ -30,6 +31,7 @@ final class PageController extends AbstractController
                 'skills' => $skills,
                 'educations' => $educations,
                 'projects' => $projects,
+                'profile' => $profile,
                 'form' => $form->createView(),
             ]);
         }

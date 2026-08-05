@@ -1,5 +1,6 @@
 parameters:
     project_images_directory: "%kernel.project_dir%/public/image/portfolio_media"
+    cv_directory: "%kernel.project_dir%/public/files/cv"
 
 services:
     _defaults:
