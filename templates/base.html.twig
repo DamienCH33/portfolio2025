@@ -11,7 +11,7 @@
 			— Damien Chauveau
 		</title>
 
-		<meta name="description" content="Portfolio de Damien Chauveau, développeur fullstack PHP Symfony / Angular à Bordeaux. Applications web métier, API REST et outils déployés en production.">
+		<meta name="description" content="{% block meta_description %}Portfolio de Damien Chauveau, développeur fullstack PHP Symfony / Angular à Bordeaux. Applications web métier, API REST et outils déployés en production.{% endblock %}">
 		<meta name="author" content="Damien Chauveau">
 
 		<meta property="og:title" content="Damien Chauveau — Développeur Fullstack PHP Symfony / Angular">
@@ -52,6 +52,9 @@
 							<a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
 						</li>
 						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_services') }}">Services</a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link" href="{{ path('app_portfolio') }}">Portfolio</a>
 						</li>
 						<li class="nav-item">
@@ -82,6 +85,8 @@
 						{%
 					endif %}
 						— Damien Chauveau — Tous droits réservés
+						·
+						<a href="{{ path('app_legal') }}" class="footer-legal">Mentions légales</a>
 					</p>
 					<div class="footer-links">
 						<a href="https://github.com/DamienCH33" target="_blank" rel="me noopener" title="GitHub">

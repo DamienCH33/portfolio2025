@@ -57,6 +57,18 @@ final class PageController extends AbstractController
         ]);
     }
 
+    #[Route('/services', name: 'app_services', methods: ['GET'])]
+    public function services(): Response
+    {
+        return $this->render('services.html.twig');
+    }
+
+    #[Route('/mentions-legales', name: 'app_legal', methods: ['GET'])]
+    public function legal(): Response
+    {
+        return $this->render('legal.html.twig');
+    }
+
     #[Route('/contact', name: 'app_contact', methods: ['GET'])]
     public function contact(): Response
     {

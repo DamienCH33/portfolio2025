@@ -625,3 +625,194 @@ h2.m-0 {
     color: #10b981;
     transform: translateY(-2px);
 }
+
+
+/* ---------- SERVICES (offres freelance) ---------- */
+.services-hero {
+    padding-top: 7rem !important;
+}
+
+.services-kicker {
+    color: var(--primary-green);
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    font-size: .85rem;
+    margin-bottom: .75rem;
+}
+
+.services-lead {
+    max-width: 720px;
+    color: #cbd5e1;
+    line-height: 1.7;
+}
+
+.offer-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    transition: border-color .2s ease;
+}
+
+.offer-card:hover {
+    border-color: var(--primary-green);
+}
+
+.offer-card h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.offer-icon {
+    font-size: 1.6rem;
+    color: var(--primary-green);
+}
+
+.offer-desc,
+.offer-sub,
+.offer-example {
+    color: #cbd5e1;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.offer-example {
+    font-size: .9rem;
+    color: #94a3b8;
+}
+
+.offer-example a {
+    color: var(--primary-green);
+}
+
+.offer-prices,
+.offer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.offer-prices li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .55rem 0;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.offer-prices strong,
+.offer-price-line strong {
+    color: var(--primary-green);
+    white-space: nowrap;
+}
+
+.offer-list li {
+    position: relative;
+    padding: .3rem 0 .3rem 1.5rem;
+    color: #e2e8f0;
+}
+
+.offer-list li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    color: var(--primary-green);
+    font-weight: 700;
+}
+
+.offer-price-line {
+    margin: auto 0 0;
+    font-size: 1.05rem;
+}
+
+.offer-note {
+    color: #94a3b8;
+    font-size: .9rem;
+}
+
+.process-step {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.process-step h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: .75rem 0 .5rem;
+}
+
+.process-step p {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+.process-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: var(--primary-green);
+    color: var(--dark-bg);
+    font-weight: 800;
+}
+
+.launch-offer {
+    max-width: 680px;
+    background: var(--card-bg);
+    border: 1px solid var(--primary-green);
+    border-radius: 14px;
+    padding: 2rem;
+}
+
+.local-banner {
+    padding: 1.5rem 0;
+}
+
+.local-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--primary-green);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+}
+
+.local-banner-title {
+    font-weight: 700;
+    margin: 0 0 .25rem;
+}
+
+.local-banner-text {
+    color: #cbd5e1;
+    margin: 0;
+}
+
+.legal-section h2 {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    color: var(--primary-green);
+}
+
+.legal-section p {
+    color: #cbd5e1;
+    line-height: 1.7;
+}
+
+.legal-section a,
+.footer-legal {
+    color: var(--primary-green);
+}
