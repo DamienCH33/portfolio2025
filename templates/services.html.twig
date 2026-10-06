@@ -1,0 +1,152 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Services pour commerces et associations{% endblock %}
+
+{% block meta_description %}Développeur web indépendant à Bègles : sites internet, gestion des avis Google, fiche Google et maintenance WordPress pour les commerces, artisans et associations de Bègles, Villenave-d'Ornon et du sud de Bordeaux.{% endblock %}
+
+{% block body %}
+	<section class="services-hero py-5">
+		<div class="container text-center">
+			<p class="services-kicker">Développeur web indépendant à Bègles</p>
+			<h1 class="fw-bold mb-3">Votre site et votre réputation Google,<br>sans y passer vos soirées</h1>
+			<p class="services-lead mx-auto mb-4">
+				Je crée et j'entretiens les sites des commerces, artisans et associations de Bègles,
+				Villenave-d'Ornon et du sud de Bordeaux. Un seul interlocuteur, joignable, qui habite à côté.
+				Le site vous appartient, et vous savez ce que vous payez chaque mois.
+			</p>
+			<div class="d-flex justify-content-center gap-3 flex-wrap">
+				<a href="{{ path('app_contact') }}" class="btn btn-primary-custom px-4">Demander un échange gratuit</a>
+				<a href="#offres" class="btn btn-outline-light px-4">Voir les offres</a>
+			</div>
+		</div>
+	</section>
+
+	<section id="offres" class="py-5 section-bg">
+		<div class="container">
+			<h2 class="section-title text-center mb-5">Les offres</h2>
+
+			<div class="row g-4">
+				<div class="col-12 col-lg-6">
+					<article class="offer-card h-100">
+						<div class="offer-icon"><i class="bi bi-window"></i></div>
+						<h3>Site internet</h3>
+						<p class="offer-desc">Un site rapide, à votre image, que vous pouvez mettre à jour vous-même.</p>
+						<ul class="offer-prices">
+							<li><span>Essentiel : 1 à 3 pages, contact, lien vers votre fiche Google</span><strong>650 €</strong></li>
+							<li><span>Vitrine : jusqu'à 6 pages, galerie, actualités</span><strong>950 €</strong></li>
+							<li><span>Avec réservation ou annonces en ligne</span><strong>dès 1 900 €</strong></li>
+						</ul>
+						<p class="offer-sub">
+							Puis <strong>35 € par mois</strong> : hébergement en Europe, sauvegardes, sécurité et 30 minutes de modifications chaque mois.
+							Associations : 30 € par mois.
+						</p>
+						<p class="offer-example">
+							Exemples :
+							<a href="https://cap-monta.up.railway.app/" target="_blank" rel="noopener">Cap Monta</a> (location avec réservation)
+							·
+							<a href="https://archers-des-alberes.fr" target="_blank" rel="noopener">Archers des Albères</a> (club sportif)
+						</p>
+					</article>
+				</div>
+
+				<div class="col-12 col-lg-6">
+					<article class="offer-card h-100">
+						<div class="offer-icon"><i class="bi bi-star-half"></i></div>
+						<h3>Avis Google clé en main</h3>
+						<p class="offer-desc">Vos clients lisent vos avis, et surtout vos réponses. Je m'en occupe.</p>
+						<ul class="offer-list">
+							<li>Une réponse personnalisée à chaque avis sous 48 heures, avec votre ton et votre signature</li>
+							<li>Un QR code à poser en caisse pour obtenir plus d'avis</li>
+							<li>Une alerte immédiate en cas d'avis négatif</li>
+							<li>Un bilan chaque mois : nombre d'avis, note, réponses</li>
+						</ul>
+						<p class="offer-price-line"><strong>29 € par mois</strong></p>
+						<p class="offer-example">Vous restez propriétaire de votre fiche : vous m'ajoutez comme gestionnaire, et vous pouvez me retirer en un clic.</p>
+					</article>
+				</div>
+
+				<div class="col-12 col-lg-6">
+					<article class="offer-card h-100">
+						<div class="offer-icon"><i class="bi bi-geo-alt"></i></div>
+						<h3>Fiche Google entretenue</h3>
+						<p class="offer-desc">Une fiche à jour, c'est plus de clients qui vous trouvent sur Google Maps.</p>
+						<ul class="offer-list">
+							<li>Horaires des jours fériés et des vacances, toujours justes</li>
+							<li>2 publications par mois (nouveautés, événements, offres)</li>
+							<li>Photos, description et catégories optimisées</li>
+						</ul>
+						<p class="offer-price-line"><strong>39 € par mois</strong> · avec les avis Google : <strong>59 € par mois</strong></p>
+					</article>
+				</div>
+
+				<div class="col-12 col-lg-6">
+					<article class="offer-card h-100">
+						<div class="offer-icon"><i class="bi bi-shield-check"></i></div>
+						<h3>Maintenance de votre site WordPress</h3>
+						<p class="offer-desc">Votre site a été fait par quelqu'un qui n'est plus là ? Je le reprends en main.</p>
+						<ul class="offer-list">
+							<li>Mises à jour de WordPress et des extensions, sans casse</li>
+							<li>Sauvegardes automatiques et surveillance de la sécurité</li>
+							<li>30 minutes de modifications chaque mois</li>
+						</ul>
+						<p class="offer-price-line"><strong>39 € par mois</strong> · bilan de départ 90 €</p>
+					</article>
+				</div>
+			</div>
+
+			<p class="offer-note text-center mt-4">
+				Prix nets. TVA non applicable, article 293 B du CGI.
+				Travaux hors forfait : 45 € de l'heure, sur devis.
+			</p>
+		</div>
+	</section>
+
+	<section class="py-5">
+		<div class="container">
+			<h2 class="section-title text-center mb-5">Comment ça se passe</h2>
+			<div class="row g-4">
+				<div class="col-12 col-md-6 col-lg-3">
+					<div class="process-step">
+						<span class="process-num">1</span>
+						<h3>On échange</h3>
+						<p>30 minutes, chez vous ou par téléphone, gratuit. Vous me dites ce dont vous avez besoin.</p>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-3">
+					<div class="process-step">
+						<span class="process-num">2</span>
+						<h3>Je vous envoie un devis</h3>
+						<p>Un prix fixe, un délai, et ce qui est inclus. Rien ne commence sans votre accord écrit.</p>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-3">
+					<div class="process-step">
+						<span class="process-num">3</span>
+						<h3>Je réalise</h3>
+						<p>Vous validez une maquette, puis le site. Deux séries de corrections sont prévues.</p>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-3">
+					<div class="process-step">
+						<span class="process-num">4</span>
+						<h3>Je reste là</h3>
+						<p>Mise en ligne, puis suivi chaque mois. Vous avez une question : vous m'écrivez.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-5 section-bg">
+		<div class="container">
+			<div class="launch-offer mx-auto text-center">
+				<h2 class="mb-3">Offre de lancement</h2>
+				<p class="mb-4">
+					Pour mes 3 premiers clients : <strong>-20 % sur la création du site</strong>,
+					en échange d'un avis Google et de l'accord pour montrer votre site en exemple.
+				</p>
+				<a href="{{ path('app_contact') }}" class="btn btn-primary-custom px-4">J'en profite</a>
+			</div>
+		</div>
+	</section>
+{% endblock %}
