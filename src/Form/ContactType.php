@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class ContactType extends AbstractType
 {
@@ -61,6 +62,14 @@ class ContactType extends AbstractType
             ->add('form_time', HiddenType::class, [
                 'mapped' => false,
                 'data' => time(),
+                // Un humain met plus de 3 secondes à remplir le formulaire ; un robot non.
+                'constraints' => [
+                    new Assert\Callback(static function (mixed $value, ExecutionContextInterface $context): void {
+                        if (!is_numeric($value) || time() - (int) $value < 3) {
+                            $context->buildViolation('Envoi trop rapide, merci de réessayer.')->addViolation();
+                        }
+                    }),
+                ],
             ])
             // Champ honeypot anti-bot
             ->add('website', TextType::class, [
@@ -71,6 +80,8 @@ class ContactType extends AbstractType
                     'tabindex' => '-1',
                     'autocomplete' => 'off',
                 ],
+                // Champ invisible : s'il est rempli, c'est un robot.
+                'constraints' => [new Assert\Blank(message: 'Envoi refusé.')],
             ]);
     }
 

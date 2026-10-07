@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions légales{% endblock %}
+
+{% block meta_description %}Mentions légales et politique de confidentialité du site de Damien Chauveau, développeur web indépendant à Bègles.{% endblock %}
+
+{#
+	À compléter dès réception de l'immatriculation :
+	- legal_siret : numéro SIRET (14 chiffres)
+	- legal_address : adresse de l'entreprise (domicile ou domiciliation)
+#}
+{% set legal_siret = 'en cours d’immatriculation' %}
+{% set legal_address = 'Bègles (33130), France' %}
+
+{% block body %}
+	<section class="legal-section section tight">
+		<div class="wrap">
+			<span class="kicker mono accent" style="font-size:.85rem;display:block;margin:40px 0 16px">// mentions légales</span>
+			<h1 class="mb-4">Mentions légales</h1>
+
+			<h2>Éditeur du site</h2>
+			<p>
+				Damien Chauveau, entrepreneur individuel (EI), micro-entreprise<br>
+				Activité : conception, développement et maintenance de sites internet et d'applications web<br>
+				SIRET : {{ legal_siret }}<br>
+				Adresse : {{ legal_address }}<br>
+				Contact : via le <a href="{{ path('app_contact') }}">formulaire de contact</a><br>
+				Directeur de la publication : Damien Chauveau<br>
+				TVA non applicable, article 293 B du CGI.
+			</p>
+
+			<h2>Hébergement</h2>
+			<p>
+				Railway Corporation, 548 Market St Suite 68956, San Francisco, California 94104, États-Unis<br>
+				Téléphone : +1 415 707 7675 · <a href="https://railway.com" target="_blank" rel="noopener">railway.com</a>
+			</p>
+
+			<h2>Propriété intellectuelle</h2>
+			<p>
+				Les textes, images et le code de ce site sont la propriété de Damien Chauveau, sauf mention contraire.
+				Les sites présentés en exemple restent la propriété de leurs clients.
+			</p>
+
+			<h2>Données personnelles</h2>
+			<p>
+				Le formulaire de contact recueille votre nom, prénom, adresse e-mail et message,
+				uniquement pour vous répondre. Ces données ne sont ni vendues ni transmises à des tiers,
+				et sont supprimées au plus tard trois ans après notre dernier échange.
+			</p>
+			<p>
+				Le site compte le nombre de visites, sans cookie publicitaire ni traceur tiers, et sans conserver d'adresse IP.
+			</p>
+			<p>
+				Vous pouvez demander l'accès, la rectification ou la suppression de vos données via le
+				<a href="{{ path('app_contact') }}">formulaire de contact</a>. En cas de désaccord, vous pouvez saisir
+				la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).
+			</p>
+		</div>
+	</section>
+{% endblock %}

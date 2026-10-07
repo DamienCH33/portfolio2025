@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Services pour commerces et associations{% endblock %}
+
+{% block meta_description %}Développeur web indépendant près de Bordeaux : sites internet, avis et fiche Google, maintenance WordPress pour commerces, artisans et associations. À distance partout en France, sur place dans l'agglomération bordelaise.{% endblock %}
+
+{% block body %}
+	<header class="page-head">
+		<div class="wrap">
+			<span class="kicker">// services · partout en France · rendez-vous sur place dans l'agglo bordelaise</span>
+			<h1>Votre site et votre réputation Google,<br><span class="accent">sans y passer vos soirées.</span></h1>
+			<p class="lead-text">Je crée et j'entretiens les sites de commerces, artisans et associations. Un seul interlocuteur, joignable, qui se déplace si vous êtes dans l'agglo bordelaise. Le site vous appartient, et vous savez ce que vous payez chaque mois.</p>
+			<div class="hero-actions">
+				<a class="btn-v2" href="{{ path('app_contact') }}">Demander un échange gratuit →</a>
+				<a class="btn-ghost" href="#offres">Voir les offres</a>
+			</div>
+		</div>
+	</header>
+
+	<section class="section" id="offres">
+		<div class="wrap">
+			<div class="shead"><span class="idx">01</span><h2>Les offres</h2><span class="rule"></span></div>
+
+			{% if offers is not empty %}
+				<div class="offers">
+					{% for offer in offers %}
+						<article class="offer">
+							<i class="bi {{ offer.icon }} ico" aria-hidden="true"></i>
+							<h3>{{ offer.title }}</h3>
+							<p class="sum">{{ offer.summary }}</p>
+							{% if offer.itemList is not empty %}
+								<ul>
+									{% for item in offer.itemList %}
+										<li>{{ item }}</li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+							<p class="price">{{ offer.priceLabel }}</p>
+							{% if offer.note %}
+								<p class="note">{{ offer.note }}</p>
+							{% endif %}
+						</article>
+					{% endfor %}
+				</div>
+			{% else %}
+				<p class="muted">Les offres sont en cours de mise à jour. <a class="accent" href="{{ path('app_contact') }}">Écrivez-moi</a> pour un devis.</p>
+			{% endif %}
+
+			<p class="offer-foot">
+				Exemples :
+				<a href="https://cap-monta.up.railway.app/" target="_blank" rel="noopener">Cap Monta</a> (location avec réservation)
+				·
+				<a href="https://archers-des-alberes.fr" target="_blank" rel="noopener">Archers des Albères</a> (club sportif).
+				Prix nets, TVA non applicable, article 293 B du CGI. Travaux hors forfait : 45 € de l'heure, sur devis.
+			</p>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="wrap">
+			<div class="shead"><span class="idx">02</span><h2>Comment ça se passe</h2><span class="rule"></span></div>
+			<div class="steps">
+				<div class="step">
+					<span class="num">01</span>
+					<h3>On échange</h3>
+					<p>30 minutes, gratuit : chez vous dans l'agglo bordelaise, ou en visio partout ailleurs.</p>
+				</div>
+				<div class="step">
+					<span class="num">02</span>
+					<h3>Je vous envoie un devis</h3>
+					<p>Un prix fixe, un délai, et ce qui est inclus. Rien ne commence sans votre accord écrit.</p>
+				</div>
+				<div class="step">
+					<span class="num">03</span>
+					<h3>Je réalise</h3>
+					<p>Vous validez une maquette, puis le site. Deux séries de corrections sont prévues.</p>
+				</div>
+				<div class="step">
+					<span class="num">04</span>
+					<h3>Je reste là</h3>
+					<p>Mise en ligne, puis suivi chaque mois. Une question : vous m'écrivez.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section tight">
+		<div class="wrap">
+			<div class="callout">
+				<div>
+					<h3>Offre de lancement</h3>
+					<p>Pour mes 3 premiers clients : <strong>-20 % sur la création du site</strong>, en échange d'un avis Google et de l'accord pour montrer votre site en exemple.</p>
+				</div>
+				<a class="btn-v2" href="{{ path('app_contact') }}">J'en profite →</a>
+			</div>
+		</div>
+	</section>
+{% endblock %}

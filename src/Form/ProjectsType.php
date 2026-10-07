@@ -88,6 +88,24 @@ class ProjectsType extends AbstractType
                 ],
             ])
 
+            ->add('logoFile', FileType::class, [
+                'label' => 'Logo du projet (optionnel)',
+                'help' => 'PNG, JPG ou WebP carré, fond transparent de préférence. Affiché dans « En ligne en ce moment » sur l\'accueil.',
+                'mapped' => false,
+                'required' => false,
+                'attr' => [
+                    'class' => 'form-control',
+                    'accept' => 'image/jpeg,image/png,image/webp',
+                ],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp'],
+                        'mimeTypesMessage' => 'Logo au format PNG, JPG ou WebP.',
+                    ]),
+                ],
+            ])
+
             ->add('link', UrlType::class, [
                 'label' => 'Lien vers le projet',
                 'attr' => [

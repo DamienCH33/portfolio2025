@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\ContactNotifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,8 @@ class ContactController extends AbstractController
     public function contactForm(
         Request $request,
         EntityManagerInterface $em,
-        RateLimiterFactory $contactFormLimiter
+        RateLimiterFactory $contactFormLimiter,
+        ContactNotifier $notifier,
     ): Response {
 
         $contact = new Contact();
@@ -37,6 +39,9 @@ class ContactController extends AbstractController
 
             $em->persist($contact);
             $em->flush();
+
+            // E-mail à l'administrateur (le message est déjà enregistré dans le back-office).
+            $notifier->notify($contact);
 
             $this->addFlash('success', 'Votre message a bien été envoyé !');
 

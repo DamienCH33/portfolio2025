@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex">
+	<title>Affichette QR avis Google — Admin</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+	<style>
+		* { box-sizing: border-box; margin: 0; padding: 0; }
+		body { font-family: Inter, system-ui, sans-serif; background: #0b1220; color: #F2F4F7; min-height: 100vh; }
+		.tool { display: grid; grid-template-columns: 340px 1fr; gap: 40px; max-width: 1100px; margin: 0 auto; padding: 40px 24px; align-items: start; }
+		.side h1 { font-family: "Space Grotesk"; font-size: 1.4rem; margin-bottom: 6px; }
+		.side p.help { color: #9aa5b4; font-size: .88rem; margin-bottom: 22px; line-height: 1.5; }
+		.side label { display: block; color: #9aa5b4; font-size: .82rem; margin: 16px 0 6px; }
+		.side input, .side textarea { width: 100%; background: #0f1319; border: 1px solid #2a323f; color: #F2F4F7; border-radius: 10px; padding: 10px 12px; font: inherit; font-size: .92rem; }
+		.side input:focus, .side textarea:focus { outline: none; border-color: #34d399; }
+		.side .btn { margin-top: 24px; width: 100%; border: 0; border-radius: 999px; padding: 13px; font: 600 .95rem Inter; color: #04201a; background: linear-gradient(135deg, #34d399, #22d3ee); cursor: pointer; }
+		.side .back { display: inline-block; margin-top: 18px; color: #9aa5b4; font-size: .85rem; text-decoration: none; }
+		.side .tip { margin-top: 22px; font-size: .8rem; color: #6b7480; line-height: 1.5; border-top: 1px solid #1d232d; padding-top: 16px; }
+
+		/* Affichette A5 : 148 x 210 mm */
+		.sheet { width: 148mm; height: 210mm; background: #fff; color: #0b1220; border-radius: 6px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.6);
+			display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 16mm 14mm 12mm; text-align: center; position: relative; overflow: hidden; }
+		.sheet::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 7mm; background: linear-gradient(90deg, #34d399, #22d3ee); }
+		.sheet .shop { font-family: "Space Grotesk"; font-weight: 700; font-size: 20pt; line-height: 1.1; margin-top: 4mm; }
+		.sheet .ask { font-family: "Space Grotesk"; font-weight: 700; font-size: 26pt; line-height: 1.1; margin-top: 6mm; }
+		.sheet .stars { font-size: 20pt; letter-spacing: 3mm; color: #f5b301; margin-top: 4mm; }
+		.sheet .qr { padding: 5mm; border: 1.2mm solid #0b1220; border-radius: 6mm; margin: 6mm 0; }
+		.sheet .qr img, .sheet .qr canvas { width: 62mm !important; height: 62mm !important; display: block; }
+		.sheet .how { font-size: 11.5pt; color: #333d4b; line-height: 1.4; max-width: 105mm; }
+		.sheet .thanks { font-family: "Space Grotesk"; font-weight: 600; font-size: 13pt; margin-top: 4mm; }
+		.sheet .foot { font-size: 7pt; color: #9aa5b4; }
+
+		@media (max-width: 900px) { .tool { grid-template-columns: 1fr; } .sheet { zoom: .55; } }
+
+		@page { size: A5; margin: 0; }
+		@media print {
+			body { background: #fff; }
+			.side { display: none; }
+			.tool { display: block; padding: 0; margin: 0; max-width: none; }
+			.sheet { box-shadow: none; border-radius: 0; transform: none; }
+			.sheet::before { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+		}
+	</style>
+</head>
+<body>
+	<div class="tool">
+		<aside class="side">
+			<h1>Affichette QR avis</h1>
+			<p class="help">Remplis les champs, vérifie l'aperçu, puis « Enregistrer en PDF ». Choisis « Enregistrer au format PDF » comme imprimante, format A5, marges aucune.</p>
+
+			<label for="shop">Nom du commerce</label>
+			<input id="shop" value="Boulangerie Dupont" autocomplete="off">
+
+			<label for="url">Lien d'avis Google</label>
+			<input id="url" value="https://g.page/r/VOTRE-ID/review" autocomplete="off">
+
+			<label for="ask">Phrase d'accroche</label>
+			<input id="ask" value="Votre avis compte !">
+
+			<label for="how">Texte explicatif</label>
+			<textarea id="how" rows="3">Scannez le QR code avec l'appareil photo de votre téléphone et laissez-nous quelques mots sur Google.</textarea>
+
+			<button class="btn" type="button" onclick="window.print()">Enregistrer en PDF</button>
+			<a class="back" href="{{ path('admin_offers') }}">← Retour au back-office</a>
+
+			<p class="tip">Le lien d'avis se trouve dans le profil Google du client : « Demander des avis » → « Partager le formulaire d'avis ». Il commence en général par g.page/r/.</p>
+		</aside>
+
+		<div class="sheet" id="sheet">
+			<div>
+				<div class="shop" data-bind="shop"></div>
+				<div class="ask" data-bind="ask"></div>
+				<div class="stars">★★★★★</div>
+			</div>
+			<div class="qr" id="qr"></div>
+			<div>
+				<p class="how" data-bind="how"></p>
+				<p class="thanks">Merci !</p>
+			</div>
+			<div class="foot">Avis publiés sur Google</div>
+		</div>
+	</div>
+
+	<script>
+		(function () {
+			var fields = ['shop', 'ask', 'how'];
+			var qrBox = document.getElementById('qr');
+			var urlInput = document.getElementById('url');
+
+			function drawQr() {
+				qrBox.innerHTML = '';
+				if (typeof QRCode === 'undefined') {
+					qrBox.textContent = 'QR indisponible (connexion au CDN requise).';
+					return;
+				}
+				new QRCode(qrBox, { text: urlInput.value.trim() || ' ', width: 512, height: 512, correctLevel: QRCode.CorrectLevel.M });
+			}
+
+			function sync() {
+				fields.forEach(function (id) {
+					document.querySelector('[data-bind="' + id + '"]').textContent = document.getElementById(id).value;
+				});
+				document.title = 'QR avis — ' + document.getElementById('shop').value;
+			}
+
+			fields.forEach(function (id) { document.getElementById(id).addEventListener('input', sync); });
+			urlInput.addEventListener('input', drawQr);
+			sync();
+			drawQr();
+		})();
+	</script>
+</body>
+</html>

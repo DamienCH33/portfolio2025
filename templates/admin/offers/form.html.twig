@@ -1,0 +1,35 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}{{ offer ? 'Modifier l\'offre' : 'Nouvelle offre' }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="m-0">{{ offer ? 'Modifier « ' ~ offer.title ~ ' »' : 'Nouvelle offre' }}</h2>
+        <a href="{{ path('admin_offers') }}" class="btn btn-outline-light btn-sm">← Retour aux offres</a>
+    </div>
+
+    <div class="card p-4 admin-form">
+        {{ form_start(form) }}
+            <div class="row g-3">
+                <div class="col-md-8">{{ form_row(form.title, {attr: {class: 'form-control'}}) }}</div>
+                <div class="col-md-4">{{ form_row(form.position, {attr: {class: 'form-control'}}) }}</div>
+                <div class="col-12">{{ form_row(form.summary, {attr: {class: 'form-control'}}) }}</div>
+                <div class="col-12">{{ form_row(form.items, {attr: {class: 'form-control'}}) }}</div>
+                <div class="col-md-6">{{ form_row(form.priceLabel, {attr: {class: 'form-control'}}) }}</div>
+                <div class="col-md-6">{{ form_row(form.note, {attr: {class: 'form-control'}}) }}</div>
+                <div class="col-md-6">{{ form_row(form.icon, {attr: {class: 'form-control'}}) }}</div>
+                <div class="col-md-6 d-flex align-items-end">
+                    <div class="form-check">
+                        {{ form_widget(form.active, {attr: {class: 'form-check-input'}}) }}
+                        {{ form_label(form.active, null, {label_attr: {class: 'form-check-label'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary-custom">Enregistrer</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

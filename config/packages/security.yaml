@@ -21,6 +21,10 @@ security:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
+            # Anti force brute : 5 essais ratés par minute (par identifiant + IP), puis blocage.
+            login_throttling:
+                max_attempts: 5
+                interval: '1 minute'
             logout:
                 path: app_logout
                 target: app_home

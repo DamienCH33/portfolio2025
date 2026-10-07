@@ -17,11 +17,23 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
         $projects = [
 
             [
+                'title' => 'Cap Monta',
+                'description' => 'Site de location de bungalows et mobil-homes à Montalivet : recherche par dates, fiches logement, calendrier des disponibilités et demandes de réservation en ligne. En production, utilisé pour de vraies réservations.',
+                'skills' => ['Symfony', 'PHP', 'PostgreSQL', 'Docker', 'FrankenPHP', 'Railway'],
+                'image' => 'capmonta.png',
+                // À remplacer par l'URL du dépôt GitHub si le code est public.
+                'link' => 'https://cap-monta.up.railway.app/',
+                'demo' => 'https://cap-monta.up.railway.app/',
+                'date' => '2026-10-01',
+            ],
+
+            [
                 'title' => 'La compagnie des archers des Albères',
                 'description' => 'Site vitrine et back-office sur mesure livrés à un client associatif, de la conception au déploiement. Back-office EasyAdmin donnant au client une autonomie complète sur les actualités, événements, saisons, partenaires et galeries. Authentification sécurisée, gestion des rôles, galerie responsive et carte Google Maps.',
                 'skills' => ['Symfony', 'PHP', 'PostgreSQL', 'Docker', 'GitHub', 'PHPUnit', 'PHPStan', 'FrankenPHP', 'Railway'],
                 'image' => 'archersdesalberes.png',
                 'link' => 'https://github.com/DamienCH33/archersdesalberes-website',
+                'demo' => 'https://archers-des-alberes.fr',
                 'date' => '2026-05-01',
             ],
 
@@ -31,6 +43,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
                 'skills' => ['Symfony', 'PHP', 'Twig', 'PostgreSQL', 'PHPUnit', 'Open Food Facts API', 'PWA', 'ZXing', 'FrankenPHP', 'Redis', 'Angular'],
                 'image' => 'nutripetit.png',
                 'link' => 'https://github.com/DamienCH33/nutripetit',
+                'demo' => 'https://nutripetit.up.railway.app',
                 'date' => '2026-05-15',
             ],
 
@@ -44,6 +57,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
                 'skills' => ['Symfony', 'PHP', 'API REST', 'PostgreSQL', 'Docker', 'PHPUnit', 'PHPStan', 'Git'],
                 'image' => 'monavispro-69c68a9ee5974.png',
                 'link' => 'https://github.com/DamienCH33/MonAvisPro',
+                'demo' => 'https://monavispro-production.up.railway.app',
                 'date' => '2026-03-27',
             ],
 
@@ -118,6 +132,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             $project->setDescription($data['description']);
             $project->setImage($data['image']);
             $project->setLink($data['link']);
+            $project->setDemoUrl($data['demo'] ?? null);
             $project->setCreatedAt(new \DateTimeImmutable($data['date']));
 
             foreach ($data['skills'] as $skillName) {

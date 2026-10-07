@@ -2,49 +2,38 @@
 
 {% block title %}Contact{% endblock %}
 
+{% block meta_description %}Contacter Damien Chauveau, développeur fullstack Symfony / Angular à Bordeaux : poste, mission freelance ou site internet.{% endblock %}
+
 {% block body %}
-<section id="contact" class="py-5 section-bg">
-    <div class="container">
+	<header class="page-head">
+		<div class="wrap">
+			<span class="kicker">// contact</span>
+			<h1>Parlons de <span class="accent">votre projet.</span></h1>
+		</div>
+	</header>
 
-        <h2 class="section-title text-center mb-3">Contact</h2>
+	<section class="section tight" id="contact">
+		<div class="wrap contact-grid">
+			<div class="contact-side">
+				<p>Un poste de développeur fullstack, une mission Symfony / Angular, ou un site pour votre commerce ou votre association : laissez-moi un message, je réponds rapidement.</p>
+				<p>Dites-moi où vous en êtes et ce que vous cherchez, même en deux lignes.</p>
+				<div class="links">
+					<a class="link-arrow sec" href="https://www.linkedin.com/in/damien-chauveau-747892100/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+					<a class="link-arrow sec" href="https://github.com/DamienCH33" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+					<a class="link-arrow sec" href="{{ asset('files/cv-damien-chauveau.pdf') }}?v=3" target="_blank" rel="noopener noreferrer">CV (PDF) ↗</a>
+				</div>
+			</div>
 
-        <p class="text-center text-muted mb-5 contact-intro">
-            Une question, une proposition de collaboration ou une opportunité
-            professionnelle ? N’hésitez pas à me laisser un message.
-        </p>
+			<div class="panel">
+				{% for message in app.flashes('success') %}
+					<div class="alert alert-success">{{ message }}</div>
+				{% endfor %}
+				{% for message in app.flashes('danger') %}
+					<div class="alert alert-danger">{{ message }}</div>
+				{% endfor %}
 
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success text-center">{{ message }}</div>
-        {% endfor %}
-
-        {% for message in app.flashes('danger') %}
-            <div class="alert alert-danger text-center">{{ message }}</div>
-        {% endfor %}
-
-        <div class="contact-card mx-auto">
-
-            {% include "form_contact.html.twig" %}
-
-        </div>
-
-        <div class="contact-alt text-center mt-5">
-            <p class="text-muted mb-2">
-                Vous pouvez également me contacter directement via :
-            </p>
-
-            <span class="mx-2">•</span>
-
-            <a href="https://github.com/DamienCH33" target="_blank" class="contact-link">
-                GitHub
-            </a>
-
-            <span class="mx-2">•</span>
-
-            <a href="https://linkedin.com/in/tonprofil" target="_blank" class="contact-link">
-                LinkedIn
-            </a>
-        </div>
-
-    </div>
-</section>
+				{% include 'form_contact.html.twig' %}
+			</div>
+		</div>
+	</section>
 {% endblock %}

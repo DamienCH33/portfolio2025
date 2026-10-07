@@ -1,0 +1,65 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}Offres de services{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="m-0">🛠️ Offres de services</h2>
+        <a href="{{ path('admin_offers_create') }}" class="btn btn-primary-custom">
+            <i class="bi bi-plus-circle"></i> Ajouter une offre
+        </a>
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+    {% if offers is not empty %}
+        <div class="table-responsive">
+            <table class="table table-dark table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Ordre</th>
+                        <th>Offre</th>
+                        <th>Prix affiché</th>
+                        <th class="text-center">En ligne</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for offer in offers %}
+                        <tr>
+                            <td>{{ offer.position }}</td>
+                            <td>
+                                <i class="bi {{ offer.icon }} text-success me-1"></i>
+                                <strong>{{ offer.title }}</strong>
+                                <div class="small-muted">{{ offer.summary }}</div>
+                            </td>
+                            <td>{{ offer.priceLabel }}</td>
+                            <td class="text-center">
+                                {% if offer.active %}
+                                    <span class="badge bg-success">Oui</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">Masquée</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <a href="{{ path('admin_offers_edit', {id: offer.id}) }}" class="btn btn-outline-warning btn-sm">
+                                    <i class="bi bi-pencil"></i> Modifier
+                                </a>
+                                <form method="post" action="{{ path('admin_offers_delete', {id: offer.id}) }}" style="display:inline;" onsubmit="return confirm('Supprimer cette offre ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete_offer_' ~ offer.id) }}">
+                                    <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i> Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center">Aucune offre pour le moment.</div>
+    {% endif %}
+</div>
+{% endblock %}

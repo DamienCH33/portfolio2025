@@ -42,6 +42,16 @@
 				</div>
 
 				<div class="col-md-6 mb-3">
+					{{ form_label(form.logoFile) }}
+					{% if project is defined and project.logo %}
+						<div class="mb-2"><img src="{{ asset('image/projects/' ~ project.logo) }}" alt="Logo actuel" height="40" style="border-radius:8px;background:#fff;padding:4px"></div>
+					{% endif %}
+					{{ form_widget(form.logoFile, {'attr': {'class': 'form-control'}}) }}
+					{{ form_help(form.logoFile) }}
+					{{ form_errors(form.logoFile) }}
+				</div>
+
+				<div class="col-md-6 mb-3">
 					{{ form_label(form.link) }}
 					{{ form_widget(form.link) }}
 					{{ form_errors(form.link) }}

@@ -1,0 +1,34 @@
+{# Une ligne « étude de cas ». Variables : project, show_thumb (bool), max_chars (int) #}
+{% set max_chars = max_chars|default(240) %}
+{% set front_tech = ['Angular', 'TypeScript', 'PWA', 'JavaScript', 'Twig', 'Bootstrap'] %}
+{% set main_url = project.demoUrl ?: project.link %}
+{% set desc = project.description|striptags|replace({"\n": ' ', "\r": ' '})|split(' ')|filter(w => w is not empty)|join(' ') %}
+<article class="case">
+	<div class="yr">{{ project.createdAt ? project.createdAt|date('Y') : '' }}</div>
+	<div class="meat">
+		<h3>
+			{% if main_url %}
+				<a href="{{ main_url }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
+			{% else %}
+				{{ project.title }}
+			{% endif %}
+		</h3>
+		<p class="desc">{{ desc|length > max_chars ? desc|slice(0, max_chars)|split(' ')|slice(0, -1)|join(' ') ~ '…' : desc }}</p>
+		<div class="stack">
+			{% for skill in project.techStack|slice(0, 7) %}
+				<span class="{{ skill.name in front_tech ? 'front' }}">{{ skill.name }}</span>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="go">
+		{% if show_thumb|default(false) and project.image %}
+			<img class="thumb" src="{{ asset('image/projects/' ~ project.image) }}" alt="Capture de {{ project.title }}" loading="lazy" onerror="this.remove()">
+		{% endif %}
+		{% if project.demoUrl %}
+			<a class="main" href="{{ project.demoUrl }}" target="_blank" rel="noopener noreferrer">Voir en ligne ↗</a>
+		{% endif %}
+		{% if project.link and project.link != project.demoUrl %}
+			<a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">Code ↗</a>
+		{% endif %}
+	</div>
+</article>
