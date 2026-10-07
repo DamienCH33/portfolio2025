@@ -163,7 +163,7 @@ class ProjectsController extends AbstractController
         return $this->redirectToRoute('admin_projects');
     }
 
-    #[Route('/media/{filename}', name: 'project_image')]
+    #[Route('/media/{filename}', name: 'project_image', requirements: ['filename' => '[A-Za-z0-9._-]+\.(png|jpe?g|webp)'], methods: ['GET'])]
     public function projectImage(string $filename): Response
     {
         $path = $this->getUploadDir() . '/' . $filename;
