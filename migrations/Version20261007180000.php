@@ -50,7 +50,7 @@ final class Version20261007180000 extends AbstractMigration
         foreach (CaseStudies::all() as $title => $case) {
             $this->addSql(
                 'UPDATE project SET context = ?, approach = ?, challenge = ?, outcome = ? WHERE title = ? AND context IS NULL',
-                [$case['context'], $case['approach'], $case['challenge'], $case['outcome'], $title]
+                [$case['context'], $case['approach'], $case['challenge'] ?? null, $case['outcome'], $title]
             );
         }
     }

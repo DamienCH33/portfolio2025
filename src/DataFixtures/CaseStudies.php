@@ -8,7 +8,7 @@ namespace App\DataFixtures;
  */
 final class CaseStudies
 {
-    /** @return array<string, array{context: string, approach: string, challenge: string, outcome: string}> clé = titre du projet */
+    /** @return array<string, array{context: string, approach: string, challenge?: string, outcome: string}> clé = titre du projet */
     public static function all(): array
     {
         return [
@@ -37,6 +37,25 @@ TXT,
 - En ligne sur un seul domaine : vitrine, application Angular et API.
 - 184 tests PHPUnit, PHPStan sans erreur, CI GitHub Actions à chaque push.
 - Audit de sécurité passé : 10 points sur 12 corrigés, dont un jeton de session opaque contre les accès aux données d'un autre utilisateur.
+TXT,
+            ],
+            'Cap Monta' => [
+                'context' => <<<'TXT'
+À Montalivet, au CHM et à Euronat, les bungalows et mobil-homes se louent surtout via des petites annonces. Le vacancier ne voit pas les dates libres, et le propriétaire gère les demandes à la main.
+
+Cap Monta est un site de location pensé pour les deux : le vacancier cherche par dates et par nombre de voyageurs, voit les disponibilités réelles et envoie sa demande de réservation en ligne. Le propriétaire reçoit des demandes claires, sur des dates qu'il sait libres.
+TXT,
+                'approach' => <<<'TXT'
+- Un parcours inspiré des grandes plateformes de location (recherche destination / dates / voyageurs, cartes d'annonces, fiche logement), avec une identité propre au lieu : la mer et la forêt, sans fioritures.
+- API Symfony pour les logements, les disponibilités et les demandes de réservation ; front Angular pour une recherche et un calendrier fluides.
+- PostgreSQL pour les données, Redis en cache, hébergement Railway.
+- Fiche logement complète : calendrier des dates prises et libres, carte « Où se situe le logement », notation des logements.
+- Une vraie photo en bandeau d'accueil plutôt qu'une illustration : un vacancier achète un lieu, pas un site.
+TXT,
+                'outcome' => <<<'TXT'
+- En ligne et utilisé pour de vraies réservations.
+- Un modèle économique simple : le site doit au minimum couvrir ses frais d'hébergement et de nom de domaine.
+- Il sert de référence à mon offre « site avec réservation » pour les commerces et les loueurs.
 TXT,
             ],
             'Mon Avis Pro' => [

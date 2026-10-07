@@ -251,13 +251,13 @@ class Project
     /** @return list<string> */
     public function getGallery(): array
     {
-        return array_values($this->gallery);
+        return $this->gallery;
     }
 
     /** @param list<string> $gallery */
     public function setGallery(array $gallery): static
     {
-        $this->gallery = array_values($gallery);
+        $this->gallery = $gallery;
 
         return $this;
     }
@@ -265,7 +265,6 @@ class Project
     public function addToGallery(string $filename): static
     {
         $this->gallery[] = $filename;
-        $this->gallery = array_values($this->gallery);
 
         return $this;
     }

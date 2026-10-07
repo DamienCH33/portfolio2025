@@ -20,7 +20,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             [
                 'title' => 'Cap Monta',
                 'description' => 'Site de location de bungalows et mobil-homes à Montalivet : recherche par dates, fiches logement, calendrier des disponibilités et demandes de réservation en ligne. En production, utilisé pour de vraies réservations.',
-                'skills' => ['Symfony', 'PHP', 'PostgreSQL', 'Docker', 'FrankenPHP', 'Railway'],
+                'skills' => ['Symfony', 'Angular', 'PHP', 'API REST', 'PostgreSQL', 'Redis', 'Railway'],
                 'image' => 'capmonta.png',
                 // À remplacer par l'URL du dépôt GitHub si le code est public.
                 'link' => 'https://cap-monta.up.railway.app/',
@@ -139,7 +139,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
                 $project
                     ->setContext($case['context'])
                     ->setApproach($case['approach'])
-                    ->setChallenge($case['challenge'])
+                    ->setChallenge($case['challenge'] ?? null)
                     ->setOutcome($case['outcome']);
             }
             $project->setCreatedAt(new \DateTimeImmutable($data['date']));
