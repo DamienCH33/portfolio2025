@@ -22,12 +22,12 @@
 	</div>
 	<div class="go">
 		{% if show_thumb|default(false) and project.image %}
-			<img class="thumb" src="{{ asset('image/projects/' ~ project.image) }}" alt="Capture de {{ project.title }}" loading="lazy">
+			<img class="thumb" src="{{ asset('image/projects/' ~ project.image) }}" alt="Capture de {{ project.title }}" loading="lazy" onerror="this.remove()">
 		{% endif %}
 		{% if project.demoUrl %}
 			<a class="main" href="{{ project.demoUrl }}" target="_blank" rel="noopener noreferrer">Voir en ligne ↗</a>
 		{% endif %}
-		{% if project.link %}
+		{% if project.link and project.link != project.demoUrl %}
 			<a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">Code ↗</a>
 		{% endif %}
 	</div>
