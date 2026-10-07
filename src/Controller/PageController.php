@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Entity\Skill;
 use App\Form\ContactType;
+use App\Repository\OfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +17,9 @@ final class PageController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(EntityManagerInterface $em, Request $request): Response
     {
-        $skills = $em->getRepository(Skill::class)->findAll();
+        $skills = $em->getRepository(Skill::class)->findBy([], ['priority' => 'ASC', 'name' => 'ASC']);
         $educations = $em->getRepository(\App\Entity\Education::class)->findAll();
-        $projects = $em->getRepository(\App\Entity\Project::class)->findBy([], ['createdAt' => 'DESC'], 3);
+        $projects = $em->getRepository(\App\Entity\Project::class)->findBy([], ['createdAt' => 'DESC'], 4);
         $profile = $em->getRepository(\App\Entity\Profile::class)->getSingleton();
 
         $form = $this->createForm(ContactType::class, new Contact(), [
@@ -58,9 +59,11 @@ final class PageController extends AbstractController
     }
 
     #[Route('/services', name: 'app_services', methods: ['GET'])]
-    public function services(): Response
+    public function services(OfferRepository $offers): Response
     {
-        return $this->render('services.html.twig');
+        return $this->render('services.html.twig', [
+            'offers' => $offers->findPublished(),
+        ]);
     }
 
     #[Route('/mentions-legales', name: 'app_legal', methods: ['GET'])]

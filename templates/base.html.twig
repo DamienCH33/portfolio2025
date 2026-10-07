@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<title>
-			{% block title %}Portfolio - Damien
-			{% endblock %}
-			— Damien Chauveau
-		</title>
+		<title>{% block title %}Portfolio{% endblock %} — Damien Chauveau</title>
 
-		<meta name="description" content="{% block meta_description %}Portfolio de Damien Chauveau, développeur fullstack PHP Symfony / Angular à Bordeaux. Applications web métier, API REST et outils déployés en production.{% endblock %}">
+		<meta name="description" content="{% block meta_description %}Portfolio de Damien Chauveau, développeur fullstack PHP Symfony / Angular à Bordeaux. API REST, interfaces Angular et applications métier déployées en production.{% endblock %}">
 		<meta name="author" content="Damien Chauveau">
+		<meta name="theme-color" content="#0A0C10">
 
 		<meta property="og:title" content="Damien Chauveau — Développeur Fullstack PHP Symfony / Angular">
-		<meta property="og:description" content="Applications web métier, API REST et outils déployés en production. Découvrez mes projets et compétences.">
+		<meta property="og:description" content="API REST Symfony, interfaces Angular et applications métier déployées en production. Découvrez mes projets.">
 		<meta property="og:image" content="{{ absolute_url(asset('image/og-image.png')) }}">
 		<meta property="og:image:width" content="1200">
 		<meta property="og:image:height" content="630">
@@ -23,83 +19,64 @@
 		<meta property="og:type" content="website">
 		<meta property="og:locale" content="fr_FR">
 
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-		<link href="/styles/style.css" rel="stylesheet">
+		<link href="/styles/style.css?v=2" rel="stylesheet">
+		{% block stylesheets %}{% endblock %}
 	</head>
 
 	<body>
-		<nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" aria-label="Main navigation">
-			<div class="container">
-				<a class="navbar-brand brand-logo" href="{{ path('app_home') }}">
-					<span class="brand-badge">
-
-						<span class="brand-bracket">&lt;</span>
-
-						<span class="brand-first">Damien</span>
-						<span class="brand-last">CHAUVEAU</span>
-
-						<span class="brand-bracket">/&gt;</span>
-
-					</span>
-				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-					<ul class="navbar-nav">
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_services') }}">Services</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_portfolio') }}">Portfolio</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_about') }}">À propos</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
-						</li>
-					</ul>
+		{% set route = app.request.attributes.get('_route') %}
+		<nav class="site-nav" aria-label="Navigation principale">
+			<div class="wrap nav-inner">
+				<a class="brand" href="{{ path('app_home') }}">Damien Chauveau<span class="dot">.</span></a>
+				<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+				<div class="nav-links" id="nav-links">
+					<a href="{{ path('app_portfolio') }}" class="{{ route == 'app_portfolio' ? 'active' }}">Projets</a>
+					<a href="{{ path('app_services') }}" class="{{ route == 'app_services' ? 'active' }}">Services</a>
+					<a href="{{ path('app_about') }}" class="{{ route == 'app_about' ? 'active' }}">À propos</a>
+					<a href="{{ path('app_contact') }}" class="{{ route starts with 'app_contact' ? 'active' }}">Contact</a>
+					<a class="avail" href="{{ path('app_contact') }}">Dispo · CDI &amp; missions</a>
 				</div>
 			</div>
 		</nav>
 
-		<main class="pt-5"> {% block body %}{% endblock %}
-			</main>
+		<main>
+			{% block body %}{% endblock %}
+		</main>
 
-			{% set yearRef = 2025 %}
-			<footer class="footer py-4 mt-5 border-top">
-				<div class="container text-center">
-					<p class="footer-name mb-3">
-						©
-						{% if yearRef < "now" |date("Y") %}
-							{{ yearRef }}
-							-
-							{{ "now" |date("Y") }}
-						{% else %}
-							{{ yearRef }}
-						{%
-					endif %}
-						— Damien Chauveau — Tous droits réservés
-						·
-						<a href="{{ path('app_legal') }}" class="footer-legal">Mentions légales</a>
-					</p>
-					<div class="footer-links">
-						<a href="https://github.com/DamienCH33" target="_blank" rel="me noopener" title="GitHub">
-							<i class="bi bi-github"></i>
-						</a>
-						<a href="https://linkedin.com/in/damien-chauveau-747892100/" target="_blank" rel="me noopener" title="LinkedIn">
-							<i class="bi bi-linkedin"></i>
-						</a>
-					</div>
+		{% set yearRef = 2025 %}
+		{% set yearNow = 'now'|date('Y') %}
+		<footer class="site-footer">
+			<div class="wrap foot">
+				<div class="copy">
+					© {{ yearRef < yearNow ? yearRef ~ '–' ~ yearNow : yearRef }} Damien Chauveau ·
+					<a href="{{ path('app_legal') }}">Mentions légales</a>
 				</div>
-			</footer>
+				<div class="right">
+					<a href="https://github.com/DamienCH33" target="_blank" rel="me noopener">GitHub</a>
+					<a href="https://www.linkedin.com/in/damien-chauveau-747892100/" target="_blank" rel="me noopener">LinkedIn</a>
+					<a href="{{ asset('files/cv-damien-chauveau.pdf') }}?v=3" target="_blank" rel="noopener">CV (PDF)</a>
+					<a class="admin" href="{{ path('admin_dashboard') }}" title="Administration" rel="nofollow">admin</a>
+				</div>
+			</div>
+		</footer>
 
-			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-		</body>
-
-	</html>
+		<script>
+			(function () {
+				var btn = document.querySelector('.nav-toggle');
+				var links = document.getElementById('nav-links');
+				if (!btn || !links) return;
+				btn.addEventListener('click', function () {
+					var open = links.classList.toggle('open');
+					btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+					btn.textContent = open ? 'Fermer' : 'Menu';
+				});
+			})();
+		</script>
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

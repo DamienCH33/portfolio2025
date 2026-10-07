@@ -1,125 +1,99 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}À propos
-{% endblock %}
+{% block title %}À propos{% endblock %}
+
+{% block meta_description %}Parcours de Damien Chauveau : près de dix ans dans l'assurance, puis développeur fullstack PHP Symfony / Angular. Expériences, formation et façon de travailler.{% endblock %}
 
 {% block body %}
+	<header class="page-head">
+		<div class="wrap">
+			<span class="kicker">// à propos</span>
+			<h1>De l'assurance<br>au <span class="accent">code en production.</span></h1>
+			<p class="lead-text">Près de dix ans à faire tourner des contrats et des outils métier, puis le passage de l'autre côté : aujourd'hui je conçois les applications, côté API comme côté interface.</p>
+		</div>
+	</header>
 
-	<section class="about-section py-5">
-		<div class="container">
-			<h1 class="text-center mb-5 py-5">À propos</h1>
-			<div class="about-intro">
-				<div class="about-profile">
-					<img src="{{ asset('image/portfolio_media/damien_chauveau_photo.png') }}" alt="Photo Damien Chauveau" class="about-photo">
-					<div class="about-info">
-						<h2>Damien Chauveau</h2>
-						<p class="about-role">
-							Développeur Fullstack PHP Symfony / Angular
-						</p>
-						<ul class="about-meta">
-							<li>📍 Bordeaux</li>
-							<li>🎓 Développeur Concepteur Logiciel (RNCP niveau 6)</li>
-							<li>💻 Stack principale : PHP • Symfony • Angular • API REST</li>
-							<li>🔎 Disponible pour un poste de développeur fullstack</li>
-						</ul>
-					</div>
-				</div>
+	<section class="section tight">
+		<div class="wrap about-grid">
+			<aside class="about-side">
+				<img src="{{ asset('image/portfolio_media/damien_chauveau_photo.png') }}?v=3" alt="Photo de Damien Chauveau" class="about-photo">
+				<ul class="meta">
+					<li><strong>Développeur fullstack</strong>PHP · Symfony · Angular</li>
+					<li><strong>Bordeaux</strong>Villenave-d'Ornon · remote OK</li>
+					<li><strong>RNCP niveau 6</strong>Développeur d'application PHP / Symfony</li>
+					<li><strong>Disponible</strong>CDI et missions freelance</li>
+					<li><strong>Langues</strong>Français natif · anglais technique</li>
+				</ul>
+			</aside>
+
+			<div class="prose">
+				<h3>Ce que je fais</h3>
+				<p>Je développe des applications web complètes : <strong>API REST avec Symfony</strong>, modèle de données avec Doctrine et PostgreSQL, et <strong>interfaces Angular / TypeScript</strong> qui consomment ces API. Quand le projet le demande, je fais aussi le back-office, les intégrations externes (Google, OpenAI, Open Food Facts) et le déploiement.</p>
+				<p>Je tiens à ce qui ne se voit pas dans une démo : tests PHPUnit, analyse statique PHPStan, CI GitHub Actions, secrets chiffrés, et un code qu'un autre développeur peut reprendre.</p>
+
+				<h3>Ce que l'assurance m'a appris</h3>
+				<p>Chez Willis Towers Watson, j'ai été pendant quatre ans le <strong>référent applicatif</strong> de la refonte d'un extranet client : l'interlocuteur métier des équipes de développement. Recette, tests de livraison, qualification des anomalies, documentation, daily, déploiement par phases et formation des collectivités utilisatrices.</p>
+				<p>Résultat : je sais lire un besoin métier, poser les bonnes questions avant de coder, et parler aussi bien aux utilisateurs qu'aux développeurs. Sur des domaines denses (insurtech, mutuelles, éditeurs de logiciels d'assurance), c'est un vrai raccourci.</p>
 			</div>
+		</div>
+	</section>
 
-			<h2>Parcours</h2>
-
-			<p>
-				Après plus de dix années d’expérience en entreprise dans le secteur de l’assurance,
-				j’ai progressivement orienté ma carrière vers le développement web.
-			</p>
-
-			<p>
-				Chez Willis Towers Watson, j’ai participé à l’évolution d’un extranet de gestion
-				utilisé par des collectivités. Mon rôle impliquait la participation aux phases
-				de recettage des fonctionnalités, la remontée d’anomalies et l’accompagnement
-				des utilisateurs dans l’utilisation de l’outil.
-			</p>
-
-			<p>
-				Cette expérience m’a permis de développer une bonne compréhension des applications
-				métiers, des besoins fonctionnels et du fonctionnement des projets logiciels
-				en environnement professionnel, en collaboration avec des équipes techniques.
-			</p>
-
-			<p>
-				Afin de me spécialiser dans le développement web, j’ai ensuite suivi la formation
-				<strong>Développeur d’Application PHP/Symfony</strong>
-				chez OpenClassrooms,
-				une formation professionnalisante basée sur la réalisation de nombreux projets
-				applicatifs couvrant l’ensemble du cycle de développement backend.
-			</p>
-
-			<h2>Expérience en développement</h2>
-
-			<p>
-				Dans le cadre de cette formation et d’un stage chez Bilendi Technology,
-								j’ai travaillé sur le développement d’applications web avec PHP et Symfony
-								en utilisant l’architecture MVC.
-			</p>
-
-			<p>
-				J’y ai développé des fonctionnalités CRUD, manipulé des bases de données
-								relationnelles avec Doctrine ORM et participé au travail collaboratif
-								via Git et GitHub.
-			</p>
-
-			<p>
-				Ces projets m’ont permis de mettre en pratique plusieurs aspects essentiels
-								du développement backend : conception d’API REST, gestion des entités
-								et relations, optimisation de requêtes SQL et mise en place de tests
-								automatisés.
-			</p>
-
-			<p>
-				J’ai également conçu des interfaces côté frontend avec Angular et TypeScript,
-								notamment pour consommer mes API REST Symfony (application NutriPetit).
-			</p>
-
-			<h2>Technologies</h2>
-
-			<ul class="about-tech">
+	<section class="section">
+		<div class="wrap">
+			<div class="shead"><span class="idx">01</span><h2>Parcours</h2><span class="rule"></span></div>
+			<ol class="timeline">
 				<li>
-					<strong>Backend :</strong>
-					PHP, Symfony, Doctrine ORM, API REST</li>
+					<div class="when">05/2026 — auj.</div>
+					<div>
+						<h4>Développeur Symfony freelance</h4>
+						<div class="where">Compagnie des Archers des Albères</div>
+						<p>Site vitrine et back-office sur mesure livrés à un client associatif, de la conception au déploiement : back-office EasyAdmin, authentification et rôles, galerie, carte Google Maps. Symfony 7, PostgreSQL, Docker, CI/CD GitHub Actions, Railway.</p>
+					</div>
+				</li>
 				<li>
-					<strong>Base de données :</strong>
-					PostgreSQL, MySQL</li>
+					<div class="when">2025 — 2026</div>
+					<div>
+						<h4>Titre Développeur d'application PHP / Symfony — RNCP 6</h4>
+						<div class="where">OpenClassrooms</div>
+						<p>15 projets validés en soutenance devant jury : API REST, sécurité, tests, CI/CD, maintenance et migration d'applications existantes.</p>
+					</div>
+				</li>
 				<li>
-					<strong>Qualité du code :</strong>
-					PHPUnit, PHPStan, PHP-CS-Fixer</li>
+					<div class="when">06/2024</div>
+					<div>
+						<h4>Immersion équipe de développement Symfony</h4>
+						<div class="where">Bilendi Technology</div>
+						<p>Workflows Git, revues de code et organisation Agile sur une application existante, en environnement professionnel.</p>
+					</div>
+				</li>
 				<li>
-					<strong>Outils :</strong>
-					Docker, Git, GitHub, GitHub Actions (CI), Composer</li>
+					<div class="when">2021 — 2025</div>
+					<div>
+						<h4>Référent applicatif — refonte de l'extranet client</h4>
+						<div class="where">Willis Towers Watson</div>
+						<p>Interlocuteur métier des équipes de développement : recette, tests de livraison, remontée d'anomalies, documentation, déploiement par phases et formation des utilisateurs.</p>
+					</div>
+				</li>
 				<li>
-					<strong>Frontend :</strong>
-					Angular, TypeScript, HTML, CSS, Twig, Bootstrap</li>
-			</ul>
+					<div class="when">2015 — 2021</div>
+					<div>
+						<h4>Gestionnaire de contrats — collectivités locales</h4>
+						<div class="where">Willis Towers Watson (ex-Gras Savoye)</div>
+						<p>Gestion de portefeuilles d'assurance B2B pour des collectivités territoriales.</p>
+					</div>
+				</li>
+			</ol>
+		</div>
+	</section>
 
-			<h2>Approche du développement</h2>
-			<p>
-				Je m’attache à produire un code structuré et maintenable en appliquant
-								les bonnes pratiques du développement backend : séparation des
-								responsabilités, architecture claire et organisation cohérente
-								des projets.
-			</p>
-			<p>
-				La qualité du code occupe également une place importante dans ma
-								façon de travailler, notamment grâce aux tests automatisés,
-								à l’analyse statique et à l’utilisation d’outils modernes
-								de développement.
-			</p>
-
-			<h2>Objectif professionnel</h2>
-			<p>
-				Aujourd'hui, je souhaite poursuivre mon évolution en tant que
-								développeur fullstack au sein d'une équipe technique, sur des
-								applications web concrètes et utiles.
-			</p>
+	<section class="final">
+		<div class="wrap">
+			<h2>On en parle <span class="accent">de vive voix ?</span></h2>
+			<p>Je cherche un poste de développeur fullstack à Bordeaux ou en remote, et je prends des missions en parallèle.</p>
+			<div class="hero-actions">
+				<a class="btn-v2" href="{{ path('app_contact') }}">Me contacter →</a>
+				<a class="link-arrow sec" href="{{ asset('files/cv-damien-chauveau.pdf') }}?v=3" target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>
+			</div>
 		</div>
 	</section>
 {% endblock %}
