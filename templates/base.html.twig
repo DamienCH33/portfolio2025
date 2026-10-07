@@ -9,10 +9,11 @@
 		<meta name="description" content="{% block meta_description %}Portfolio de Damien Chauveau, développeur fullstack PHP Symfony / Angular à Bordeaux. API REST, interfaces Angular et applications métier déployées en production.{% endblock %}">
 		<meta name="author" content="Damien Chauveau">
 		<meta name="theme-color" content="#0A0C10">
+		<link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.pathInfo }}">
 
 		<meta property="og:title" content="Damien Chauveau — Développeur Fullstack PHP Symfony / Angular">
 		<meta property="og:description" content="API REST Symfony, interfaces Angular et applications métier déployées en production. Découvrez mes projets.">
-		<meta property="og:image" content="{{ absolute_url(asset('image/og-image.png')) }}">
+		<meta property="og:image" content="{{ absolute_url(asset('image/og-image.png')) }}?v=2">
 		<meta property="og:image:width" content="1200">
 		<meta property="og:image:height" content="630">
 		<meta property="og:url" content="{{ app.request.uri }}">
@@ -58,9 +59,14 @@
 				</div>
 				<div class="right">
 					<a href="https://github.com/DamienCH33" target="_blank" rel="me noopener">GitHub</a>
-					<a href="https://www.linkedin.com/in/damien-chauveau-747892100/" target="_blank" rel="me noopener">LinkedIn</a>
+					<a href="https://www.linkedin.com/in/chauveau-damien/" target="_blank" rel="me noopener">LinkedIn</a>
 					<a href="{{ asset('files/cv-damien-chauveau.pdf') }}?v=3" target="_blank" rel="noopener">CV (PDF)</a>
-					<a class="admin" href="{{ path('admin_dashboard') }}" title="Administration" rel="nofollow">admin</a>
+					{% if is_granted('ROLE_ADMIN') %}
+						<a class="admin-on" href="{{ path('admin_dashboard') }}" rel="nofollow">● Back-office</a>
+						<a class="admin" href="{{ path('app_logout') }}" rel="nofollow">Déconnexion</a>
+					{% else %}
+						<a class="admin" href="{{ path('admin_dashboard') }}" title="Administration" rel="nofollow">admin</a>
+					{% endif %}
 				</div>
 			</div>
 		</footer>

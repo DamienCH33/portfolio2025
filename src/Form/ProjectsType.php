@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Project;
 use App\Entity\Skill;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -134,6 +135,53 @@ class ProjectsType extends AbstractType
                         'message' => 'Veuillez entrer une URL valide.',
                     ]),
                 ],
+            ])
+
+            // ----- Étude de cas -----
+            ->add('context', TextareaType::class, [
+                'label' => 'Le besoin',
+                'required' => false,
+                'help' => 'Pour qui, quel problème. Laisser vide = pas de page détaillée. Une ligne commençant par « - » devient une puce.',
+                'attr' => ['class' => 'form-control', 'rows' => 4],
+            ])
+            ->add('approach', TextareaType::class, [
+                'label' => 'Mes choix techniques',
+                'required' => false,
+                'help' => 'Ce que tu as choisi et pourquoi.',
+                'attr' => ['class' => 'form-control', 'rows' => 6],
+            ])
+            ->add('challenge', TextareaType::class, [
+                'label' => 'La difficulté',
+                'required' => false,
+                'help' => 'Un vrai problème rencontré et comment tu l\'as résolu.',
+                'attr' => ['class' => 'form-control', 'rows' => 6],
+            ])
+            ->add('outcome', TextareaType::class, [
+                'label' => 'Le résultat',
+                'required' => false,
+                'attr' => ['class' => 'form-control', 'rows' => 4],
+            ])
+            ->add('galleryFiles', FileType::class, [
+                'label' => 'Captures supplémentaires (2 ou 3)',
+                'mapped' => false,
+                'required' => false,
+                'multiple' => true,
+                'help' => 'Ajoutées à la suite des captures existantes.',
+                'attr' => ['class' => 'form-control', 'accept' => 'image/jpeg,image/png,image/webp'],
+                'constraints' => [
+                    new Assert\All([
+                        new File([
+                            'maxSize' => '5M',
+                            'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp'],
+                            'mimeTypesMessage' => 'Captures au format PNG, JPG ou WebP.',
+                        ]),
+                    ]),
+                ],
+            ])
+            ->add('clearGallery', CheckboxType::class, [
+                'label' => 'Supprimer les captures supplémentaires actuelles',
+                'mapped' => false,
+                'required' => false,
             ])
 
             ->add('createdAt', DateType::class, [

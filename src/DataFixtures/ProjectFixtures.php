@@ -7,6 +7,7 @@ use App\Entity\Skill;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class ProjectFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -19,7 +20,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             [
                 'title' => 'Cap Monta',
                 'description' => 'Site de location de bungalows et mobil-homes à Montalivet : recherche par dates, fiches logement, calendrier des disponibilités et demandes de réservation en ligne. En production, utilisé pour de vraies réservations.',
-                'skills' => ['Symfony', 'PHP', 'PostgreSQL', 'Docker', 'FrankenPHP', 'Railway'],
+                'skills' => ['Symfony', 'Angular', 'PHP', 'API REST', 'PostgreSQL', 'Redis', 'Railway'],
                 'image' => 'capmonta.png',
                 // À remplacer par l'URL du dépôt GitHub si le code est public.
                 'link' => 'https://cap-monta.up.railway.app/',
@@ -133,6 +134,14 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             $project->setImage($data['image']);
             $project->setLink($data['link']);
             $project->setDemoUrl($data['demo'] ?? null);
+            $project->setSlug(strtolower((string) (new AsciiSlugger('fr'))->slug($data['title'])));
+            if (null !== $case = (CaseStudies::all()[$data['title']] ?? null)) {
+                $project
+                    ->setContext($case['context'])
+                    ->setApproach($case['approach'])
+                    ->setChallenge($case['challenge'] ?? null)
+                    ->setOutcome($case['outcome']);
+            }
             $project->setCreatedAt(new \DateTimeImmutable($data['date']));
 
             foreach ($data['skills'] as $skillName) {

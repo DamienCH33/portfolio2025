@@ -372,6 +372,35 @@ label, .form-label { color: var(--muted); font-size: .88rem; margin-bottom: 6px;
 .foot .right .admin { color: #3a4452; font-size: .78rem; }
 .foot .right .admin:hover { color: var(--muted); }
 
+
+/* ---------- PAGE PROJET (étude de cas) ---------- */
+.back-link { display: inline-block; color: var(--muted); font-size: .88rem; margin-bottom: 22px; }
+.back-link:hover { color: var(--text); }
+.case-stack { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+.case-stack span { font-size: .82rem; color: #c8d0da; border: 1px solid rgba(255, 255, 255, .14); padding: 4px 11px; border-radius: 20px; background: rgba(0, 0, 0, .15); }
+.case-stack span.front { color: var(--accent); border-color: rgba(52, 211, 153, .4); }
+.case-layout { max-width: 820px; }
+.case-shot { margin: 0 0 56px; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .8); }
+.case-shot img { display: block; width: 100%; height: auto; }
+.case-part { margin-bottom: 52px; }
+.case-part h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -.02em; margin-bottom: 18px; display: flex; align-items: baseline; gap: 14px; }
+.case-part h2 .idx { font-family: var(--font-mono); font-size: .85rem; color: var(--accent-2); }
+.case-part .prose p { color: #b3bdca; font-size: 1.02rem; max-width: none; }
+.case-part .prose ul { list-style: none; padding: 0; margin: 0 0 18px; }
+.case-part .prose li { color: #b3bdca; padding: 10px 0 10px 26px; position: relative; border-top: 1px solid var(--border); }
+.case-part .prose li:last-child { border-bottom: 1px solid var(--border); }
+.case-part .prose li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+.case-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.case-gallery img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 12px; border: 1px solid var(--border); display: block; transition: transform .2s; }
+.case-gallery a:hover img { transform: translateY(-2px); }
+.next-label { font-family: var(--font-mono); font-size: .82rem; color: var(--accent-2); margin-bottom: 10px !important; }
+.next-link:hover .accent { padding-left: 6px; }
+.case .go a.case-cta { color: var(--accent); }
+
+/* ---------- ADMIN : barre « connecté » sur le site public ---------- */
+.foot .right .admin-on { color: var(--accent); font-size: .82rem; }
+.admin-quick { display: grid; gap: 8px; }
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 960px) {
 	.hero-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -410,7 +439,7 @@ label, .form-label { color: var(--muted); font-size: .88rem; margin-bottom: 6px;
 	.case { grid-template-columns: 1fr; gap: 12px; }
 	.case:hover { padding-left: 0; }
 	.case .yr { padding-top: 0; }
-	.case .go { flex-direction: row; align-items: center; gap: 20px; }
+	.case .go { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 10px 20px; }
 	.case .thumb { width: 100%; }
 	.timeline li { grid-template-columns: 1fr; gap: 6px; }
 	.sk-row { flex-direction: column; gap: 4px; }

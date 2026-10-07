@@ -43,6 +43,30 @@ class Project
     #[ORM\Column(name: 'demo_url', length: 255, type: Types::STRING, nullable: true)]
     private ?string $demoUrl = null;
 
+    // ----- Étude de cas (page /projets/{slug}) -----
+    #[ORM\Column(length: 160, unique: true, nullable: true)]
+    private ?string $slug = null;
+
+    /** Le besoin : pour qui, quel problème. */
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $context = null;
+
+    /** Les choix techniques et pourquoi. */
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $approach = null;
+
+    /** Une difficulté rencontrée et comment elle a été résolue. */
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $challenge = null;
+
+    /** Le résultat : en ligne, chiffres, qualité. */
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $outcome = null;
+
+    /** @var list<string> Captures supplémentaires (noms de fichiers dans image/projects) */
+    #[ORM\Column(type: Types::JSON, options: ['default' => '[]'])]
+    private array $gallery = [];
+
     #[ORM\Column(name: 'created_At', type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -162,5 +186,97 @@ class Project
         $this->logo = $logo;
 
         return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getContext(): ?string
+    {
+        return $this->context;
+    }
+
+    public function setContext(?string $context): static
+    {
+        $this->context = self::clean($context);
+
+        return $this;
+    }
+
+    public function getApproach(): ?string
+    {
+        return $this->approach;
+    }
+
+    public function setApproach(?string $approach): static
+    {
+        $this->approach = self::clean($approach);
+
+        return $this;
+    }
+
+    public function getChallenge(): ?string
+    {
+        return $this->challenge;
+    }
+
+    public function setChallenge(?string $challenge): static
+    {
+        $this->challenge = self::clean($challenge);
+
+        return $this;
+    }
+
+    public function getOutcome(): ?string
+    {
+        return $this->outcome;
+    }
+
+    public function setOutcome(?string $outcome): static
+    {
+        $this->outcome = self::clean($outcome);
+
+        return $this;
+    }
+
+    /** @return list<string> */
+    public function getGallery(): array
+    {
+        return $this->gallery;
+    }
+
+    /** @param list<string> $gallery */
+    public function setGallery(array $gallery): static
+    {
+        $this->gallery = $gallery;
+
+        return $this;
+    }
+
+    public function addToGallery(string $filename): static
+    {
+        $this->gallery[] = $filename;
+
+        return $this;
+    }
+
+    /** Une page détaillée existe dès que le besoin est renseigné. */
+    public function hasCaseStudy(): bool
+    {
+        return null !== $this->slug && null !== $this->context;
+    }
+
+    private static function clean(?string $text): ?string
+    {
+        return null !== $text && '' !== trim($text) ? trim($text) : null;
     }
 }

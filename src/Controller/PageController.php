@@ -67,6 +67,30 @@ final class PageController extends AbstractController
         ]);
     }
 
+    #[Route('/projets/{slug}', name: 'app_project_show', requirements: ['slug' => '[a-z0-9-]+'], methods: ['GET'])]
+    public function project(string $slug, EntityManagerInterface $em): Response
+    {
+        $repo = $em->getRepository(\App\Entity\Project::class);
+        $project = $repo->findOneBy(['slug' => $slug]);
+
+        if (null === $project || !$project->hasCaseStudy()) {
+            throw $this->createNotFoundException('Projet introuvable.');
+        }
+
+        // Projet suivant parmi ceux qui ont une page détaillée (navigation en bas de page)
+        $withCase = array_values(array_filter(
+            $repo->findBy([], ['createdAt' => 'DESC']),
+            static fn (\App\Entity\Project $p): bool => $p->hasCaseStudy(),
+        ));
+        $index = array_search($project, $withCase, true);
+        $next = count($withCase) > 1 ? $withCase[((int) $index + 1) % count($withCase)] : null;
+
+        return $this->render('project.html.twig', [
+            'project' => $project,
+            'next' => $next,
+        ]);
+    }
+
     #[Route('/services', name: 'app_services', methods: ['GET'])]
     public function services(OfferRepository $offers): Response
     {

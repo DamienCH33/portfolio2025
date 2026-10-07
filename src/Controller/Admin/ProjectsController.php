@@ -6,6 +6,7 @@ use App\Entity\Project;
 use App\Form\ProjectsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,6 +64,7 @@ class ProjectsController extends AbstractController
             }
 
             $this->handleLogo($form->get('logoFile')->getData(), $project, $slugger);
+            $this->handleCaseStudy($form, $project, $slugger, $em);
 
             $em->persist($project);
             $em->flush();
@@ -120,6 +122,7 @@ class ProjectsController extends AbstractController
             }
 
             $this->handleLogo($form->get('logoFile')->getData(), $project, $slugger);
+            $this->handleCaseStudy($form, $project, $slugger, $em);
 
             $em->flush();
 
@@ -147,6 +150,12 @@ class ProjectsController extends AbstractController
 
             if ($project->getImage() && is_file($imagePath)) {
                 unlink($imagePath);
+            }
+
+            foreach ($project->getGallery() as $capture) {
+                if (is_file($this->getUploadDir() . '/' . $capture)) {
+                    unlink($this->getUploadDir() . '/' . $capture);
+                }
             }
 
             $logoPath = $this->getUploadDir() . '/' . $project->getLogo();
@@ -200,5 +209,43 @@ class ProjectsController extends AbstractController
         }
 
         $project->setLogo($newFilename);
+    }
+
+    /**
+     * Slug de la page détaillée + captures supplémentaires.
+     */
+    private function handleCaseStudy(FormInterface $form, Project $project, SluggerInterface $slugger, EntityManagerInterface $em): void
+    {
+        if (null === $project->getSlug()) {
+            $base = (string) $slugger->slug((string) $project->getTitle())->lower();
+            $slug = $base;
+            $i = 2;
+            while (null !== ($other = $em->getRepository(Project::class)->findOneBy(['slug' => $slug])) && $other !== $project) {
+                $slug = $base . '-' . $i++;
+            }
+            $project->setSlug($slug);
+        }
+
+        if (true === $form->get('clearGallery')->getData()) {
+            foreach ($project->getGallery() as $old) {
+                $path = $this->getUploadDir() . '/' . $old;
+                if (is_file($path)) {
+                    unlink($path);
+                }
+            }
+            $project->setGallery([]);
+        }
+
+        /** @var UploadedFile[] $files */
+        $files = $form->get('galleryFiles')->getData() ?? [];
+        foreach ($files as $file) {
+            $name = 'capture-' . $project->getSlug() . '-' . uniqid() . '.' . ($file->guessExtension() ?? 'png');
+            try {
+                $file->move($this->getUploadDir(), $name);
+                $project->addToGallery($name);
+            } catch (FileException) {
+                $this->addFlash('danger', "Erreur lors de l'upload d'une capture.");
+            }
+        }
     }
 }

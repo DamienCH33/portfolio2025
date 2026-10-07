@@ -64,6 +64,32 @@
 				</div>
 			</div>
 
+			<hr class="my-4">
+			<h4 class="mb-1">Étude de cas</h4>
+			<p class="small-muted mb-3">Remplis au moins « Le besoin » pour que le projet ait sa page détaillée sur le site{% if project is defined and project.slug %} (<a href="{{ path('app_project_show', {slug: project.slug}) }}" target="_blank">/projets/{{ project.slug }}</a>){% endif %}.</p>
+			<div class="row">
+				<div class="col-12 mb-3">{{ form_row(form.context) }}</div>
+				<div class="col-12 mb-3">{{ form_row(form.approach) }}</div>
+				<div class="col-12 mb-3">{{ form_row(form.challenge) }}</div>
+				<div class="col-12 mb-3">{{ form_row(form.outcome) }}</div>
+				<div class="col-md-8 mb-3">
+					{% if project is defined and project.gallery is not empty %}
+						<div class="mb-2 d-flex gap-2 flex-wrap">
+							{% for capture in project.gallery %}
+								<img src="{{ asset('image/projects/' ~ capture) }}" alt="" height="60" style="border-radius:6px">
+							{% endfor %}
+						</div>
+					{% endif %}
+					{{ form_row(form.galleryFiles) }}
+				</div>
+				<div class="col-md-4 mb-3 d-flex align-items-end">
+					<div class="form-check">
+						{{ form_widget(form.clearGallery, {attr: {class: 'form-check-input'}}) }}
+						{{ form_label(form.clearGallery, null, {label_attr: {class: 'form-check-label'}}) }}
+					</div>
+				</div>
+			</div>
+
 			<button type="submit" class="btn btn-primary mt-3">
 				💾 Enregistrer
 			</button>
