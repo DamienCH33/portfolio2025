@@ -7,6 +7,7 @@ use App\Form\ProjectsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -60,6 +61,8 @@ class ProjectsController extends AbstractController
                 $this->addFlash('danger', "Erreur upload");
                 return $this->redirectToRoute('admin_projects_create');
             }
+
+            $this->handleLogo($form->get('logoFile')->getData(), $project, $slugger);
 
             $em->persist($project);
             $em->flush();
@@ -116,6 +119,8 @@ class ProjectsController extends AbstractController
                 }
             }
 
+            $this->handleLogo($form->get('logoFile')->getData(), $project, $slugger);
+
             $em->flush();
 
             $this->addFlash(
@@ -144,6 +149,11 @@ class ProjectsController extends AbstractController
                 unlink($imagePath);
             }
 
+            $logoPath = $this->getUploadDir() . '/' . $project->getLogo();
+            if ($project->getLogo() && is_file($logoPath)) {
+                unlink($logoPath);
+            }
+
             $em->remove($project);
             $em->flush();
 
@@ -163,5 +173,32 @@ class ProjectsController extends AbstractController
         }
 
         return $this->file($path);
+    }
+
+    /**
+     * Enregistre le logo envoyé (s'il y en a un) et supprime l'ancien.
+     */
+    private function handleLogo(?UploadedFile $logoFile, Project $project, SluggerInterface $slugger): void
+    {
+        if (null === $logoFile) {
+            return;
+        }
+
+        $newFilename = 'logo-' . $slugger->slug((string) $project->getTitle())->lower() . '-' . uniqid() . '.' . ($logoFile->guessExtension() ?? 'png');
+
+        try {
+            $logoFile->move($this->getUploadDir(), $newFilename);
+        } catch (FileException) {
+            $this->addFlash('danger', "Erreur lors de l'upload du logo.");
+
+            return;
+        }
+
+        $old = $project->getLogo();
+        if ($old && is_file($this->getUploadDir() . '/' . $old)) {
+            unlink($this->getUploadDir() . '/' . $old);
+        }
+
+        $project->setLogo($newFilename);
     }
 }

@@ -21,6 +21,14 @@ final class PageController extends AbstractController
         $educations = $em->getRepository(\App\Entity\Education::class)->findAll();
         $projects = $em->getRepository(\App\Entity\Project::class)->findBy([], ['createdAt' => 'DESC'], 4);
         $profile = $em->getRepository(\App\Entity\Profile::class)->getSingleton();
+        // Projets avec un lien « en ligne » : panneau du hero
+        $liveProjects = $em->getRepository(\App\Entity\Project::class)->createQueryBuilder('p')
+            ->where('p.demoUrl IS NOT NULL')
+            ->andWhere("p.demoUrl <> ''")
+            ->orderBy('p.createdAt', 'DESC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
 
         $form = $this->createForm(ContactType::class, new Contact(), [
             'action' => '#contact',
@@ -32,6 +40,7 @@ final class PageController extends AbstractController
                 'skills' => $skills,
                 'educations' => $educations,
                 'projects' => $projects,
+                'live_projects' => $liveProjects,
                 'profile' => $profile,
                 'form' => $form->createView(),
             ]);

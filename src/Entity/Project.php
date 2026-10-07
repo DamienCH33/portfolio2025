@@ -34,6 +34,9 @@ class Project
     #[ORM\Column(name: 'image', length: 255, type: Types::STRING)]
     private ?string $image = null;
 
+    #[ORM\Column(name: 'logo', length: 255, type: Types::STRING, nullable: true)]
+    private ?string $logo = null;
+
     #[ORM\Column(name: 'link', length: 255, type: Types::STRING)]
     private ?string $link = null;
 
@@ -145,6 +148,18 @@ class Project
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): static
+    {
+        $this->logo = $logo;
 
         return $this;
     }

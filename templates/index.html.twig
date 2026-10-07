@@ -5,27 +5,67 @@
 {% block body %}
 	{% set cv_url = profile and profile.cvFile ? asset('files/cv/' ~ profile.cvFile) : asset('files/cv-damien-chauveau.pdf') ~ '?v=3' %}
 
-	{# HERO #}
+	{# HERO — D « En ligne » #}
+	{% set live = live_projects|default([]) %}
 	<header class="hero">
 		<div class="wrap">
-			<p class="intro">
-				<span class="name">{{ profile.title|default('Damien Chauveau') }}</span>
-				— {{ profile.subtitle|default('Développeur Fullstack PHP Symfony / Angular') }}, Bordeaux.
-			</p>
-			<h1>Je conçois des applications<br>qui <span class="accent">tiennent en production.</span><br><span class="line2">Pas des démos.</span></h1>
-			<p class="lead-text">{{ profile.intro|default('Je conçois des API REST avec Symfony et les interfaces Angular qui les consomment, de la base de données au déploiement. Près de dix ans dans l\'assurance m\'ont appris à partir du besoin métier avant d\'écrire du code.') }}</p>
-			<div class="hero-actions">
-				<a class="link-arrow primary" href="#projets">Voir mes projets →</a>
-				<a class="link-arrow sec" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>
-				<a class="link-arrow sec" href="{{ path('app_contact') }}">Me contacter</a>
+			<div class="hero-grid">
+				<div>
+					<p class="kick">// développeur fullstack · Symfony &amp; Angular · Bordeaux</p>
+					<h1>Du besoin métier<br>à l'appli <span class="grad-text">qui tourne.</span></h1>
+					<p class="lead-text">{{ profile.intro|default('J\'ai passé près de dix ans du côté des utilisateurs, dans l\'assurance. Aujourd\'hui je construis les outils : l\'API en Symfony, l\'écran en Angular, et la mise en ligne. Un seul interlocuteur, du premier échange au déploiement.') }}</p>
+					<div class="hero-actions">
+						<a class="btn-v2" href="#projets">Voir mes projets →</a>
+						<a class="btn-ghost" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>
+					</div>
+				</div>
+
+				{% if live is not empty %}
+					<div class="live-panel">
+						<div class="top"><b>En ligne en ce moment</b><span class="live-dot">{{ live|length }} projet{{ live|length > 1 ? 's' }}</span></div>
+						{% for project in live %}
+							<a class="live-row" href="{{ project.demoUrl }}" target="_blank" rel="noopener noreferrer">
+								<span class="mono-mini" aria-hidden="true">
+									{{ project.title|slice(0, 1)|upper }}
+									{% if project.logo %}
+										<img class="logo" src="{{ asset('image/projects/' ~ project.logo) }}" alt="" onerror="this.remove()">
+									{% elseif project.image %}
+										<img src="{{ asset('image/projects/' ~ project.image) }}" alt="" loading="lazy" onerror="this.remove()">
+									{% endif %}
+								</span>
+								<div>
+									<div class="n">{{ project.title }}</div>
+									<div class="t">{{ project.techStack|slice(0, 3)|map(s => s.name)|join(' · ') }}</div>
+								</div>
+								<span class="s">Ouvrir ↗</span>
+							</a>
+						{% endfor %}
+					</div>
+				{% endif %}
 			</div>
+
 			<div class="creds">
-				<div><div class="k">Symfony · Angular</div><div class="v">de l'API REST à l'interface</div></div>
-				<div><div class="k">En production</div><div class="v">sites et apps livrés, utilisés pour de vrai</div></div>
-				<div><div class="k">RNCP niv. 6</div><div class="v">développeur d'application PHP / Symfony</div></div>
-				<div><div class="k">9 ans</div><div class="v">métier assurance (Willis Towers Watson)</div></div>
+				<div><div class="k">Back + front</div><div class="v">de l'API à l'écran, une seule personne</div></div>
+				<div><div class="k">{{ live|length > 0 ? live|length ~ ' projet' ~ (live|length > 1 ? 's') ~ ' en ligne' : 'En production' }}</div><div class="v">SaaS, PWA, sites clients</div></div>
+				<div><div class="k">9 ans d'assurance</div><div class="v">je parle métier, pas que code</div></div>
+				<div><div class="k">RNCP niveau 6</div><div class="v">développeur d'application</div></div>
 			</div>
 		</div>
+
+		{% set band = skills|filter(s => s.category in ['Langage', 'Framework', 'Base de données', 'Outils /DevOps', 'Qualité / Tests'])|map(s => s.name)|slice(0, 10) %}
+		{% if band is not empty %}
+			<div class="stack-band" aria-label="Stack technique">
+				<div class="track">
+					{% for pass in 1..2 %}
+						<div class="in" {{ pass == 2 ? 'aria-hidden="true"' }}>
+							{% for name in band %}
+								<span>{{ name }}</span><i aria-hidden="true">✦</i>
+							{% endfor %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		{% endif %}
 	</header>
 
 	{# PROJETS #}
@@ -53,52 +93,18 @@
 				<div class="cell">
 					<span class="tag">// entreprises &amp; recruteurs</span>
 					<h3>Développement fullstack</h3>
-					<p>API REST Symfony, front Angular, back-offices, reprise de code existant. En CDI (Bordeaux ou remote) ou en mission freelance. Mon passé dans l'assurance aide sur les domaines métier denses : insurtech, mutuelles, éditeurs.</p>
+					<p>Vous avez une équipe, un produit, du code à faire avancer ? API Symfony, front Angular, back-office ou reprise d'un existant. En CDI à Bordeaux ou en remote, ou en mission freelance. Mon passé dans l'assurance aide sur les métiers denses : insurtech, mutuelles, éditeurs.</p>
 					<a href="{{ path('app_contact') }}">Parler d'un poste ou d'une mission →</a>
 				</div>
 				<div class="cell">
 					<span class="tag">// commerçants &amp; associations</span>
 					<h3>Sites &amp; suivi mensuel</h3>
-					<p>Site internet, fiche et avis Google, maintenance. Des offres claires avec un suivi chaque mois, pour Bègles, Villenave-d'Ornon et Bordeaux sud. Vous gérez votre métier, je gère le web.</p>
+					<p>Commerces, artisans, associations, indépendants : site internet, fiche et avis Google, maintenance. Partout en France à distance, et je me déplace sur Bordeaux et son agglomération. Vous gérez votre métier, je gère le web.</p>
 					<a href="{{ path('app_services') }}">Voir les offres →</a>
 				</div>
 			</div>
 		</div>
 	</section>
-
-	{# STACK — depuis le back-office (Compétences) #}
-	{% set categories = {
-		'Langage': 'Langages',
-		'Framework': 'Frameworks',
-		'Architecture': 'Architecture',
-		'Base de données': 'Bases de données',
-		'Outils /DevOps': 'DevOps & outils',
-		'Qualité / Tests': 'Qualité & tests'
-	} %}
-	{% set rows = [] %}
-	{% for key, label in categories %}
-		{% set names = skills|filter(s => s.category == key)|map(s => s.name) %}
-		{% if names is not empty %}
-			{% set rows = rows|merge([{label: label, value: names|join(' · ')}]) %}
-		{% endif %}
-	{% endfor %}
-	{% if rows is not empty %}
-		<section class="section" id="stack">
-			<div class="wrap">
-				<div class="shead"><span class="idx">03</span><h2>Stack &amp; outils</h2><span class="rule"></span></div>
-				{% set half = (rows|length / 2)|round(0, 'ceil') %}
-				<div class="sk-grid">
-					{% for column in rows|batch(half) %}
-						<div>
-							{% for row in column %}
-								<div class="sk-row"><span class="lab">{{ row.label }}</span><span class="val">{{ row.value }}</span></div>
-							{% endfor %}
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-		</section>
-	{% endif %}
 
 	{# CTA #}
 	<section class="final" id="contact">
@@ -107,7 +113,7 @@
 			<p>Je réponds vite. Dites-moi où vous en êtes, on voit ensemble si je peux aider.</p>
 			<div class="hero-actions">
 				<a class="btn-v2" href="{{ path('app_contact') }}">M'écrire →</a>
-				<a class="link-arrow sec" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>
+				<a class="btn-ghost" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>
 			</div>
 		</div>
 	</section>
