@@ -21,7 +21,8 @@ framework:
             messenger.bus.default: []
 
         routing:
-            Symfony\Component\Mailer\Messenger\SendEmailMessage: async
+            # Les e-mails partent immédiatement (pas de worker sur l'hébergement).
+            # Symfony\Component\Mailer\Messenger\SendEmailMessage: async
             Symfony\Component\Notifier\Message\ChatMessage: async
             Symfony\Component\Notifier\Message\SmsMessage: async
 
