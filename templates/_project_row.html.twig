@@ -1,14 +1,15 @@
 {# Une ligne « étude de cas ». Variables : project, show_thumb (bool), max_chars (int) #}
 {% set max_chars = max_chars|default(240) %}
 {% set front_tech = ['Angular', 'TypeScript', 'PWA', 'JavaScript', 'Twig', 'Bootstrap'] %}
-{% set main_url = project.demoUrl ?: project.link %}
+{% set case_url = project.hasCaseStudy ? path('app_project_show', {slug: project.slug}) : null %}
+{% set main_url = case_url ?: (project.demoUrl ?: project.link) %}
 {% set desc = project.description|striptags|replace({"\n": ' ', "\r": ' '})|split(' ')|filter(w => w is not empty)|join(' ') %}
 <article class="case">
 	<div class="yr">{{ project.createdAt ? project.createdAt|date('Y') : '' }}</div>
 	<div class="meat">
 		<h3>
 			{% if main_url %}
-				<a href="{{ main_url }}" target="_blank" rel="noopener noreferrer">{{ project.title }}</a>
+				<a href="{{ main_url }}" {{ case_url ? '' : 'target="_blank" rel="noopener noreferrer"' }}>{{ project.title }}</a>
 			{% else %}
 				{{ project.title }}
 			{% endif %}
@@ -24,8 +25,11 @@
 		{% if show_thumb|default(false) and project.image %}
 			<img class="thumb" src="{{ asset('image/projects/' ~ project.image) }}" alt="Capture de {{ project.title }}" loading="lazy" onerror="this.remove()">
 		{% endif %}
+		{% if case_url %}
+			<a class="main case-cta" href="{{ case_url }}">Étude de cas →</a>
+		{% endif %}
 		{% if project.demoUrl %}
-			<a class="main" href="{{ project.demoUrl }}" target="_blank" rel="noopener noreferrer">Voir en ligne ↗</a>
+			<a class="{{ case_url ? '' : 'main' }}" href="{{ project.demoUrl }}" target="_blank" rel="noopener noreferrer">Voir en ligne ↗</a>
 		{% endif %}
 		{% if project.link and project.link != project.demoUrl %}
 			<a href="{{ project.link }}" target="_blank" rel="noopener noreferrer">Code ↗</a>

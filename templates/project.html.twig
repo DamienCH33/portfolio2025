@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ project.title }} — étude de cas{% endblock %}
+
+{% block meta_description %}{{ project.context|striptags|split("\n")|first|slice(0, 155) }}{% endblock %}
+
+{% block body %}
+	{% set front_tech = ['Angular', 'TypeScript', 'PWA', 'JavaScript', 'Twig', 'Bootstrap'] %}
+	<header class="page-head">
+		<div class="wrap">
+			<a class="back-link" href="{{ path('app_portfolio') }}">← Tous les projets</a>
+			<span class="kicker">// étude de cas · {{ project.createdAt ? project.createdAt|date('Y') }}</span>
+			<h1>{{ project.title }}</h1>
+			<div class="case-stack">
+				{% for skill in project.techStack %}
+					<span class="{{ skill.name in front_tech ? 'front' }}">{{ skill.name }}</span>
+				{% endfor %}
+			</div>
+			<div class="hero-actions">
+				{% if project.demoUrl %}
+					<a class="btn-v2" href="{{ project.demoUrl }}" target="_blank" rel="noopener noreferrer">Voir en ligne ↗</a>
+				{% endif %}
+				{% if project.link and project.link != project.demoUrl %}
+					<a class="btn-ghost" href="{{ project.link }}" target="_blank" rel="noopener noreferrer">Voir le code ↗</a>
+				{% endif %}
+			</div>
+		</div>
+	</header>
+
+	<section class="section tight">
+		<div class="wrap case-layout">
+			<div class="case-body">
+				{% if project.image %}
+					<figure class="case-shot">
+						<img src="{{ asset('image/projects/' ~ project.image) }}" alt="Capture de {{ project.title }}" onerror="this.closest('figure').remove()">
+					</figure>
+				{% endif %}
+
+				{% set parts = [
+					{key: 'context', num: '01', title: 'Le besoin'},
+					{key: 'approach', num: '02', title: 'Mes choix techniques'},
+					{key: 'challenge', num: '03', title: 'La difficulté'},
+					{key: 'outcome', num: '04', title: 'Le résultat'}
+				] %}
+				{% for part in parts %}
+					{% set text = attribute(project, part.key) %}
+					{% if text %}
+						<section class="case-part">
+							<h2><span class="idx">{{ part.num }}</span>{{ part.title }}</h2>
+							<div class="prose">{% include '_rich_text.html.twig' with {text: text} only %}</div>
+						</section>
+					{% endif %}
+				{% endfor %}
+
+				{% if project.gallery is not empty %}
+					<section class="case-part">
+						<h2><span class="idx">05</span>En images</h2>
+						<div class="case-gallery">
+							{% for capture in project.gallery %}
+								<a href="{{ asset('image/projects/' ~ capture) }}" target="_blank" rel="noopener">
+									<img src="{{ asset('image/projects/' ~ capture) }}" alt="Capture {{ loop.index }} de {{ project.title }}" loading="lazy" onerror="this.closest('a').remove()">
+								</a>
+							{% endfor %}
+						</div>
+					</section>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+
+	<section class="final">
+		<div class="wrap">
+			{% if next and next != project %}
+				<p class="next-label">Projet suivant</p>
+				<h2><a class="next-link" href="{{ path('app_project_show', {slug: next.slug}) }}">{{ next.title }} <span class="accent">→</span></a></h2>
+			{% else %}
+				<h2>Un projet <span class="accent">dans ce style ?</span></h2>
+			{% endif %}
+			<p>Poste, mission ou site à créer : parlons-en.</p>
+			<div class="hero-actions">
+				<a class="btn-v2" href="{{ path('app_contact') }}">Me contacter →</a>
+				<a class="btn-ghost" href="{{ path('app_portfolio') }}">Tous les projets</a>
+			</div>
+		</div>
+	</section>
+{% endblock %}

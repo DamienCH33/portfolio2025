@@ -1,0 +1,13 @@
+{# Texte simple → paragraphes ; les lignes commençant par « - » deviennent une liste. Variable : text #}
+{% for block in text|replace({"\r": ''})|split("\n\n") %}
+	{% set lines = block|trim|split("\n") %}
+	{% if lines|first|trim starts with '- ' %}
+		<ul>
+			{% for line in lines %}
+				{% if line|trim is not empty %}<li>{{ line|trim|slice(2) }}</li>{% endif %}
+			{% endfor %}
+		</ul>
+	{% elseif block|trim is not empty %}
+		<p>{{ block|trim|nl2br }}</p>
+	{% endif %}
+{% endfor %}
