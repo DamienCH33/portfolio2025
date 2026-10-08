@@ -17,7 +17,7 @@ final class PageController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(EntityManagerInterface $em, Request $request): Response
     {
-        $skills = $em->getRepository(Skill::class)->findBy([], ['priority' => 'ASC', 'name' => 'ASC']);
+        $skills = $em->getRepository(Skill::class)->findBy([], ['priority' => 'DESC', 'name' => 'ASC']);
         $educations = $em->getRepository(\App\Entity\Education::class)->findAll();
         $projects = $em->getRepository(\App\Entity\Project::class)->findBy([], ['createdAt' => 'DESC'], 4);
         $profile = $em->getRepository(\App\Entity\Profile::class)->getSingleton();
@@ -80,7 +80,7 @@ final class PageController extends AbstractController
         // Projet suivant parmi ceux qui ont une page détaillée (navigation en bas de page)
         $withCase = array_values(array_filter(
             $repo->findBy([], ['createdAt' => 'DESC']),
-            static fn (\App\Entity\Project $p): bool => $p->hasCaseStudy(),
+            static fn(\App\Entity\Project $p): bool => $p->hasCaseStudy(),
         ));
         $index = array_search($project, $withCase, true);
         $next = count($withCase) > 1 ? $withCase[((int) $index + 1) % count($withCase)] : null;
