@@ -39,6 +39,35 @@ TXT,
 - Audit de sécurité passé : 10 points sur 12 corrigés, dont un jeton de session opaque contre les accès aux données d'un autre utilisateur.
 TXT,
             ],
+            'La compagnie des archers des Albères' => [
+                'context' => <<<'TXT'
+La Compagnie des Archers des Albères est un club de tir à l'arc associatif, fondé en 1991 à Sorède. Son ancien site était devenu difficile à maintenir : une interface vieillissante, et surtout aucune administration simple. Chaque actualité ou nouvelle photo demandait de passer par quelqu'un qui savait coder.
+
+L'objectif : un site moderne que les bénévoles du club mettent à jour eux-mêmes, sans moi.
+TXT,
+                'approach' => <<<'TXT'
+- Symfony 7.4 / PHP 8.4, PostgreSQL et Twig : un site vitrine rendu côté serveur, rapide et bien référencé, sans complexité inutile pour un club.
+- Back-office EasyAdmin 5, au thème sombre aux couleurs du club : actualités par catégorie (podiums, événements, vie du club), albums photo, partenaires, horaires, tarifs, histoire du club et documents PDF (statuts, inscription, santé, règlement).
+- Import groupé de photos pour la galerie : au retour d'une compétition, le club envoie toutes ses photos en une fois.
+- Pages publiques pensées pour mobile : menu hamburger, slider d'accueil qui gère photos portrait et paysage avec un fond flou, partenaires en pied de page sur toutes les pages.
+- Sécurité : rôles, limitation des tentatives de connexion, réinitialisation du mot de passe par e-mail en français.
+TXT,
+                'challenge' => <<<'TXT'
+La mise en production sur Railway, où tout ce qui marchait en local a cassé l'un après l'autre.
+
+- Les e-mails de réinitialisation de mot de passe ne partaient pas : Railway bloque le SMTP sortant. Je suis passé par l'API HTTP de Brevo, qui passe là où le SMTP est filtré.
+- L'envoi de plusieurs photos d'un coup déconnectait l'administrateur. La cause était un simple avertissement PHP (limite max_file_uploads atteinte) envoyé avant les en-têtes HTTP, ce qui empêchait la session de s'enregistrer. J'ai fixé les limites d'upload dans l'image Docker (nombre de fichiers, taille, mémoire) pour que l'import groupé tienne la route.
+- Les photos disparaissaient à chaque redéploiement : elles vivaient dans le conteneur. Je les ai déplacées sur un volume persistant Railway.
+- Les liens générés sortaient en http derrière le proxy Railway : réglé en déclarant les proxies de confiance.
+
+Chaque problème a donné un commit dédié et lisible, ce qui rendra le prochain déploiement beaucoup plus simple.
+TXT,
+                'outcome' => <<<'TXT'
+- En ligne sur archers-des-alberes.fr, livré à un vrai client et administré par le club en autonomie.
+- PHPStan niveau 7, une soixantaine de tests PHPUnit (fonctionnels, contrôleurs, dépôts), Rector et php-cs-fixer.
+- CI GitHub Actions avec les tests exécutés sur une vraie base PostgreSQL.
+TXT,
+            ],
             'Cap Monta' => [
                 'context' => <<<'TXT'
 À Montalivet, au CHM et à Euronat, les bungalows et mobil-homes se louent surtout via des petites annonces. Le vacancier ne voit pas les dates libres, et le propriétaire gère les demandes à la main.

@@ -31,7 +31,7 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
             [
                 'title' => 'La compagnie des archers des Albères',
                 'description' => 'Site vitrine et back-office sur mesure livrés à un client associatif, de la conception au déploiement. Back-office EasyAdmin donnant au client une autonomie complète sur les actualités, événements, saisons, partenaires et galeries. Authentification sécurisée, gestion des rôles, galerie responsive et carte Google Maps.',
-                'skills' => ['Symfony', 'PHP', 'PostgreSQL', 'Docker', 'GitHub', 'PHPUnit', 'PHPStan', 'FrankenPHP', 'Railway'],
+                'skills' => ['Symfony', 'PHP', 'Twig', 'Bootstrap', 'PostgreSQL', 'Doctrine ORM', 'Docker', 'FrankenPHP', 'Railway', 'PHPUnit', 'PHPStan', 'PHP-CS-Fixer'],
                 'image' => 'archersdesalberes.png',
                 'link' => 'https://github.com/DamienCH33/archersdesalberes-website',
                 'demo' => 'https://archers-des-alberes.fr',
