@@ -41,21 +41,32 @@ TXT,
             ],
             'Cap Monta' => [
                 'context' => <<<'TXT'
-À Montalivet, au CHM et à Euronat, les bungalows et mobil-homes se louent surtout via des petites annonces. Le vacancier ne voit pas les dates libres, et le propriétaire gère les demandes à la main.
+Au CHM Montalivet et à Euronat, les bungalows, mobil-homes et chalets se louent entre particuliers via des sites d'annonces où les disponibilités sont écrites à la main : « 19/07 au 22/08 non disponible ». Pour trouver une semaine libre en août, il faut lire chaque annonce, écrire à plusieurs propriétaires et attendre.
 
-Cap Monta est un site de location pensé pour les deux : le vacancier cherche par dates et par nombre de voyageurs, voit les disponibilités réelles et envoie sa demande de réservation en ligne. Le propriétaire reçoit des demandes claires, sur des dates qu'il sait libres.
+Cap Monta fait l'inverse : chaque logement a un vrai calendrier, les semaines libres s'affichent directement dans les résultats, et le locataire envoie sa demande au propriétaire, qui répond sous 48 heures. Pas de commission, pas de paiement sur le site.
 TXT,
                 'approach' => <<<'TXT'
-- Un parcours inspiré des grandes plateformes de location (recherche destination / dates / voyageurs, cartes d'annonces, fiche logement), avec une identité propre au lieu : la mer et la forêt, sans fioritures.
-- API Symfony pour les logements, les disponibilités et les demandes de réservation ; front Angular pour une recherche et un calendrier fluides.
-- PostgreSQL pour les données, Redis en cache, hébergement Railway.
-- Fiche logement complète : calendrier des dates prises et libres, carte « Où se situe le logement », notation des logements.
-- Une vraie photo en bandeau d'accueil plutôt qu'une illustration : un vacancier achète un lieu, pas un site.
+- API Symfony 8.1 et API Platform 4, front Angular 22 en rendu serveur (SSR) pour le référencement, en 4 langues (français, anglais, néerlandais, allemand) : la clientèle du CHM est très européenne.
+- PostgreSQL pour tout ce qui décide, Redis uniquement pour le confort (cache du calendrier) : Redis coupé, le site continue.
+- Une demande de séjour suit une machine à états (Symfony Workflow) : envoyée, acceptée, refusée, expirée ou annulée, avec relance du propriétaire à 24 h et expiration automatique à 48 h.
+- Import d'annonce par IA (Mistral) : le propriétaire colle son texte, l'IA en tire le logement, les tarifs et les dates prises, il vérifie avant de publier. L'IA assiste, elle ne décide pas.
+- Données personnelles : suivi d'une demande sans compte, coordonnées du locataire visibles seulement après acceptation, purge automatique.
+- 34 décisions d'architecture documentées avec leur contexte et leur coût.
+TXT,
+                'challenge' => <<<'TXT'
+Le piège classique d'un moteur de réservation maison : deux personnes demandent les mêmes dates au même moment, le code vérifie la disponibilité pour chacune, voit « libre » deux fois, et enregistre deux séjours qui se chevauchent.
+
+Plutôt que de compter sur le code, j'ai confié la garantie à PostgreSQL : une contrainte d'exclusion sur la période du séjour (arrivée incluse, départ exclu, pour que le samedi du départ reste libre pour l'arrivée suivante). La base refuse elle-même deux séjours qui se chevauchent, quelle que soit la course entre les requêtes ; un verrou Redis transforme simplement ce cas en message d'erreur propre.
+
+Difficulté dans la difficulté : Doctrine ne connaît pas ce type de contrainte et propose de la supprimer à chaque nouvelle migration. J'ai ajouté un test d'intégration qui vérifie sa présence en base : si une migration l'efface, la CI casse.
+
+Deuxième chantier, l'import par IA : un tarif inventé publié au nom d'un propriétaire serait grave. J'ai écrit le jeu d'évaluation avant l'agent (de vraies annonces avec la réponse attendue), avec une règle dure vérifiée en PHP : aucun prix absent du texte. Résultat : zéro prix inventé, et un score mesuré honnêtement sur des annonces jamais vues.
 TXT,
                 'outcome' => <<<'TXT'
-- En ligne et utilisé pour de vraies réservations.
-- Un modèle économique simple : le site doit au minimum couvrir ses frais d'hébergement et de nom de domaine.
-- Il sert de référence à mon offre « site avec réservation » pour les commerces et les loueurs.
+- En ligne, sur un seul domaine : l'API n'est joignable que par le réseau privé, via le serveur du front.
+- 324 tests côté API (unitaires, intégration sur vrai PostgreSQL) et 103 côté web, PHPStan niveau 7, TypeScript strict, CI GitHub Actions.
+- PageSpeed : 100 sur ordinateur, 93 en performance mobile.
+- Audit de sécurité de la production : 83 contrôles, 0 échec.
 TXT,
             ],
             'Mon Avis Pro' => [

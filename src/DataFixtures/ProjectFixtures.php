@@ -19,11 +19,10 @@ class ProjectFixtures extends Fixture implements DependentFixtureInterface
 
             [
                 'title' => 'Cap Monta',
-                'description' => 'Site de location de bungalows et mobil-homes à Montalivet : recherche par dates, fiches logement, calendrier des disponibilités et demandes de réservation en ligne. En production, utilisé pour de vraies réservations.',
-                'skills' => ['Symfony', 'Angular', 'PHP', 'API REST', 'PostgreSQL', 'Redis', 'Railway'],
+                'description' => 'Location de bungalows, mobil-homes et chalets entre particuliers au CHM Montalivet et à Euronat, avec les semaines libres visibles d\'un coup d\'œil.',
+                'skills' => ['Symfony', 'API Platform', 'Angular', 'TypeScript', 'PHP', 'PostgreSQL', 'Doctrine ORM', 'Redis', 'Docker', 'Railway', 'PHPUnit', 'PHPStan'],
                 'image' => 'capmonta.png',
-                // À remplacer par l'URL du dépôt GitHub si le code est public.
-                'link' => 'https://cap-monta.up.railway.app/',
+                'link' => 'https://github.com/DamienCH33/cap-monta',
                 'demo' => 'https://cap-monta.up.railway.app/',
                 'date' => '2026-10-01',
             ],
