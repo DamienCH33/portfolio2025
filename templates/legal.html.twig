@@ -2,15 +2,21 @@
 
 {% block title %}Mentions légales{% endblock %}
 
-{% block meta_description %}Mentions légales et politique de confidentialité du site de Damien Chauveau, développeur web indépendant à Bègles.{% endblock %}
+{% block meta_description %}Mentions légales et politique de confidentialité du site de Damien Chauveau, développeur web indépendant à Villenave-d'Ornon.{% endblock %}
 
 {#
-	À compléter dès réception de l'immatriculation :
-	- legal_siret : numéro SIRET (14 chiffres)
-	- legal_address : adresse de l'entreprise (domicile ou domiciliation)
+	Coordonnées légales de la micro-entreprise (immatriculée au RNE le 08/10/2026).
+	- legal_address : adresse de l'établissement déclarée au RNE (LCEN, art. 6-III).
+	- legal_mediator : médiateur de la consommation (art. L612-1 du Code de la consommation).
+	  Les prestations sont réservées aux professionnels et associations : pas de médiateur requis.
+	  À renseigner seulement si une offre s'ouvre un jour aux particuliers.
 #}
-{% set legal_siret = 'en cours d’immatriculation' %}
-{% set legal_address = 'Bègles (33130), France' %}
+{% set legal_siret = '131 233 488 00017' %}
+{% set legal_ape = '62.01Z (programmation informatique)' %}
+{% set legal_address = "60 chemin de Leyran, 33140 Villenave-d'Ornon, France" %}
+{% set legal_phone = '06 82 09 71 36' %}
+{% set legal_email = 'contact@damienchauveau-dev.fr' %}
+{% set legal_mediator = null %}
 
 {% block body %}
 	<section class="legal-section section tight">
@@ -20,11 +26,12 @@
 
 			<h2>Éditeur du site</h2>
 			<p>
-				Damien Chauveau, entrepreneur individuel (EI), micro-entreprise<br>
+				Damien Chauveau EI, entrepreneur individuel (micro-entreprise)<br>
 				Activité : conception, développement et maintenance de sites internet et d'applications web<br>
-				SIRET : {{ legal_siret }}<br>
+				Immatriculé au Registre national des entreprises — SIRET : {{ legal_siret }} — Code APE : {{ legal_ape }}<br>
 				Adresse : {{ legal_address }}<br>
-				Contact : via le <a href="{{ path('app_contact') }}">formulaire de contact</a><br>
+				Téléphone : {{ legal_phone }}<br>
+				E-mail : <a href="mailto:{{ legal_email }}">{{ legal_email }}</a> · <a href="{{ path('app_contact') }}">formulaire de contact</a><br>
 				Directeur de la publication : Damien Chauveau<br>
 				TVA non applicable, article 293 B du CGI.
 			</p>
@@ -35,26 +42,55 @@
 				Téléphone : +1 415 707 7675 · <a href="https://railway.com" target="_blank" rel="noopener">railway.com</a>
 			</p>
 
+			<h2>Nom de domaine</h2>
+			<p>
+				Le nom de domaine damienchauveau-dev.fr est enregistré auprès d'OVH SAS, 2 rue Kellermann, 59100 Roubaix, France.
+			</p>
+
 			<h2>Propriété intellectuelle</h2>
 			<p>
 				Les textes, images et le code de ce site sont la propriété de Damien Chauveau, sauf mention contraire.
+				Toute reproduction sans autorisation est interdite.
 				Les sites présentés en exemple restent la propriété de leurs clients.
 			</p>
 
-			<h2>Données personnelles</h2>
+			<h2>Prestations</h2>
 			<p>
+				Les prestations proposées sur ce site s'adressent aux professionnels et aux associations.
+				Les conditions de chaque prestation (prix, délais, contenu, modalités de paiement) sont fixées dans le devis signé.
+				Les conditions générales de vente sont communiquées sur simple demande.
+			</p>
+
+			<h2 id="donnees">Données personnelles</h2>
+			<p>
+				Responsable du traitement : Damien Chauveau EI ({{ legal_email }}).
 				Le formulaire de contact recueille votre nom, prénom, adresse e-mail et message,
-				uniquement pour vous répondre. Ces données ne sont ni vendues ni transmises à des tiers,
+				uniquement pour vous répondre (base légale : mesures précontractuelles à votre demande).
+				Ces données ne sont ni vendues ni transmises à des tiers, hors hébergeur,
 				et sont supprimées au plus tard trois ans après notre dernier échange.
 			</p>
 			<p>
 				Le site compte le nombre de visites, sans cookie publicitaire ni traceur tiers, et sans conserver d'adresse IP.
 			</p>
 			<p>
-				Vous pouvez demander l'accès, la rectification ou la suppression de vos données via le
+				Pour l'affichage, le site charge des polices (Google Fonts, Google LLC) et des feuilles de style (jsDelivr) depuis des serveurs tiers.
+				Votre navigateur leur transmet alors votre adresse IP, comme pour tout fichier chargé depuis un autre site.
+				Aucune autre donnée ne leur est envoyée.
+			</p>
+			<p>
+				Vous pouvez demander l'accès, la rectification ou la suppression de vos données à
+				<a href="mailto:{{ legal_email }}">{{ legal_email }}</a> ou via le
 				<a href="{{ path('app_contact') }}">formulaire de contact</a>. En cas de désaccord, vous pouvez saisir
 				la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">cnil.fr</a>).
 			</p>
+
+			{% if legal_mediator %}
+				<h2>Médiation de la consommation</h2>
+				<p>
+					Conformément à l'article L612-1 du Code de la consommation, le client consommateur peut recourir
+					gratuitement, en cas de litige non résolu à l'amiable, au médiateur suivant : {{ legal_mediator }}.
+				</p>
+			{% endif %}
 		</div>
 	</section>
 {% endblock %}
