@@ -18,6 +18,11 @@
 				<a class="btn-v2" href="{{ path('app_contact') }}">Demander un échange gratuit →</a>
 				<a class="btn-ghost" href="#offres">Voir les offres</a>
 			</div>
+			<ul class="trust">
+				<li>Entreprise immatriculée · SIRET 131 233 488 00017</li>
+				<li>Basé à Villenave-d'Ornon</li>
+				<li>Le site et le nom de domaine vous appartiennent</li>
+			</ul>
 		</div>
 	</header>
 
@@ -51,19 +56,42 @@
 			{% endif %}
 
 			<p class="offer-foot">
-				Exemples :
-				<a href="https://cap-monta.up.railway.app/" target="_blank" rel="noopener">Cap Monta</a> (location avec réservation)
-				·
-				<a href="https://archers-des-alberes.fr" target="_blank" rel="noopener">Archers des Albères</a> (club sportif).
 				Offres réservées aux professionnels et aux associations.
 				Prix nets, TVA non applicable, article 293 B du CGI. Travaux hors forfait : 45 € de l'heure, sur devis.
 			</p>
 		</div>
 	</section>
 
+	{% if showcase|default([]) is not empty %}
+		<section class="section" id="realisations">
+			<div class="wrap">
+				<div class="shead"><span class="idx">02</span><h2>Ils sont en ligne</h2><span class="rule"></span></div>
+				<div class="showcase">
+					{% for project in showcase %}
+						<article class="show">
+							<a class="show-img" href="{{ project.demoUrl ?: '#' }}" target="_blank" rel="noopener">
+								{% if project.image %}
+									<img src="{{ asset('image/projects/' ~ project.image) }}" alt="Capture du site {{ project.title }}" loading="lazy" onerror="this.remove()">
+								{% endif %}
+							</a>
+							<div class="show-body">
+								<h3>{{ project.title }}</h3>
+								<p>{{ project.description|striptags|slice(0, 160) }}{{ project.description|length > 160 ? '…' }}</p>
+								<div class="show-links">
+									{% if project.demoUrl %}<a href="{{ project.demoUrl }}" target="_blank" rel="noopener">Voir le site ↗</a>{% endif %}
+									{% if project.hasCaseStudy %}<a href="{{ path('app_project_show', {slug: project.slug}) }}">Comment je l'ai fait →</a>{% endif %}
+								</div>
+							</div>
+						</article>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	{% endif %}
+
 	<section class="section">
 		<div class="wrap">
-			<div class="shead"><span class="idx">02</span><h2>Comment ça se passe</h2><span class="rule"></span></div>
+			<div class="shead"><span class="idx">03</span><h2>Comment ça se passe</h2><span class="rule"></span></div>
 			<div class="steps">
 				<div class="step">
 					<span class="num">01</span>
@@ -89,6 +117,34 @@
 		</div>
 	</section>
 
+	<section class="section" id="faq">
+		<div class="wrap">
+			<div class="shead"><span class="idx">04</span><h2>Vos questions</h2><span class="rule"></span></div>
+			<div class="faq">
+				<details>
+					<summary>Je suis engagé combien de temps sur l'abonnement mensuel ?</summary>
+					<p>[À COMPLÉTER selon ton contrat : par ex. « 12 mois, puis résiliable à tout moment avec un mois de préavis. »]</p>
+				</details>
+				<details>
+					<summary>Si j'arrête, je garde mon site ?</summary>
+					<p>Oui. Le site et le nom de domaine sont à votre nom. Si vous arrêtez, je vous remets les fichiers et les accès, et vous pouvez le faire héberger ailleurs.</p>
+				</details>
+				<details>
+					<summary>Combien de temps pour avoir mon site ?</summary>
+					<p>[À COMPLÉTER : par ex. « Comptez 2 à 4 semaines pour un site Essentiel ou Vitrine, une fois vos textes et photos reçus. » Le délai exact est écrit dans le devis.]</p>
+				</details>
+				<details>
+					<summary>Je n'ai ni textes ni photos, c'est un problème ?</summary>
+					<p>Non. On les prépare ensemble pendant l'échange : je vous pose les bonnes questions et je rédige à partir de vos réponses. Pour les photos, vos photos de téléphone font souvent très bien l'affaire.</p>
+				</details>
+				<details>
+					<summary>Vous travaillez avec les particuliers ?</summary>
+					<p>Non, uniquement avec les professionnels (commerces, artisans, indépendants) et les associations.</p>
+				</details>
+			</div>
+		</div>
+	</section>
+
 	<section class="section tight">
 		<div class="wrap">
 			<div class="callout">
@@ -97,6 +153,14 @@
 					<p>Pour mes 3 premiers clients : <strong>-20 % sur la création du site</strong>, en échange d'un avis Google et de l'accord pour montrer votre site en exemple.</p>
 				</div>
 				<a class="btn-v2" href="{{ path('app_contact') }}">J'en profite →</a>
+			</div>
+			<div class="direct">
+				<img src="{{ asset('image/portfolio_media/damien_chauveau_photo.webp') }}" alt="Damien Chauveau" width="56" height="56" loading="lazy">
+				<p><strong>Damien</strong>, votre interlocuteur unique.<br>Vous préférez en parler directement ?</p>
+				<div class="direct-links">
+					<a class="btn-ghost" href="tel:+33682097136">06 82 09 71 36</a>
+					<a class="btn-ghost" href="mailto:contact@damienchauveau-dev.fr">contact@damienchauveau-dev.fr</a>
+				</div>
 			</div>
 		</div>
 	</section>
