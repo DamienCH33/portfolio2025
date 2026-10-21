@@ -30,3 +30,4 @@ phpstan-result-cache.php
 
 ### OS ###
 .DS_Store
+graphify-out/

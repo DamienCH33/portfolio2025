@@ -92,10 +92,20 @@ final class PageController extends AbstractController
     }
 
     #[Route('/services', name: 'app_services', methods: ['GET'])]
-    public function services(OfferRepository $offers): Response
+    public function services(OfferRepository $offers, EntityManagerInterface $em): Response
     {
+        // Réalisations clients montrées sur la page (dans cet ordre)
+        $showcase = [];
+        foreach (['cap-monta', 'la-compagnie-des-archers-des-alberes'] as $slug) {
+            $project = $em->getRepository(\App\Entity\Project::class)->findOneBy(['slug' => $slug]);
+            if (null !== $project) {
+                $showcase[] = $project;
+            }
+        }
+
         return $this->render('services.html.twig', [
             'offers' => $offers->findPublished(),
+            'showcase' => $showcase,
         ]);
     }
 
