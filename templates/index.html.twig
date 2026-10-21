@@ -15,7 +15,7 @@
 					<h1>Du besoin métier<br>à l'appli <span class="grad-text">qui tourne.</span></h1>
 					<p class="lead-text">{{ profile.intro|default('J\'ai passé près de dix ans du côté des utilisateurs, dans l\'assurance. Aujourd\'hui je construis les outils : l\'API en Symfony, l\'écran en Angular, et la mise en ligne. Un seul interlocuteur, du premier échange au déploiement.') }}</p>
 					<div class="hero-actions">
-						<a class="btn-v2" href="#projets">Voir mes projets →</a>
+						<a class="btn-v2" href="#projets">Voir mes projets</a>
 						<a class="btn-ghost" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>
 					</div>
 				</div>
@@ -37,7 +37,7 @@
 									<div class="n">{{ project.title }}</div>
 									<div class="t">{{ project.techStack|slice(0, 3)|map(s => s.name)|join(' · ') }}</div>
 								</div>
-								<span class="s">Ouvrir ↗</span>
+								<span class="s">Ouvrir</span>
 							</a>
 						{% endfor %}
 					</div>
@@ -80,7 +80,7 @@
 				{% endfor %}
 			</div>
 			<div class="shead-after">
-				<a class="link-arrow primary" href="{{ path('app_portfolio') }}">Tous les projets →</a>
+				<a class="link-arrow primary" href="{{ path('app_portfolio') }}">Tous les projets</a>
 			</div>
 		</div>
 	</section>
@@ -94,13 +94,13 @@
 					<span class="tag">// entreprises &amp; recruteurs</span>
 					<h3>Développement fullstack</h3>
 					<p>Vous avez une équipe, un produit, du code à faire avancer ? API Symfony, front Angular, back-office ou reprise d'un existant. En CDI à Bordeaux ou en remote, ou en mission freelance. Mon passé dans l'assurance aide sur les métiers denses : insurtech, mutuelles, éditeurs.</p>
-					<a href="{{ path('app_contact') }}">Parler d'un poste ou d'une mission →</a>
+					<a href="{{ path('app_contact') }}">Parler d'un poste ou d'une mission</a>
 				</div>
 				<div class="cell">
 					<span class="tag">// commerçants &amp; associations</span>
 					<h3>Sites &amp; suivi mensuel</h3>
 					<p>Commerces, artisans, associations, indépendants : site internet, fiche et avis Google, maintenance. Partout en France à distance, et je me déplace sur Bordeaux et son agglomération. Vous gérez votre métier, je gère le web.</p>
-					<a href="{{ path('app_services') }}">Voir les offres →</a>
+					<a href="{{ path('app_services') }}">Voir les offres</a>
 				</div>
 			</div>
 		</div>
@@ -112,7 +112,7 @@
 			<h2>Un projet, un poste,<br>une <span class="accent">idée à construire ?</span></h2>
 			<p>Je réponds vite. Dites-moi où vous en êtes, on voit ensemble si je peux aider.</p>
 			<div class="hero-actions">
-				<a class="btn-v2" href="{{ path('app_contact') }}">M'écrire →</a>
+				<a class="btn-v2" href="{{ path('app_contact') }}">M'écrire</a>
 				<a class="btn-ghost" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>
 			</div>
 		</div>

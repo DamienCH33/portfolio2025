@@ -15,7 +15,7 @@
 			<h1>Votre site et votre réputation Google,<br><span class="accent">sans y passer vos soirées.</span></h1>
 			<p class="lead-text">Je crée et j'entretiens les sites de commerces, artisans et associations. Un seul interlocuteur, joignable, qui se déplace si vous êtes dans l'agglo bordelaise. Le site vous appartient, et vous savez ce que vous payez chaque mois.</p>
 			<div class="hero-actions">
-				<a class="btn-v2" href="{{ path('app_contact') }}">Demander un échange gratuit →</a>
+				<a class="btn-v2" href="{{ path('app_contact') }}">Demander un échange gratuit</a>
 				<a class="btn-ghost" href="#offres">Voir les offres</a>
 			</div>
 			<ul class="trust">
@@ -78,8 +78,8 @@
 								<h3>{{ project.title }}</h3>
 								<p>{{ project.description|striptags|slice(0, 160) }}{{ project.description|length > 160 ? '…' }}</p>
 								<div class="show-links">
-									{% if project.demoUrl %}<a href="{{ project.demoUrl }}" target="_blank" rel="noopener">Voir le site ↗</a>{% endif %}
-									{% if project.hasCaseStudy %}<a href="{{ path('app_project_show', {slug: project.slug}) }}">Comment je l'ai fait →</a>{% endif %}
+									{% if project.demoUrl %}<a href="{{ project.demoUrl }}" target="_blank" rel="noopener">Voir le site</a>{% endif %}
+									{% if project.hasCaseStudy %}<a href="{{ path('app_project_show', {slug: project.slug}) }}">Comment je l'ai fait</a>{% endif %}
 								</div>
 							</div>
 						</article>
@@ -152,7 +152,7 @@
 					<h3>Offre de lancement</h3>
 					<p>Pour mes 3 premiers clients : <strong>-20 % sur la création du site</strong>, en échange d'un avis Google et de l'accord pour montrer votre site en exemple.</p>
 				</div>
-				<a class="btn-v2" href="{{ path('app_contact') }}">J'en profite →</a>
+				<a class="btn-v2" href="{{ path('app_contact') }}">J'en profite</a>
 			</div>
 			<div class="direct">
 				<img src="{{ asset('image/portfolio_media/damien_chauveau_photo.webp') }}" alt="Damien Chauveau" width="56" height="56" loading="lazy">

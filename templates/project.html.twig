@@ -8,7 +8,7 @@
 	{% set front_tech = ['Angular', 'TypeScript', 'PWA', 'JavaScript', 'Twig', 'Bootstrap'] %}
 	<header class="page-head">
 		<div class="wrap">
-			<a class="back-link" href="{{ path('app_portfolio') }}">← Tous les projets</a>
+			<a class="back-link" href="{{ path('app_portfolio') }}">Tous les projets</a>
 			<span class="kicker">// étude de cas · {{ project.createdAt ? project.createdAt|date('Y') }}</span>
 			<h1>{{ project.title }}</h1>
 			<div class="case-stack">
@@ -18,10 +18,10 @@
 			</div>
 			<div class="hero-actions">
 				{% if project.demoUrl %}
-					<a class="btn-v2" href="{{ project.demoUrl }}" target="_blank" rel="noopener noreferrer">Voir en ligne ↗</a>
+					<a class="btn-v2" href="{{ project.demoUrl }}" target="_blank" rel="noopener noreferrer">Voir en ligne</a>
 				{% endif %}
 				{% if project.link and project.link != project.demoUrl %}
-					<a class="btn-ghost" href="{{ project.link }}" target="_blank" rel="noopener noreferrer">Voir le code ↗</a>
+					<a class="btn-ghost" href="{{ project.link }}" target="_blank" rel="noopener noreferrer">Voir le code</a>
 				{% endif %}
 			</div>
 		</div>
@@ -72,13 +72,13 @@
 		<div class="wrap">
 			{% if next and next != project %}
 				<p class="next-label">Projet suivant</p>
-				<h2><a class="next-link" href="{{ path('app_project_show', {slug: next.slug}) }}">{{ next.title }} <span class="accent">→</span></a></h2>
+				<h2><a class="next-link" href="{{ path('app_project_show', {slug: next.slug}) }}">{{ next.title }}</a></h2>
 			{% else %}
 				<h2>Un projet <span class="accent">dans ce style ?</span></h2>
 			{% endif %}
 			<p>Poste, mission ou site à créer : parlons-en.</p>
 			<div class="hero-actions">
-				<a class="btn-v2" href="{{ path('app_contact') }}">Me contacter →</a>
+				<a class="btn-v2" href="{{ path('app_contact') }}">Me contacter</a>
 				<a class="btn-ghost" href="{{ path('app_portfolio') }}">Tous les projets</a>
 			</div>
 		</div>
