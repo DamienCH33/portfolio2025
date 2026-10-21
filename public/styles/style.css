@@ -270,7 +270,7 @@ img { max-width: 100%; }
 
 /* ---------- À PROPOS ---------- */
 .about-grid { display: grid; grid-template-columns: 260px 1fr; gap: 56px; align-items: start; }
-.about-photo { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); }
+.about-photo { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; border-radius: var(--radius); border: 1px solid var(--border); }
 .about-side .meta { list-style: none; padding: 0; margin: 20px 0 0; }
 .about-side .meta li { color: var(--muted); font-size: .9rem; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .about-side .meta li strong { color: var(--text); font-weight: 500; display: block; }
@@ -304,7 +304,7 @@ img { max-width: 100%; }
 .offer .sum { color: var(--muted); margin-bottom: 18px; }
 .offer ul { list-style: none; padding: 0; margin: 0 0 22px; }
 .offer li { color: var(--muted); font-size: .93rem; padding: 7px 0 7px 22px; position: relative; border-top: 1px solid var(--border); }
-.offer li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+.offer li::before { content: ""; position: absolute; left: 2px; top: .65em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 .offer .price { margin-top: auto; font-family: var(--font-title); font-size: 1.15rem; font-weight: 600; }
 .offer .note { color: var(--faint); font-size: .85rem; margin-top: 4px; }
 .offer-foot { color: var(--faint); font-size: .85rem; margin-top: 28px; }
@@ -389,7 +389,7 @@ label, .form-label { color: var(--muted); font-size: .88rem; margin-bottom: 6px;
 .case-part .prose ul { list-style: none; padding: 0; margin: 0 0 18px; }
 .case-part .prose li { color: #b3bdca; padding: 10px 0 10px 26px; position: relative; border-top: 1px solid var(--border); }
 .case-part .prose li:last-child { border-bottom: 1px solid var(--border); }
-.case-part .prose li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+.case-part .prose li::before { content: ""; position: absolute; left: 2px; top: .7em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 .case-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
 .case-gallery img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 12px; border: 1px solid var(--border); display: block; transition: transform .2s; }
 .case-gallery a:hover img { transform: translateY(-2px); }
@@ -445,6 +445,7 @@ label, .form-label { color: var(--muted); font-size: .88rem; margin-bottom: 6px;
 	.about-grid,
 	.contact-grid { grid-template-columns: 1fr; gap: 36px; }
 	.about-side { max-width: 320px; }
+	.about-photo { max-width: 220px; }
 	.steps { grid-template-columns: 1fr 1fr; }
 }
 
