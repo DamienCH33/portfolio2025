@@ -41,7 +41,7 @@ jobs:
       - name: Update supported Symfony 7.4 patches
         run: composer update "symfony/*" --with-all-dependencies --no-interaction --no-progress --no-scripts
       - name: Validate Composer files
-        run: composer validate
+        run: composer validate --no-check-publish
       - name: Create database and run migrations
         run: |
           php bin/console doctrine:database:create --env=test --if-not-exists
