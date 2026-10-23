@@ -1,0 +1,5 @@
+[tools]
+php = "8.5.12"
+
+[settings]
+minimum_release_age = "0d"
