@@ -22,6 +22,8 @@ final class Version20261112220000 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql("UPDATE profile SET intro = REPLACE(REPLACE(intro, 'près de dix ans', '9 ans'), 'Près de dix ans', '9 ans')");
+        // Nouvelle intro, seulement si l'ancienne (texte d'origine) est encore en place.
+        $this->addSql("UPDATE profile SET intro = 'J''ai passé 9 ans dans l''assurance, à utiliser et à recetter des outils métier. Maintenant je les développe : API en Symfony, front en Angular, et la mise en prod avec.' WHERE intro LIKE '%du côté des utilisateurs, dans l''assurance%'");
         $this->addSql("UPDATE project SET outcome = REPLACE(outcome, '184 tests PHPUnit', 'Plus de 200 tests PHPUnit') WHERE outcome IS NOT NULL");
         // Le CV uploadé avant la mise en place du volume a disparu : retour au CV versionné.
         $this->addSql('UPDATE profile SET cv_file = NULL');

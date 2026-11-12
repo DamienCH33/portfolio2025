@@ -17,7 +17,7 @@ class ProfileFixtures extends Fixture
         $profile = (new Profile())
             ->setTitle('Damien Chauveau')
             ->setSubtitle('Développeur Fullstack PHP Symfony / Angular')
-            ->setIntro('J\'ai passé 9 ans du côté des utilisateurs, dans l\'assurance. Aujourd\'hui je construis les outils : l\'API en Symfony, l\'écran en Angular, et la mise en ligne. Un seul interlocuteur, du premier échange au déploiement.')
+            ->setIntro('J\'ai passé 9 ans dans l\'assurance, à utiliser et à recetter des outils métier. Maintenant je les développe : API en Symfony, front en Angular, et la mise en prod avec.')
             ->setGithubUrl('https://github.com/DamienCH33')
             ->setLinkedinUrl('https://www.linkedin.com/in/chauveau-damien/')
             ->setUpdatedAt(new \DateTimeImmutable());
