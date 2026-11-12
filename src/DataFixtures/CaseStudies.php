@@ -35,7 +35,7 @@ Deuxième difficulté, côté déploiement : le front et l'API sur deux domaines
 TXT,
                 'outcome' => <<<'TXT'
 - En ligne sur un seul domaine : vitrine, application Angular et API.
-- 184 tests PHPUnit, PHPStan sans erreur, CI GitHub Actions à chaque push.
+- Plus de 200 tests PHPUnit, PHPStan sans erreur, CI GitHub Actions à chaque push.
 - Audit de sécurité passé : 10 points sur 12 corrigés, dont un jeton de session opaque contre les accès aux données d'un autre utilisateur.
 TXT,
             ],
