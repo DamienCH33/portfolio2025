@@ -3,7 +3,7 @@
 {% block title %}Développeur fullstack Symfony / Angular à Bordeaux{% endblock %}
 
 {% block body %}
-	{% set cv_url = profile and profile.cvFile ? asset('files/cv/' ~ profile.cvFile) : asset('files/cv-damien-chauveau.pdf') ~ '?v=3' %}
+	{% set cv_url = profile and profile.cvFile ? asset('files/cv/' ~ profile.cvFile) : asset('files/cv-damien-chauveau.pdf') ~ '?v=4' %}
 
 	{# HERO — D « En ligne » #}
 	{% set live = live_projects|default([]) %}
@@ -13,7 +13,7 @@
 				<div>
 					<p class="kick">// développeur fullstack · Symfony &amp; Angular · Bordeaux</p>
 					<h1>Du besoin métier<br>à l'appli <span class="grad-text">qui tourne.</span></h1>
-					<p class="lead-text">{{ profile.intro|default('J\'ai passé près de dix ans du côté des utilisateurs, dans l\'assurance. Aujourd\'hui je construis les outils : l\'API en Symfony, l\'écran en Angular, et la mise en ligne. Un seul interlocuteur, du premier échange au déploiement.') }}</p>
+					<p class="lead-text">{{ profile.intro|default('J\'ai passé 9 ans du côté des utilisateurs, dans l\'assurance. Aujourd\'hui je construis les outils : l\'API en Symfony, l\'écran en Angular, et la mise en ligne. Un seul interlocuteur, du premier échange au déploiement.') }}</p>
 					<div class="hero-actions">
 						<a class="btn-v2" href="#projets">Voir mes projets</a>
 						<a class="btn-ghost" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>
@@ -47,7 +47,7 @@
 			<div class="creds">
 				<div><div class="k">Back + front</div><div class="v">de l'API à l'écran, une seule personne</div></div>
 				<div><div class="k">{{ live|length > 0 ? live|length ~ ' projet' ~ (live|length > 1 ? 's') ~ ' en ligne' : 'En production' }}</div><div class="v">SaaS, PWA, sites clients</div></div>
-				<div><div class="k">9 ans d'assurance</div><div class="v">je parle métier, pas que code</div></div>
+				<div><div class="k">9 ans d'assurance</div><div class="v">ex-référent applicatif chez WTW</div></div>
 				<div><div class="k">RNCP niveau 6</div><div class="v">développeur d'application</div></div>
 			</div>
 		</div>
@@ -93,7 +93,7 @@
 				<div class="cell">
 					<span class="tag">// entreprises &amp; recruteurs</span>
 					<h3>Développement fullstack</h3>
-					<p>Vous avez une équipe, un produit, du code à faire avancer ? API Symfony, front Angular, back-office ou reprise d'un existant. En CDI à Bordeaux ou en remote, ou en mission freelance. Mon passé dans l'assurance aide sur les métiers denses : insurtech, mutuelles, éditeurs.</p>
+					<p>API Symfony, front Angular, back-office ou reprise d'un existant. En CDI à Bordeaux ou en remote, ou en mission freelance. Mes 9 ans dans l'assurance font gagner du temps sur les métiers denses.</p>
 					<a href="{{ path('app_contact') }}">Parler d'un poste ou d'une mission</a>
 				</div>
 				<div class="cell">
@@ -110,7 +110,7 @@
 	<section class="final" id="contact">
 		<div class="wrap">
 			<h2>Un projet, un poste,<br>une <span class="accent">idée à construire ?</span></h2>
-			<p>Je réponds vite. Dites-moi où vous en êtes, on voit ensemble si je peux aider.</p>
+			<p>Je réponds sous 24 h. Dites-moi où vous en êtes, on voit ensemble si je peux aider.</p>
 			<div class="hero-actions">
 				<a class="btn-v2" href="{{ path('app_contact') }}">M'écrire</a>
 				<a class="btn-ghost" href="{{ cv_url }}" target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>

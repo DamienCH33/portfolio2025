@@ -9,6 +9,8 @@
 		<meta name="description" content="{% block meta_description %}Portfolio de Damien Chauveau, développeur fullstack PHP Symfony / Angular à Bordeaux. API REST, interfaces Angular et applications métier déployées en production.{% endblock %}">
 		<meta name="author" content="Damien Chauveau">
 		<meta name="theme-color" content="#0A0C10">
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+		<link rel="alternate icon" href="/favicon.ico" sizes="32x32">
 		<link rel="canonical" href="{{ app.request.schemeAndHttpHost ~ app.request.pathInfo }}">
 
 		<meta property="og:title" content="{% block og_title %}Damien Chauveau — Développeur Fullstack PHP Symfony / Angular{% endblock %}">
@@ -25,7 +27,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-		<link href="/styles/style.css?v=2" rel="stylesheet">
+		<link href="/styles/style.css?v=3" rel="stylesheet">
 		{% block stylesheets %}{% endblock %}
 	</head>
 
@@ -37,7 +39,7 @@
 				<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
 				<div class="nav-links" id="nav-links">
 					<a href="{{ path('app_portfolio') }}" class="{{ route == 'app_portfolio' ? 'active' }}">Projets</a>
-					<a href="{{ path('app_services') }}" class="{{ route == 'app_services' ? 'active' }}">Services</a>
+					<a href="{{ path('app_services') }}" class="{{ route == 'app_services' ? 'active' }}">Sites pour pros</a>
 					<a href="{{ path('app_about') }}" class="{{ route == 'app_about' ? 'active' }}">À propos</a>
 					<a href="{{ path('app_contact') }}" class="{{ route starts with 'app_contact' ? 'active' }}">Contact</a>
 					<a class="avail" href="{{ path('app_contact') }}">Dispo · CDI &amp; missions</a>
@@ -60,7 +62,7 @@
 				<div class="right">
 					<a href="https://github.com/DamienCH33" target="_blank" rel="me noopener">GitHub</a>
 					<a href="https://www.linkedin.com/in/chauveau-damien/" target="_blank" rel="me noopener">LinkedIn</a>
-					<a href="{{ asset('files/cv-damien-chauveau.pdf') }}?v=3" target="_blank" rel="noopener">CV (PDF)</a>
+					<a href="{{ asset('files/cv-damien-chauveau.pdf') }}?v=4" target="_blank" rel="noopener">CV (PDF)</a>
 					{% if is_granted('ROLE_ADMIN') %}
 						<a class="admin-on" href="{{ path('admin_dashboard') }}" rel="nofollow">● Back-office</a>
 						<a class="admin" href="{{ path('app_logout') }}" rel="nofollow">Déconnexion</a>
