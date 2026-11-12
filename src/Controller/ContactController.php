@@ -37,6 +37,12 @@ class ContactController extends AbstractController
                 return $this->redirectToRoute('app_contact_form');
             }
 
+            // Le profil choisi est noté en tête du message : visible dans le back-office et dans l'e-mail.
+            $audience = $form->get('audience')->getData();
+            if (is_string($audience) && $audience !== '') {
+                $contact->setMessage('[' . $audience . '] ' . $contact->getMessage());
+            }
+
             $em->persist($contact);
             $em->flush();
 

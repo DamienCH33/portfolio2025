@@ -7,21 +7,35 @@
 {% block body %}
 	<header class="page-head">
 		<div class="wrap">
-			<span class="kicker">// projets</span>
+			<span class="kicker">// Projets</span>
 			<h1>Ce que j'ai construit</h1>
-			<p class="lead-text">Des projets en ligne, utilisés tous les jours, et ceux qui m'ont appris le métier. Tout le code est public sur GitHub : jugez sur pièce.</p>
+			<p class="lead-text">Les projets en ligne d'abord, puis ceux de ma formation. Le code est public sur GitHub, allez voir.</p>
 		</div>
 	</header>
 
 	<section class="section tight">
 		<div class="wrap">
-			<div class="case-list">
-				{% for project in projects %}
-					{% include '_project_row.html.twig' with {project: project, show_thumb: true, max_chars: 420} only %}
-				{% else %}
-					<p class="muted">Les projets arrivent.</p>
-				{% endfor %}
-			</div>
+			{% set online = projects|filter(p => p.demoUrl) %}
+			{% set others = projects|filter(p => not p.demoUrl) %}
+			{% if projects is empty %}
+				<p class="muted">Les projets arrivent.</p>
+			{% endif %}
+			{% if online is not empty %}
+				<div class="shead"><span class="idx">01</span><h2>En ligne</h2><span class="rule"></span></div>
+				<div class="case-list">
+					{% for project in online %}
+						{% include '_project_row.html.twig' with {project: project, show_thumb: true, max_chars: 420} only %}
+					{% endfor %}
+				</div>
+			{% endif %}
+			{% if others is not empty %}
+				<div class="shead group-next"><span class="idx">02</span><h2>Formation et projets plus anciens</h2><span class="rule"></span></div>
+				<div class="case-list">
+					{% for project in others %}
+						{% include '_project_row.html.twig' with {project: project, show_thumb: true, max_chars: 240} only %}
+					{% endfor %}
+				</div>
+			{% endif %}
 		</div>
 	</section>
 

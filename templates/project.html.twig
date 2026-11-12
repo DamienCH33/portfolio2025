@@ -9,7 +9,7 @@
 	<header class="page-head">
 		<div class="wrap">
 			<a class="back-link" href="{{ path('app_portfolio') }}">Tous les projets</a>
-			<span class="kicker">// étude de cas · {{ project.createdAt ? project.createdAt|date('Y') }}</span>
+			<span class="kicker">// Étude de cas · {{ project.createdAt ? project.createdAt|date('Y') }}</span>
 			<h1>{{ project.title }}</h1>
 			<div class="case-stack">
 				{% for skill in project.techStack %}

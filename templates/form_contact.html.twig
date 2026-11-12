@@ -23,6 +23,12 @@
 </div>
 
 <div class="col-12">
+{{ form_label(form.audience) }}
+{{ form_widget(form.audience, {'attr': {'class': 'form-select'}}) }}
+{{ form_errors(form.audience) }}
+</div>
+
+<div class="col-12">
 {{ form_label(form.message) }}
 {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
 {{ form_errors(form.message) }}
