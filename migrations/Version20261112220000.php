@@ -9,6 +9,7 @@ use Doctrine\Migrations\AbstractMigration;
 
 /**
  * Textes : « 9 ans » d'assurance dans l'intro du profil, et nombre de tests NutriPetit à jour.
+ * Remet aussi le CV du dépôt (le fichier uploadé a été perdu avant le volume).
  * Simples remplacements : sans effet si le texte a déjà été modifié dans l'admin.
  */
 final class Version20261112220000 extends AbstractMigration
@@ -22,6 +23,8 @@ final class Version20261112220000 extends AbstractMigration
     {
         $this->addSql("UPDATE profile SET intro = REPLACE(REPLACE(intro, 'près de dix ans', '9 ans'), 'Près de dix ans', '9 ans')");
         $this->addSql("UPDATE project SET outcome = REPLACE(outcome, '184 tests PHPUnit', 'Plus de 200 tests PHPUnit') WHERE outcome IS NOT NULL");
+        // Le CV uploadé avant la mise en place du volume a disparu : retour au CV versionné.
+        $this->addSql('UPDATE profile SET cv_file = NULL');
     }
 
     public function down(Schema $schema): void
