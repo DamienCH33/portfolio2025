@@ -25,8 +25,8 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+		<link href="/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+		<link href="/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet">
 		<link href="/styles/style.css?v=3" rel="stylesheet">
 		{% block stylesheets %}{% endblock %}
 	</head>
@@ -42,7 +42,7 @@
 					<a href="{{ path('app_services') }}" class="{{ route == 'app_services' ? 'active' }}">Sites pour pros</a>
 					<a href="{{ path('app_about') }}" class="{{ route == 'app_about' ? 'active' }}">À propos</a>
 					<a href="{{ path('app_contact') }}" class="{{ route starts with 'app_contact' ? 'active' }}">Contact</a>
-					<a class="avail" href="{{ path('app_contact') }}">Dispo · CDI &amp; missions</a>
+					<a class="avail" href="{{ path('app_contact') }}">{% if route == 'app_services' %}Devis gratuit{% else %}Dispo · CDI &amp; missions{% endif %}</a>
 				</div>
 			</div>
 		</nav>

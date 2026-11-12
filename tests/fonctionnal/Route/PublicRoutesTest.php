@@ -13,6 +13,9 @@ class PublicRoutesTest extends WebTestCase
         $routes = [
             '/',
             '/contact',
+            '/services',
+            '/portfolio',
+            '/about',
         ];
 
         foreach ($routes as $route) {

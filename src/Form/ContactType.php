@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -48,6 +49,19 @@ class ContactType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank(message: 'Veuillez saisir une adresse e-mail.'),
                     new Assert\Email(message: 'Adresse e-mail invalide.'),
+                ],
+            ])
+
+            ->add('audience', ChoiceType::class, [
+                'label' => 'Vous êtes',
+                'mapped' => false,
+                'required' => false,
+                'placeholder' => 'Choisir (facultatif)',
+                'choices' => [
+                    'Recruteur ou entreprise' => 'Recruteur ou entreprise',
+                    'Commerçant, artisan ou indépendant' => 'Commerçant, artisan ou indépendant',
+                    'Association' => 'Association',
+                    'Autre' => 'Autre',
                 ],
             ])
 

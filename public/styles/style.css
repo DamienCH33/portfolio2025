@@ -535,3 +535,6 @@ label, .form-label { color: var(--muted); font-size: .88rem; margin-bottom: 6px;
 
 /* Écran de connexion */
 .login-box { max-width: 420px; margin: 0 auto; }
+
+/* Portfolio : second groupe de projets */
+.shead.group-next { margin-top: 72px; }

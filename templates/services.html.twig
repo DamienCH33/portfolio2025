@@ -9,6 +9,31 @@
 {% block og_description %}Sites vitrines sur mesure, hébergement et maintenance par abonnement, gestion de votre fiche Google et de vos avis. Développeur web freelance, devis gratuit.{% endblock %}
 
 {% block body %}
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "ProfessionalService",
+		"name": "Damien Chauveau — Création de sites internet",
+		"url": "{{ url('app_services') }}",
+		"image": "{{ absolute_url(asset('image/og-image.png')) }}",
+		"telephone": "+33682097136",
+		"email": "contact@damienchauveau-dev.fr",
+		"priceRange": "€€",
+		"address": {
+			"@type": "PostalAddress",
+			"streetAddress": "60 chemin de Leyran",
+			"postalCode": "33140",
+			"addressLocality": "Villenave-d'Ornon",
+			"addressCountry": "FR"
+		},
+		"areaServed": [
+			{"@type": "City", "name": "Bordeaux"},
+			{"@type": "City", "name": "Villenave-d'Ornon"},
+			{"@type": "Country", "name": "France"}
+		],
+		"founder": {"@type": "Person", "name": "Damien Chauveau"}
+	}
+	</script>
 	<header class="page-head">
 		<div class="wrap">
 			<span class="kicker">// services · partout en France · rendez-vous sur place dans l'agglo bordelaise</span>
