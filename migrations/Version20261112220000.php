@@ -25,6 +25,9 @@ final class Version20261112220000 extends AbstractMigration
         $this->addSql("UPDATE project SET outcome = REPLACE(outcome, '184 tests PHPUnit', 'Plus de 200 tests PHPUnit') WHERE outcome IS NOT NULL");
         // Le CV uploadé avant la mise en place du volume a disparu : retour au CV versionné.
         $this->addSql('UPDATE profile SET cv_file = NULL');
+        // Captures d'écran à jour, versionnées dans public/image/projects.
+        $this->addSql("UPDATE project SET image = 'nutripetit-accueil-2026-11.png' WHERE slug = 'nutripetit'");
+        $this->addSql("UPDATE project SET image = 'monavispro-accueil-2026-11.png' WHERE slug = 'mon-avis-pro'");
     }
 
     public function down(Schema $schema): void
