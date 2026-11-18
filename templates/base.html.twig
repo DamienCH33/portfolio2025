@@ -66,8 +66,6 @@
 					{% if is_granted('ROLE_ADMIN') %}
 						<a class="admin-on" href="{{ path('admin_dashboard') }}" rel="nofollow">● Back-office</a>
 						<a class="admin" href="{{ path('app_logout') }}" rel="nofollow">Déconnexion</a>
-					{% else %}
-						<a class="admin" href="{{ path('admin_dashboard') }}" title="Administration" rel="nofollow">admin</a>
 					{% endif %}
 				</div>
 			</div>
